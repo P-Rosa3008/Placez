@@ -1,0 +1,29 @@
+.modal {
+  position: absolute;
+  right: 0;
+  width: 10%;
+  height: 100%;
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 14px 0px 0px 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  z-index: 10;
+  animation: slide-left 600ms ease-out forwards;
+}
+
+@media (min-width: 768px) {
+  .modal {
+    width: 40rem;
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-3rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
