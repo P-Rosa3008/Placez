@@ -48,57 +48,87 @@ const UserProfile = () => {
   };
 
   return (
-    <Box display="flex" flexDirection="column">
+    <Box>
       {user ? (
-        <Grid container spacing={2}>
-          <Grid item>
-            <Box paddingX={2} paddingTop={2} paddingBottom={1}>
+        <Box
+          width="100%"
+          weight="100%"
+          display="flex"
+          justifyContent="center"
+          paddingTop="24px"
+        >
+          <Box display="block">
+            <Box display="flex" height="216px" width="200px">
               <Avatar
-                sx={{ position: "relative", height: 200, width: 200 }}
+                sx={{
+                  position: "relative",
+                  height: 200,
+                  width: 200,
+                  marginBottom: 2,
+                }}
                 src={user.avatar ? `http://localhost:8080/${user.avatar}` : ""}
               />
-            </Box>
-            <Grid item>
               <ImageUpload
                 id="image"
                 setImage={handleImage}
                 image={user.avatar}
               />
-            </Grid>
-          </Grid>
-          <Grid item xs={12} sm container>
-            <Grid item xs container direction="column" spacing={2}>
-              <Box
-                position="absolute"
-                paddingTop={4}
-                paddingLeft={4}
-                width={0.7}
-                height={0.5}
-              >
-                <Grid item xs>
-                  <Typography>{user.username}</Typography>
-                  <Typography>{user.email}</Typography>
-                </Grid>
-                <Grid item>
-                  <Typography>{user.places.length} Places</Typography>
-                </Grid>
-                <Box
-                  border={1}
-                  padding={1}
-                  borderRadius={1}
-                  borderColor="rgba(0, 0, 0, 0.54)"
-                  width={0.5}
-                  height={0.5}
-                >
-                  <Typography>
-                    Hi I'm Pedro from Portugal, I love to travel and explore!
-                  </Typography>
-                </Box>
-              </Box>
-            </Grid>
-          </Grid>
-        </Grid>
+            </Box>
+            <Box>
+              <Typography>{user.username}</Typography>
+              <Typography>{user.email}</Typography>
+            </Box>
+          </Box>
+        </Box>
       ) : (
+        // <Grid container spacing={2}>
+        //   <Grid item>
+        //     <Box paddingX={2} paddingTop={2} paddingBottom={1}>
+        //       <Avatar
+        //         sx={{ position: "relative", height: 200, width: 200 }}
+        //         src={user.avatar ? `http://localhost:8080/${user.avatar}` : ""}
+        //       />
+        //     </Box>
+        //     <Grid item>
+        //       <ImageUpload
+        //         id="image"
+        //         setImage={handleImage}
+        //         image={user.avatar}
+        //       />
+        //     </Grid>
+        //   </Grid>
+        //   <Grid item xs={12} sm container>
+        //     <Grid item xs container direction="column" spacing={2}>
+        //       <Box
+        //         position="absolute"
+        //         paddingTop={4}
+        //         paddingLeft={4}
+        //         width={0.7}
+        //         height={0.5}
+        //       >
+        //         <Grid item xs>
+        //           <Typography>{user.username}</Typography>
+        //           <Typography>{user.email}</Typography>
+        //         </Grid>
+        //         <Grid item>
+        //           <Typography>{user.places.length} Places</Typography>
+        //         </Grid>
+        //         <Box
+        //           border={1}
+        //           padding={1}
+        //           borderRadius={1}
+        //           borderColor="rgba(0, 0, 0, 0.54)"
+        //           width={0.5}
+        //           height={0.5}
+        //         >
+        //           <Typography>
+        //             Hi I'm Pedro from Portugal, I love to travel and explore!
+        //           </Typography>
+        //         </Box>
+        //       </Box>
+        //     </Grid>
+        //   </Grid>
+        // </Grid>
         <Box paddingLeft="16%">
           <CircularProgress />
         </Box>

@@ -2,7 +2,6 @@ import { Button } from "@mui/material";
 import React from "react";
 
 function NewMarkerButton(props) {
-  //comment test
   return (
     <Button
       variant="contained"

@@ -353,7 +353,7 @@ function CreateMarker(props) {
           ) : null}
         </Form>
       </CardContent>
-      <CardActions sx={{ paddingBottom: 1 }}>
+      <CardActions sx={{ paddingBottom: 1, paddingLeft: 2, paddingTop: 4 }}>
         <Button type="submit" value="Submit" onClick={submitHandler}>
           {isLoading ? <CircularProgress /> : "Submit"}
         </Button>

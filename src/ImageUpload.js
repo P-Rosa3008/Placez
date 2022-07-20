@@ -1,5 +1,7 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, IconButton } from "@mui/material";
 import React, { useRef, useState } from "react";
+import AddAPhotoRoundedIcon from "@mui/icons-material/AddAPhotoRounded";
+import EditRoundedIcon from "@mui/icons-material/EditRounded";
 
 function ImageUpload(props) {
   // const [file, setFile] = useState();
@@ -28,10 +30,16 @@ function ImageUpload(props) {
   };
 
   return (
-    <Box display="flex" alignItems="center" justifyContent="center">
+    <Box
+      position="absolute"
+      sx={{ backgroundColor: "rgba(253,161,13,1)", borderRadius: 1 }}
+    >
       <Button onClick={pickImageHandler}>
-        {props.image ? "Change Picture" : "Upload an image"}
+        {props.image ? "Edit photo" : "Add photo"}
       </Button>
+      {/* <IconButton aria-label="close" size="medium">
+        {props.image ? <EditRoundedIcon /> : <AddAPhotoRoundedIcon />}
+      </IconButton> */}
       <input
         id="image"
         ref={filePickerRef}
