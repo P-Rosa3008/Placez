@@ -56,7 +56,6 @@ function TypesAccordion(props) {
                   height: "100%",
                   alignItems: "center",
                   justifyContent: "center",
-                  // boxShadow: "2px 1px 5px gray",
                   backgroundColor: "rgba(255,255,255,1)",
                   borderTopLeftRadius: "4px",
                   borderBottomLeftRadius: "4px",
@@ -68,7 +67,6 @@ function TypesAccordion(props) {
               <Box
                 display="flex"
                 sx={{
-                  // boxShadow: "2px 1px 5px gray",
                   width: "80%",
                   height: "100%",
                   alignItems: "center",

@@ -16,7 +16,6 @@ import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
 
 function CustomDrawer() {
   const auth = useContext(AuthContext);
-  // console.log(auth);
   return (
     <Drawer
       sx={{

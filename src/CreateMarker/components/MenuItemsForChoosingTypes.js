@@ -48,11 +48,7 @@ function MenuItemsForChoosingTypes(props) {
 
   return (
     <React.Fragment>
-      <Box
-        paddingTop={3}
-        paddingBottom={2}
-        // backgroundColor={"rgba(20, 33, 61, 1)"}
-      >
+      <Box paddingTop={3} paddingBottom={2}>
         <SearchBar search={searchHandler} />
       </Box>
 

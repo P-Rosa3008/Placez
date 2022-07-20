@@ -29,28 +29,49 @@ function ImageUpload(props) {
     filePickerRef.current.click();
   };
 
-  return (
-    <Box
-      position="absolute"
-      sx={{ backgroundColor: "rgba(253,161,13,1)", borderRadius: 1 }}
-    >
-      <Button onClick={pickImageHandler}>
-        {props.image ? "Edit photo" : "Add photo"}
-      </Button>
-      {/* <IconButton aria-label="close" size="medium">
-        {props.image ? <EditRoundedIcon /> : <AddAPhotoRoundedIcon />}
-      </IconButton> */}
-      <input
-        id="image"
-        ref={filePickerRef}
-        name="image"
-        type="file"
-        style={{ display: "none" }}
-        accept=".jpg,.png,.jpeg"
-        onChange={pickedHandler}
-      ></input>
-    </Box>
-  );
+  if (props.component === "user-profile-image") {
+    return (
+      <Box
+        position="absolute"
+        right="0"
+        top="0"
+        sx={{ backgroundColor: "rgba(253,161,13,1)", borderRadius: "50%" }}
+      >
+        <IconButton aria-label="close" size="medium" color="primary">
+          {props.image ? <EditRoundedIcon /> : <AddAPhotoRoundedIcon />}
+        </IconButton>
+        <input
+          id="image"
+          ref={filePickerRef}
+          name="image"
+          type="file"
+          style={{ display: "none" }}
+          accept=".jpg,.png,.jpeg"
+          onChange={pickedHandler}
+        ></input>
+      </Box>
+    );
+  } else {
+    return (
+      <Box
+        position="absolute"
+        sx={{ backgroundColor: "rgba(253,161,13,1)", borderRadius: 1 }}
+      >
+        <Button onClick={pickImageHandler}>
+          {props.image ? "Edit photo" : "Add photo"}
+        </Button>
+        <input
+          id="image"
+          ref={filePickerRef}
+          name="image"
+          type="file"
+          style={{ display: "none" }}
+          accept=".jpg,.png,.jpeg"
+          onChange={pickedHandler}
+        ></input>
+      </Box>
+    );
+  }
 }
 
 export default ImageUpload;

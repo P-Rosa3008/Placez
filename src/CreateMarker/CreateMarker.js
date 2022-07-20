@@ -321,42 +321,28 @@ function CreateMarker(props) {
               </Box>
             </Box>
             <DescriptionOption handleInputChange={handleDescription} />
-            <ImageUpload id="image" setImage={handleImage} />
-            {/* <Button
-              onClick={handleInsertAdvancedOptions}
-              sx={{ "&:hover": { backgroundColor: "transparent" } }}
-            >
-              <Switch
-                checked={insertAdvancedOptions || advancedOptionsChoosed}
-                onChange={handleInsertAdvancedOptions}
-              />
-              Advanced options
-            </Button> */}
-          </Container>
-          {insertAdvancedOptions && closeModal ? (
-            <ChooseAdvancedOptions
-              open={insertAdvancedOptions}
-              handleCloseChildModal={closeChildModal}
-              advancedOptionsChoosedValues={handleAdvancedOptionsChoosedValues}
-              advancedOptionsChoosed={handleAdvancedOptionsChoosed}
+            <ImageUpload
+              id="image"
+              component="create-marker"
+              setImage={handleImage}
             />
-          ) : null}
-          {advancedOptionsChoosed ? (
-            <Box sx={{ overflow: "auto", maxHeight: "300px" }}>
-              <AdvancedOptions
-                type={type}
-                advancedOptionsObjectData={advancedOptions}
-                advancedOptionsData={handleAdvancedOptionsData}
-                advancedOptionsChoosedValues={advancedOptionsChoosedValues}
-              />
-            </Box>
-          ) : null}
+          </Container>
         </Form>
       </CardContent>
-      <CardActions sx={{ paddingBottom: 1, paddingLeft: 2, paddingTop: 4 }}>
-        <Button type="submit" value="Submit" onClick={submitHandler}>
-          {isLoading ? <CircularProgress /> : "Submit"}
-        </Button>
+      <CardActions
+        sx={{
+          display: "flex",
+          justifyContent: "flex-end",
+          paddingBottom: 1,
+          paddingLeft: 2.5,
+          paddingTop: 4,
+        }}
+      >
+        <Box sx={{ backgroundColor: "rgba(253,161,13,1)", borderRadius: 1 }}>
+          <Button type="submit" value="Submit" onClick={submitHandler}>
+            {isLoading ? <CircularProgress /> : "Submit"}
+          </Button>
+        </Box>
       </CardActions>
       {!isValid && (
         <Collapse in={open}>

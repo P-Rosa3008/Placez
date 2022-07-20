@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from "react";
 import { Button, Rating, Typography } from "@mui/material";
 import { Form } from "react-bootstrap";
 import { Box } from "@mui/system";
-// import StarRoundedIcon from "@mui/icons-material/StarRounded";
 
 import MenuItemsForChoosingTypes from "../CreateMarker/components/MenuItemsForChoosingTypes";
 import classes from "./Modal.module.css";
@@ -24,7 +23,6 @@ function Modal(props) {
   // const [loadedPlace, setLoadedPlace] = useState();
   const [edited, setEdited] = useState(false);
   const [image, setImage] = useState();
-  // const [starRating, setStartRating] = useState(0);
 
   const getFamousWorks = (works) => {
     return (
@@ -114,7 +112,6 @@ function Modal(props) {
     const fetchPlace = async () => {
       try {
         await sendRequest(`http://localhost:8080/api/places/${placeId}`);
-        // setLoadedPlace(responseData.place);
       } catch (err) {}
     };
     fetchPlace();
@@ -128,11 +125,6 @@ function Modal(props) {
     const name = event.target.value;
     setNameEdited(name);
   };
-
-  // const handleStarRatingChange = (event) => {
-  //   const starRating = event.target.value;
-  //   setStartRating(starRating);
-  // };
 
   const wasNotEdited = (name, type) => {
     return name.trim().length === 0 && type.trim().length > 0;

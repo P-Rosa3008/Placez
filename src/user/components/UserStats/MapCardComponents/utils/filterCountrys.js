@@ -1,12 +1,4 @@
 export function filterCountrysAZ(countries) {
-  // const countriesNames = countries.map((country) => {
-  //   return country["name"];
-  // });
-
-  // const names = countriesNames.filter((country) => {
-  //   return country;
-  // });
-
   const filterCountryAD = () => {
     return countries.filter((country, index) => {
       return (

@@ -85,19 +85,9 @@ function Header(props) {
           }),
           { "Content-Type": "application/json" }
         );
-        // auth.login(
-        //   responseData.userId,
-        //   responseData.token,
-        //   responseData.email,
-        //   responseData.username,
-        //   responseData.firstName,
-        //   responseData.lastName
-        // );
       } catch (err) {}
       console.log(user);
     };
-
-    //createUser();
   }, []);
 
   return (

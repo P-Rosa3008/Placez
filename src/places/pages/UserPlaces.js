@@ -53,11 +53,7 @@ function UserPlaces(props) {
     <Box display="flex">
       <Box padding={3}>
         {!isLoading ? (
-          <PlaceList
-            selectedGetter={setSelectedHandler}
-            items={userPlaces}
-            // centerGetter={handleSetCenter}
-          />
+          <PlaceList selectedGetter={setSelectedHandler} items={userPlaces} />
         ) : (
           <Typography>Error</Typography>
         )}

@@ -78,7 +78,6 @@ export function TabTypes(props) {
       <TabPanel value="1" sx={{ padding: 0 }}>
         <Box sx={{ height: 520, width: 410 }}>
           <TabsCheckboxes
-            // countrys={countrys}
             filter={filterTypeCulture()}
             addToIndex={0}
             selectedCheckbox={selectedCheckbox}
@@ -89,7 +88,6 @@ export function TabTypes(props) {
       <TabPanel value="2" sx={{ padding: 0 }}>
         <Box sx={{ height: 520, width: 410 }}>
           <TabsCheckboxes
-            // countrys={countrys}
             filter={filterTypeFoodsAndDrinks()}
             addToIndex={0}
             selectedCheckbox={selectedCheckbox}
@@ -100,7 +98,6 @@ export function TabTypes(props) {
       <TabPanel value="3" sx={{ padding: 0 }}>
         <Box sx={{ height: 520, width: 410 }}>
           <TabsCheckboxes
-            // countrys={countrys}
             filter={filterTypeHealth()}
             addToIndex={0}
             selectedCheckbox={selectedCheckbox}
@@ -111,7 +108,6 @@ export function TabTypes(props) {
       <TabPanel value="4" sx={{ padding: 0 }}>
         <Box sx={{ height: 520, width: 410 }}>
           <TabsCheckboxes
-            // countrys={countrys}
             filter={filterTypeHousing()}
             addToIndex={0}
             selectedCheckbox={selectedCheckbox}
@@ -122,7 +118,6 @@ export function TabTypes(props) {
       <TabPanel value="5" sx={{ padding: 0 }}>
         <Box sx={{ height: 520, width: 410 }}>
           <TabsCheckboxes
-            // countrys={countrys}
             filter={filterTypeNature()}
             addToIndex={0}
             selectedCheckbox={selectedCheckbox}
@@ -133,7 +128,6 @@ export function TabTypes(props) {
       <TabPanel value="6" sx={{ padding: 0 }}>
         <Box sx={{ height: 520, width: 410 }}>
           <TabsCheckboxes
-            // countrys={countrys}
             filter={filterTypeTourism()}
             addToIndex={0}
             selectedCheckbox={selectedCheckbox}
@@ -144,7 +138,6 @@ export function TabTypes(props) {
       <TabPanel value="7" sx={{ padding: 0 }}>
         <Box sx={{ height: 520, width: 410 }}>
           <TabsCheckboxes
-            // countrys={countrys}
             filter={filterTypeOther()}
             addToIndex={0}
             selectedCheckbox={selectedCheckbox}

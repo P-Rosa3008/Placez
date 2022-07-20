@@ -6,12 +6,6 @@ export function MainMap(props) {
   const [countries, setCountries] = useState([]);
   const [types, setTypes] = useState([]);
 
-  // const handleSelectedCountries = (countries) => {
-  //   setCountries(countries);
-  // };
-  // const handleSelectedTypes = (types) => {
-  //   setTypes(types);
-  // };
   console.log(props);
 
   return (
@@ -39,10 +33,7 @@ export function MainMap(props) {
             right: 12,
           }}
         >
-          <SelectOptionsButton
-          // handleSelectedCountries={handleSelectedCountries}
-          // handleSelectedTypes={handleSelectedTypes}
-          />
+          <SelectOptionsButton />
         </CardActions>
       </Card>
     </Box>

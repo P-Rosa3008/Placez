@@ -77,7 +77,6 @@ export const TabAToZ = (props) => {
       <TabPanel value="1" sx={{ padding: 0 }}>
         <Box sx={{ height: 520, width: 410 }}>
           <TabsCheckboxes
-            // countrys={countrys}
             filter={filterCountryAD()}
             addToIndex={0}
             selectedCheckbox={selectedCheckbox}
@@ -87,7 +86,6 @@ export const TabAToZ = (props) => {
       </TabPanel>
       <TabPanel value="2" sx={{ padding: 0 }}>
         <TabsCheckboxes
-          // countrys={countrys}
           filter={filterCountryEH()}
           addToIndex={48}
           selectedCheckbox={selectedCheckbox}
@@ -96,7 +94,6 @@ export const TabAToZ = (props) => {
       </TabPanel>
       <TabPanel value="3" sx={{ padding: 0 }}>
         <TabsCheckboxes
-          // countrys={countrys}
           filter={filterCountryIL()}
           addToIndex={73}
           selectedCheckbox={selectedCheckbox}
@@ -105,7 +102,6 @@ export const TabAToZ = (props) => {
       </TabPanel>
       <TabPanel value="4" sx={{ padding: 0 }}>
         <TabsCheckboxes
-          // countrys={countrys}
           filter={filterCountryMP()}
           addToIndex={98}
           selectedCheckbox={selectedCheckbox}
@@ -114,7 +110,6 @@ export const TabAToZ = (props) => {
       </TabPanel>
       <TabPanel value="5" sx={{ padding: 0 }}>
         <TabsCheckboxes
-          // countrys={countrys}
           filter={filterCountryQT()}
           addToIndex={136}
           selectedCheckbox={selectedCheckbox}
@@ -123,7 +118,6 @@ export const TabAToZ = (props) => {
       </TabPanel>
       <TabPanel value="6" sx={{ padding: 0 }}>
         <TabsCheckboxes
-          // countrys={countrys}
           filter={filterCountryUZ()}
           addToIndex={180}
           selectedCheckbox={selectedCheckbox}

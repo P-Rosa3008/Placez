@@ -1,7 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
-// import { getBackgroundColours } from "../utils/getterFunctions/getRandomColourArray";
 import { AuthContext } from "../context/auth-context";
 import { useHttpClient } from "./http-hook";
 import {
@@ -40,8 +39,6 @@ export const useGetStatisticsData = () => {
 
   const [typeStatisticsBarChartUserData, setTypeStatisticsBarChartUserData] =
     useState();
-  // const [coloursUser, setColoursUser] = useState(getBackgroundColours());
-  // const [coloursAll, setColoursAll] = useState(getBackgroundColours());
   const [randomStatistic, setRandomStatistic] = useState({
     country: "",
     type: "",

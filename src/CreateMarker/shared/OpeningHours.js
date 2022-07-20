@@ -86,7 +86,6 @@ function OpeningHours(props) {
   ];
 
   const [timeIsValid, setTimeIsValid] = useState(true);
-  // const [open, setOpen] = useState(true);
   const [errorData, setErrorData] = useState();
   const [daysOfWeekData, setDaysOfTheWeekData] = useState(
     daysOfTheWeekSchedule
@@ -207,7 +206,6 @@ function OpeningHours(props) {
                 color="inherit"
                 size="small"
                 onClick={() => {
-                  // setOpen(false);
                   setErrorData(null);
                 }}
               >
