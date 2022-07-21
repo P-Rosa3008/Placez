@@ -8,17 +8,18 @@ function ModalImages(props) {
       sx={{
         width: 0.95,
         height: 140,
-        overflowY: "scroll",
         margin: "0 auto",
       }}
     >
       <ImageList sx={{ height: 1, width: 1 }} cols={4}>
-        <ImageUpload
-          id="image"
-          component="marker-modal"
-          setImage={props.handleImage}
-        ></ImageUpload>
-        {props.items?.map((item, index) => (
+        {props.items.length <= 3 ? (
+          <ImageUpload
+            id="image"
+            component="marker-modal"
+            setImage={props.handleImage}
+          ></ImageUpload>
+        ) : null}
+        {props.items?.slice(0, 4).map((item, index) => (
           <ImageListItem
             key={item.img}
             sx={{ "& .MuiImageListItem-img": { height: 0 }, borderRadius: 1 }}
