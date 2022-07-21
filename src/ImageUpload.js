@@ -2,6 +2,7 @@ import { Box, Button, IconButton } from "@mui/material";
 import React, { useRef, useState } from "react";
 import AddAPhotoRoundedIcon from "@mui/icons-material/AddAPhotoRounded";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
 
 function ImageUpload(props) {
   // const [file, setFile] = useState();
@@ -51,7 +52,8 @@ function ImageUpload(props) {
         ></input>
       </Box>
     );
-  } else {
+  }
+  if (props.component === "create-marker") {
     return (
       <Box
         position="absolute"
@@ -59,6 +61,32 @@ function ImageUpload(props) {
       >
         <Button onClick={pickImageHandler}>
           {props.image ? "Edit photo" : "Add photo"}
+        </Button>
+        <input
+          id="image"
+          ref={filePickerRef}
+          name="image"
+          type="file"
+          style={{ display: "none" }}
+          accept=".jpg,.png,.jpeg"
+          onChange={pickedHandler}
+        ></input>
+      </Box>
+    );
+  }
+
+  if (props.component === "marker-modal") {
+    return (
+      <Box
+        sx={{
+          height: 1,
+          width: 1,
+          backgroundColor: "rgba(220,220,220,0.9)",
+          borderRadius: 2,
+        }}
+      >
+        <Button sx={{ width: 1, height: 1 }} onClick={pickImageHandler}>
+          <AddRoundedIcon fontSize="large" />
         </Button>
         <input
           id="image"

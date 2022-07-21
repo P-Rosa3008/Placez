@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Button, Rating, Typography } from "@mui/material";
 import { Form } from "react-bootstrap";
 import { Box } from "@mui/system";
+// import StarRoundedIcon from "@mui/icons-material/StarRounded";
 
 import MenuItemsForChoosingTypes from "../CreateMarker/components/MenuItemsForChoosingTypes";
 import classes from "./Modal.module.css";
@@ -14,7 +15,6 @@ import ModalImages from "./ModalImages";
 function Modal(props) {
   const auth = useContext(AuthContext);
   const { sendRequest } = useHttpClient();
-  const placeId = useParams().placeId;
   const history = useHistory();
 
   const [onEdit, setOnEdit] = useState(false);
@@ -23,6 +23,7 @@ function Modal(props) {
   // const [loadedPlace, setLoadedPlace] = useState();
   const [edited, setEdited] = useState(false);
   const [image, setImage] = useState();
+  // const [starRating, setStartRating] = useState(0);
 
   const getFamousWorks = (works) => {
     return (
@@ -111,11 +112,14 @@ function Modal(props) {
   useEffect(() => {
     const fetchPlace = async () => {
       try {
-        await sendRequest(`http://localhost:8080/api/places/${placeId}`);
+        await sendRequest(
+          `http://localhost:8080/api/places/${props.selected.id}`
+        );
+        // setLoadedPlace(responseData.place);
       } catch (err) {}
     };
     fetchPlace();
-  }, [sendRequest, placeId]);
+  }, [sendRequest, props.selected.id]);
 
   const handleTypeChange = (type) => {
     setTypeValue(type);
@@ -125,6 +129,13 @@ function Modal(props) {
     const name = event.target.value;
     setNameEdited(name);
   };
+
+  // const handleStarRatingChange = (event) => {
+  //   const starRating = event.target.value;
+  //   setStartRating(starRating);
+  // };
+
+  console.log(props.selected.image);
 
   const wasNotEdited = (name, type) => {
     return name.trim().length === 0 && type.trim().length > 0;
@@ -159,7 +170,7 @@ function Modal(props) {
       props.selected.type = typeValue;
       try {
         await sendRequest(
-          `http://localhost:8080/api/places/${placeId}`,
+          `http://localhost:8080/api/places/${props.selected.id}`,
           "PATCH",
           JSON.stringify({ title: nameEdited, type: typeValue }),
           {
@@ -176,7 +187,7 @@ function Modal(props) {
     }
   };
 
-  console.log(props.selected.type);
+  console.log(props.selected);
 
   const handleImage = async (image) => {
     setImage(image);
@@ -184,7 +195,7 @@ function Modal(props) {
       const formData = new FormData();
       formData.append("image", image);
       await sendRequest(
-        `http://localhost:8080/api/places/images/${placeId}`,
+        `http://localhost:8080/api/places/images/${props.selected.id}`,
         "PATCH",
         formData,
         {
@@ -326,9 +337,12 @@ function Modal(props) {
           ) : null}
           <Typography>Latitude: {props.selected.location.lat}</Typography>
           <Typography>Longitude: {props.selected.location.lng}</Typography>
-          <ImageUpload id="image" setImage={handleImage}></ImageUpload>
+
           <Box display="flex">
-            <ModalImages items={props.selected.image} />
+            <ModalImages
+              items={props.selected.image}
+              handleImage={handleImage}
+            />
           </Box>
         </Box>
       )}

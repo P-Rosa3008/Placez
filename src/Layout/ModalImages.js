@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, ImageList, ImageListItem } from "@mui/material";
+import { Box, IconButton, ImageList, ImageListItem } from "@mui/material";
+import ImageUpload from "../ImageUpload";
 
 function ModalImages(props) {
   return (
@@ -12,6 +13,11 @@ function ModalImages(props) {
       }}
     >
       <ImageList sx={{ height: 1, width: 1 }} cols={4}>
+        <ImageUpload
+          id="image"
+          component="marker-modal"
+          setImage={props.handleImage}
+        ></ImageUpload>
         {props.items?.map((item, index) => (
           <ImageListItem
             key={item.img}
@@ -28,14 +34,6 @@ function ModalImages(props) {
             />
           </ImageListItem>
         ))}
-        <Box
-          sx={{
-            height: 1,
-            width: 1,
-            backgroundColor: "rgba(220,220,220,0.9)",
-            borderRadius: 2,
-          }}
-        ></Box>
       </ImageList>
     </Box>
   );

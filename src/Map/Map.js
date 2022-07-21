@@ -210,7 +210,7 @@ function Map(props) {
               setMarkerIsShown(true);
             },
             marker.advancedOptions[0],
-            mapRef.current.zoom ? mapRef.current.zoom : 3,
+            mapRef.current ? mapRef.current.zoom : 3,
             zoomHasChanged,
             props.countries ? props.countries : 0,
             props.types ? props.types : 0
