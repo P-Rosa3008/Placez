@@ -33,10 +33,15 @@ function ImageUpload(props) {
   if (props.component === "user-profile-image") {
     return (
       <Box
-        position="absolute"
         right="0"
         top="0"
-        sx={{ backgroundColor: "rgba(253,161,13,1)", borderRadius: "50%" }}
+        sx={{
+          position: "absolute",
+          width: 43,
+          height: 43,
+          backgroundColor: "rgba(253,161,13,1)",
+          borderRadius: "50%",
+        }}
       >
         <IconButton aria-label="close" size="medium" color="primary">
           {props.image ? <EditRoundedIcon /> : <AddAPhotoRoundedIcon />}

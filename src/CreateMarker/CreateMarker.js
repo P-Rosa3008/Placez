@@ -16,6 +16,7 @@ import {
   Switch,
   TextField,
   Toolbar,
+  Typography,
 } from "@mui/material";
 import { Form } from "react-bootstrap";
 import CloseIcon from "@mui/icons-material/Close";
@@ -27,7 +28,8 @@ import { AuthContext } from "../shared/context/auth-context";
 import ImageUpload from "../ImageUpload";
 import { DescriptionOption } from "./components/DescriptionOption";
 import ChooseAdvancedOptions from "./components/ChooseAdvancedOptions";
-import { setRegion } from "react-geocode";
+
+import QuestionMark from "../icons/Special Char/symbol_inter.png";
 
 function CreateMarker(props) {
   const [open, setOpen] = useState(true);
@@ -232,11 +234,20 @@ function CreateMarker(props) {
       }}
     >
       <CardHeader
+        title={
+          <Typography
+            variant="h3"
+            color="rgba(46,46,48,255)"
+            sx={{ fontWeight: 400 }}
+          >
+            Create Marker
+          </Typography>
+        }
         sx={{
-          paddingTop: 1.5,
-          paddingLeft: 0,
-          paddingRight: 1.5,
-          paddingBottom: 0,
+          paddingTop: 2,
+          paddingLeft: 2,
+          paddingRight: 2,
+          paddingBottom: 1,
         }}
         action={
           <Button onClick={props.onClose}>
@@ -260,38 +271,101 @@ function CreateMarker(props) {
               paddingBottom={2}
               alignContent="space-around"
             >
-              <TextField
-                id="name"
-                type="text"
-                label="Enter Name"
-                variant="outlined"
-                onChange={handleTitle}
-                sx={{ minWidth: 0.49, mr: "10px" }}
-              ></TextField>
-              <Box sx={{ minWidth: 0.49, mr: 3 }}>
-                <Form.Group>
+              <Box display="flex">
+                <Box>
+                  <Typography
+                    color="rgba(54,54,54,255)"
+                    sx={{ paddingBottom: 1, fontSize: 18, fontWeight: 400 }}
+                  >
+                    Enter name
+                  </Typography>
+                  <TextField
+                    id="name"
+                    type="text"
+                    variant="outlined"
+                    label="e.g. Eiffel Tower"
+                    onChange={handleTitle}
+                    inputProps={{
+                      style: {
+                        fontSize: "20px",
+                        fontWeight: "400",
+                        color: "rgba(163,163,165,255)",
+                      },
+                    }}
+                    sx={{
+                      minWidth: 392,
+                      mr: "10px",
+                      "& .MuiOutlinedInput-root": {
+                        "& fieldset": {
+                          borderColor: "rgba(231,232,235,255)",
+                        },
+                        "&:hover fieldset": {
+                          borderColor: "rgba(231,232,235,255)",
+                          borderWidth: "2px",
+                        },
+                        "&.Mui-focused fieldset": {
+                          borderColor: "rgba(231,232,235,255)",
+                        },
+                      },
+                      "& .MuiFormLabel-root": {
+                        fontWeight: "400",
+                        color: "rgba(163,163,165,255)",
+                      },
+                      "& .MuiInputLabel-root": {
+                        "&.Mui-focused": { color: "transparent" },
+                      },
+                      "& .css-1z7n62>span": { display: "none" },
+                    }}
+                  />
+                </Box>
+                <Box
+                  display="flex"
+                  alignItems="flex-end"
+                  sx={
+                    {
+                      // minWidth: 0.49,
+                    }
+                  }
+                >
+                  {/* <Form.Group> */}
                   <ClickAwayListener onClickAway={handleDrawerClose}>
                     <FormControl
                       sx={{
                         my: 1,
-                        minWidth: "100%",
+                        width: type ? "100%" : "",
+                        marginBottom: 0,
+                        marginTop: 0,
                       }}
                     >
                       <Button
                         variant="outlined"
                         sx={{
-                          height: "57.44px",
+                          height: "62px",
                           borderWidth: "1px",
-                          borderColor: "rgba(0, 0, 0, 0.54)",
+                          borderColor: "rgba(231,232,235,255)",
                           color: "rgba(0,0,0,0.54)",
                           fontSize: "17px",
                           fontWeight: "300",
                           textTransform: "none",
-                          "&:hover": { backgroundColor: "white" },
+                          "&:hover": {
+                            backgroundColor: "white",
+                            borderColor: "rgba(231,232,235,255)",
+                            borderWidth: "2px",
+                          },
                         }}
                         onClick={handleDrawerOpen}
                       >
-                        {type ? type : " Choose Type"}
+                        {type ? (
+                          <Typography
+                            variant="h4"
+                            fontWeight="400"
+                            color="primary"
+                          >
+                            {type}
+                          </Typography>
+                        ) : (
+                          <img src={QuestionMark} alt="question-mark" />
+                        )}
                       </Button>
                       <SwipeableDrawer
                         anchor="right"
@@ -317,27 +391,35 @@ function CreateMarker(props) {
                       </SwipeableDrawer>
                     </FormControl>
                   </ClickAwayListener>
-                </Form.Group>
+                  {/* </Form.Group> */}
+                </Box>
               </Box>
             </Box>
-            <DescriptionOption handleInputChange={handleDescription} />
-            <ImageUpload
-              id="image"
-              component="create-marker"
-              setImage={handleImage}
-            />
+            <Box>
+              <Typography
+                color="rgba(54,54,54,255)"
+                sx={{ paddingBottom: 1, fontSize: 18, fontWeight: 400 }}
+              >
+                Description
+              </Typography>
+              <DescriptionOption handleInputChange={handleDescription} />
+            </Box>
           </Container>
         </Form>
       </CardContent>
       <CardActions
         sx={{
-          display: "flex",
-          justifyContent: "flex-end",
           paddingBottom: 1,
           paddingLeft: 2.5,
           paddingTop: 4,
         }}
       >
+        <ImageUpload
+          id="image"
+          component="create-marker"
+          setImage={handleImage}
+        />
+        <Box width="100%" />
         <Box sx={{ backgroundColor: "rgba(253,161,13,1)", borderRadius: 1 }}>
           <Button type="submit" value="Submit" onClick={submitHandler}>
             {isLoading ? <CircularProgress /> : "Submit"}

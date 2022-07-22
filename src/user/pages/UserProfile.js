@@ -78,14 +78,13 @@ const UserProfile = () => {
                 }}
                 src={user.avatar ? `http://localhost:8080/${user.avatar}` : ""}
               />
-              <Box>
-                <ImageUpload
-                  id="image"
-                  component="user-profile-image"
-                  setImage={handleImage}
-                  image={user.avatar}
-                />
-              </Box>
+
+              <ImageUpload
+                id="image"
+                component="user-profile-image"
+                setImage={handleImage}
+                image={user.avatar}
+              />
             </Box>
             <Box>
               <Box

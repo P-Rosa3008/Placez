@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Button, Rating, Typography } from "@mui/material";
+import { Button, Divider, Rating, Typography } from "@mui/material";
 import { Form } from "react-bootstrap";
 import { Box } from "@mui/system";
 // import StarRoundedIcon from "@mui/icons-material/StarRounded";
@@ -281,7 +281,7 @@ function Modal(props) {
               alignItems: "baseline",
             }}
           >
-            <Typography variant="h1" color="primary">
+            <Typography variant="h1" color="primary" lineHeight="1.2">
               {props.selected.title}
             </Typography>
 
@@ -290,23 +290,27 @@ function Modal(props) {
               {props.selected.type}
             </Typography>
           </Box>
-          {/* <Box display="flex">
-            <Rating
-              sx={{
-                "& .MuiRating-decimal": { display: "flex" },
-              }}
-              value={starRating}
-              defaultValue={starRating}
-              onChange={handleStarRatingChange}
-              icon={<StarRoundedIcon />}
-              emptyIcon={<StarRoundedIcon />}
-              precision={0.5}
-              size="small"
-            ></Rating>
-          </Box> */}
-          <Typography color="primary">
-            Description: {props.selected.description}
+          <Typography color="primary" sx={{}}>
+            Latitude: {props.selected.location.lat} Longitude:{" "}
+            {props.selected.location.lng}
           </Typography>
+          <Box paddingTop="24px" paddingBottom="24px" display="flex">
+            <ModalImages
+              items={props.selected.image}
+              handleImage={handleImage}
+            />
+          </Box>
+          <Box
+            maxHeight="450px"
+            marginTop="8px"
+            paddingRight="8px"
+            overflow="scroll"
+          >
+            <Typography textAlign="justify" color="primary">
+              {props.selected.description}
+            </Typography>
+          </Box>
+
           {props.selected.type === "Museum" ? (
             <Box>
               {props.selected.advancedOptions?.map((options, index) => {
@@ -335,15 +339,6 @@ function Modal(props) {
               {getFamousWorks()}
             </Box>
           ) : null}
-          <Typography>Latitude: {props.selected.location.lat}</Typography>
-          <Typography>Longitude: {props.selected.location.lng}</Typography>
-
-          <Box display="flex">
-            <ModalImages
-              items={props.selected.image}
-              handleImage={handleImage}
-            />
-          </Box>
         </Box>
       )}
     </div>
