@@ -135,8 +135,6 @@ function Modal(props) {
   //   setStartRating(starRating);
   // };
 
-  console.log(props.selected.image);
-
   const wasNotEdited = (name, type) => {
     return name.trim().length === 0 && type.trim().length > 0;
   };
@@ -181,13 +179,9 @@ function Modal(props) {
         setEdited(true);
         props.setEdited(edited);
         history.push("/");
-      } catch (err) {
-        console.log(err.message);
-      }
+      } catch (err) {}
     }
   };
-
-  console.log(props.selected);
 
   const handleImage = async (image) => {
     setImage(image);
@@ -202,10 +196,7 @@ function Modal(props) {
           Authorization: "Bearer " + auth.token,
         }
       );
-    } catch (err) {
-      console.log(err);
-      console.log(err.message);
-    }
+    } catch (err) {}
   };
 
   return (
@@ -257,7 +248,7 @@ function Modal(props) {
               />
             </Form.Group>
           </Box>
-          <Box sx={{}}>
+          <Box>
             <Form.Group>
               <MenuItemsForChoosingTypes type={handleTypeChange} />
             </Form.Group>
@@ -290,10 +281,10 @@ function Modal(props) {
               {props.selected.type}
             </Typography>
           </Box>
-          <Typography color="primary" sx={{}}>
+          {/* <Typography color="primary" sx={{}}>
             Latitude: {props.selected.location.lat} Longitude:{" "}
             {props.selected.location.lng}
-          </Typography>
+          </Typography> */}
           <Box paddingTop="24px" paddingBottom="24px" display="flex">
             <ModalImages
               items={props.selected.image}
@@ -314,8 +305,6 @@ function Modal(props) {
           {props.selected.type === "Museum" ? (
             <Box>
               {props.selected.advancedOptions?.map((options, index) => {
-                console.log(props.selected.advancedOptions[0].schedule);
-
                 return (
                   <Box>
                     <Box sx={{ display: "flex", alignItems: "baseline" }}>

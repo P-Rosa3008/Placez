@@ -16,7 +16,6 @@ function MenuItemsForChoosingTypes(props) {
   };
 
   const searchHandler = (search) => {
-    console.log(search);
     setTypeSearch(search);
   };
 

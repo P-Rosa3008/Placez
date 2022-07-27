@@ -2,7 +2,7 @@ import { TabTypes } from "./TabTypes";
 import { TabAToZ } from "./TabAToZ";
 import React, { useState } from "react";
 import { Box, Button, Menu, Tab } from "@mui/material";
-import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import FilterAltRoundedIcon from "@mui/icons-material/FilterAltRounded";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 
 export function SelectOptionsButton(props) {
@@ -59,7 +59,7 @@ export function SelectOptionsButton(props) {
         color="secondary"
         onClick={handleClick}
       >
-        <MenuRoundedIcon />
+        <FilterAltRoundedIcon />
       </Button>
       <Menu
         open={open}

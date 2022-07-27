@@ -21,7 +21,8 @@ import { getRandomSentence } from "../utils/getterFunctions/getRandomSentence";
 import { getNegativeSetence } from "../utils/getterFunctions/getNegativeSetence";
 import { isCountryAccepted } from "../../user/components/UserStats/MapCardComponents/utils/isCountryAccepted";
 
-export const useGetStatisticsData = () => {
+export const useGetStatisticsData = (user) => {
+  console.log(user);
   ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip);
 
   const auth = useContext(AuthContext);
@@ -141,21 +142,29 @@ export const useGetStatisticsData = () => {
         randomCountryStat();
 
         const typeStatisticsBarChartUser = async () => {
-          const responseData = await sendRequest(
-            `http://localhost:8080/api/places/${auth.userId}/places`
-          );
-          const dataCount = [];
-          const occurrences = responseData.places.map((p) => p.type);
-          const nameOccurrences = [...new Set(occurrences)];
+          try {
+            const responseData = await sendRequest(
+              `http://localhost:8080/api/places/${auth.userId}/places`
+            );
+            console.log(responseData.places.length);
+            const dataCount = [];
+            const occurrences = responseData.places.map((p) => p.type);
+            const nameOccurrences = [...new Set(occurrences)];
 
-          const count = (arr, val) =>
-            arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
+            const count = (arr, val) =>
+              arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
 
-          for (const occurrence of nameOccurrences) {
-            const numberOfOccurences = count(occurrences, occurrence);
-            dataCount.push(numberOfOccurences);
-            setTypeStatisticsBarChartUserLabels(nameOccurrences);
-            setTypeStatisticsBarChartUserData(dataCount.sort((a, b) => b - a));
+            for (const occurrence of nameOccurrences) {
+              const numberOfOccurences = count(occurrences, occurrence);
+              dataCount.push(numberOfOccurences);
+              setTypeStatisticsBarChartUserLabels(nameOccurrences);
+              setTypeStatisticsBarChartUserData(
+                dataCount.sort((a, b) => b - a)
+              );
+            }
+          } catch (error) {
+            console.log(error);
+            return <Box />;
           }
         };
         typeStatisticsBarChartUser();
@@ -170,9 +179,7 @@ export const useGetStatisticsData = () => {
           });
         };
         typeEvolutionLineChart();
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
     };
     fetchPlaces();
   }, [sendRequest, auth.userId]);
@@ -197,14 +204,16 @@ export const useGetStatisticsData = () => {
       datasets: barChartDataset(typeStatisticsBarChartUserData),
     };
 
-    return (
-      <Box sx={{ width: 325 }}>
-        <Typography sx={{ fontWeight: "bold" }}>
-          Types you added the most?
-        </Typography>
-        <Bar width="10%" height="10%" data={data} options={barOptions} />
-      </Box>
-    );
+    if (user.places.length > 0) {
+      return (
+        <Box sx={{ width: 325 }}>
+          <Typography sx={{ fontWeight: "bold" }}>
+            Types you added the most?
+          </Typography>
+          <Bar width="10%" height="10%" data={data} options={barOptions} />
+        </Box>
+      );
+    }
   };
 
   const randomCountryStatistic = () => {

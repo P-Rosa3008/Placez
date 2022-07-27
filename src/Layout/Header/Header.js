@@ -86,7 +86,6 @@ function Header(props) {
           { "Content-Type": "application/json" }
         );
       } catch (err) {}
-      console.log(user);
     };
   }, []);
 

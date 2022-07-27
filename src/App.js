@@ -144,8 +144,6 @@ function App() {
 
   let routes;
 
-  console.log(typeof setSelectedHandler);
-
   if (token) {
     routes = (
       <Switch>
@@ -153,6 +151,7 @@ function App() {
           <MainMap
             allowNewMarker={allowNewMarker}
             selectedGetter={setSelectedHandler}
+            markerIsShownGetter={handleMarkerIsShown}
             markerIsShown={markerIsShown}
             selected={selected}
             center={center}
@@ -162,6 +161,7 @@ function App() {
           <MainMap
             allowNewMarker={allowNewMarker}
             selectedGetter={setSelectedHandler}
+            markerIsShownGetter={handleMarkerIsShown}
             markerIsShown={markerIsShown}
             selected={selected}
             center={center}
@@ -213,7 +213,7 @@ function App() {
             markerIsShownGetter={handleMarkerIsShown}
           />
         </Route>
-        <Route path="/place/:placeId" exact>
+        {/* <Route path="/place/:placeId" exact>
           <MainMap
             allowNewMarker={allowNewMarker}
             selectedGetter={setSelectedHandler}
@@ -221,7 +221,7 @@ function App() {
             selected={selected}
             center={center}
           />
-        </Route>
+        </Route> */}
         <Route path="/signup" exact>
           <SignUp />
         </Route>

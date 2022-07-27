@@ -34,9 +34,7 @@ function UserPlaces(props) {
 
         const places = responseData.places;
         setUserPlaces(places);
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
     };
     fetchPlaces();
   }, [sendRequest, userId]);
@@ -52,11 +50,7 @@ function UserPlaces(props) {
   return (
     <Box display="flex">
       <Box padding={3}>
-        {!isLoading ? (
-          <PlaceList selectedGetter={setSelectedHandler} items={userPlaces} />
-        ) : (
-          <Typography>Error</Typography>
-        )}
+        <PlaceList selectedGetter={setSelectedHandler} items={userPlaces} />
       </Box>
     </Box>
   );

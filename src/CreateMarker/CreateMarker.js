@@ -100,8 +100,6 @@ function CreateMarker(props) {
 
   const handleAdvancedOptionsData = (advancedOptionsData) => {
     setAdvancedOptions(advancedOptionsData);
-
-    console.log(advancedOptionsData);
   };
 
   const handleInsertAdvancedOptions = (value) => {
@@ -213,7 +211,6 @@ function CreateMarker(props) {
       });
     } catch (err) {
       setErrorData(err.message);
-      console.log(error);
     }
 
     props.onClose();

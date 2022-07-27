@@ -30,9 +30,7 @@ const UserProfile = () => {
           `http://localhost:8080/api/users/${username}`
         );
         setUser(responseData.user);
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
     };
     fetchPlaces();
   }, [sendRequest, username]);
@@ -42,7 +40,6 @@ const UserProfile = () => {
     try {
       const formData = new FormData();
       formData.append("image", image);
-      console.log(formData);
       await sendRequest(
         `http://localhost:8080/api/users/${username}`,
         "PATCH",
@@ -51,9 +48,7 @@ const UserProfile = () => {
           Authorization: "Bearer " + auth.token,
         }
       );
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 
   return (

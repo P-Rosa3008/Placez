@@ -57,7 +57,6 @@ function LogIn() {
         }),
         { "Content-Type": "application/json" }
       );
-      console.log(responseData);
       setFormState(formState);
       auth.login(
         responseData.userId,
@@ -71,7 +70,6 @@ function LogIn() {
       history.push("/");
     } catch (err) {
       setErrorData(err.message);
-      console.log(errorData);
       setOpen(true);
     }
   };

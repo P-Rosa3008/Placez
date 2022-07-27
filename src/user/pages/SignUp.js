@@ -10,6 +10,8 @@ import {
   Grid,
   IconButton,
   InputAdornment,
+  List,
+  ListItem,
   TextField,
   Typography,
 } from "@mui/material";
@@ -53,6 +55,7 @@ function SignUp() {
   };
 
   const handleEmail = (event) => {
+    console.log(event.target.value);
     setEmail(event.target.value);
   };
 
@@ -62,6 +65,8 @@ function SignUp() {
 
   const emailIsValid = () => {
     const emailValidator = validator.isEmail(email);
+    console.log(email);
+    console.log(emailValidator);
     return emailValidator;
   };
 
@@ -85,6 +90,7 @@ function SignUp() {
         email: { value: email.toLowerCase(), isValid: false },
         password: { value: password, isValid: false },
       };
+      console.log(formStateValid);
       setFormState(formStateValid);
 
       try {
@@ -326,9 +332,25 @@ function SignUp() {
                   variant="outlined"
                   error={!passwordIsValid() && submitWasPressed}
                   helperText={
-                    !passwordIsValid() && submitWasPressed
-                      ? "Please enter valid password"
-                      : null
+                    !passwordIsValid() && submitWasPressed ? (
+                      <Box>
+                        <Typography variant="caption">
+                          Please enter a valid password, must contain at least:
+                        </Typography>
+                        <ListItem sx={{ display: "list-item" }}>
+                          8 caracthers
+                        </ListItem>
+                        <ListItem sx={{ display: "list-item" }}>
+                          lower and uppercase letters
+                        </ListItem>
+                        <ListItem sx={{ display: "list-item" }}>
+                          a number
+                        </ListItem>
+                        <ListItem sx={{ display: "list-item" }}>
+                          a symbol
+                        </ListItem>
+                      </Box>
+                    ) : null
                   }
                   sx={{
                     width: "100%",

@@ -4,6 +4,7 @@ export function StatisticsCard(props) {
   return (
     <Box
       sx={{
+        minHeight: 672,
         maxHeight: 672,
         overflow: "auto",
         width: "-webkit-fill-available",
@@ -11,8 +12,11 @@ export function StatisticsCard(props) {
       }}
     >
       <Box sx={{ marginLeft: 3 }}>
-        {props.user.places > 0 ? props.typeStatisticsBarChartUser() : null}
-        {props.typeStatisticsBarChartUser()}
+        {props.user.places.length > 0 ? (
+          props.typeStatisticsBarChartUser()
+        ) : (
+          <Box />
+        )}
         {props.typeStatisticsBarChartAll()}
       </Box>
     </Box>

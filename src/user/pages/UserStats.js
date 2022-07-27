@@ -7,7 +7,6 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { useParams } from "react-router-dom";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import { useGetStatisticsData } from "../../shared/hooks/statistics-hook";
-import { TypeStatisticsPieChartUser as TypeStatisticsBarChartUser } from "../../shared/utils/statisticsUtils/statisticsFunctions.js/typePieChartUser";
 
 function UserStats() {
   const username = useParams().username;
@@ -36,7 +35,7 @@ function UserStats() {
     randomCountryStatistic,
     typeStatisticsBarChartAll,
     typeStatisticsBarChartUser,
-  } = useGetStatisticsData();
+  } = useGetStatisticsData(user);
 
   return (
     <Box

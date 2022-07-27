@@ -20,7 +20,6 @@ function FamousWorks(props) {
     if (event.target.name === "thirdwork") {
       values.thirdWork = event.target.value;
     }
-    console.log(values);
     setFamousWorksState(values);
   };
 

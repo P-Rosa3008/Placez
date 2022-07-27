@@ -8,11 +8,13 @@ export function DescriptionOption(props) {
       type="text"
       label="e.g. A beautiful tower"
       multiline
+      maxRows={5}
       minRows={5}
       variant="outlined"
       inputProps={{ style: { fontSize: "20", color: "rgba(100,100,100,255)" } }}
       sx={{
         minWidth: 1,
+
         marginBottom: 1,
         "& .MuiOutlinedInput-root": {
           "& fieldset": {

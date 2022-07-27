@@ -6,7 +6,12 @@ export function MainMap(props) {
   const [countries, setCountries] = useState([]);
   const [types, setTypes] = useState([]);
 
-  console.log(props);
+  const handleSelectedCountries = (countries) => {
+    setCountries(countries);
+  };
+  const handleSelectedTypes = (types) => {
+    setTypes(types);
+  };
 
   return (
     <Box position="relative">
@@ -21,6 +26,7 @@ export function MainMap(props) {
           allowNewMarker={props.allowNewMarker}
           selectedGetter={props.selectedGetter}
           markerIsShown={props.markerIsShown}
+          markerIsShownGetter={props.markerIsShownGetter}
           selected={props.selected}
           center={props.center}
           countries={countries}
@@ -33,7 +39,12 @@ export function MainMap(props) {
             right: 12,
           }}
         >
-          <SelectOptionsButton />
+          <SelectOptionsButton
+            countries={countries}
+            types={types}
+            handleSelectedCountries={handleSelectedCountries}
+            handleSelectedTypes={handleSelectedTypes}
+          />
         </CardActions>
       </Card>
     </Box>

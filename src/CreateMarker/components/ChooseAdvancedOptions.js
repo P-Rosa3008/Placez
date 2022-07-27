@@ -51,7 +51,6 @@ function ChooseAdvancedOptions(props) {
         <Button
           onClick={() => {
             props.advancedOptionsChoosedValues(bools);
-            console.log(bools);
             setOpen(false);
             setCloseModal(false);
             props.handleCloseChildModal(closeModal);

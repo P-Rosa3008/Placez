@@ -24,8 +24,6 @@ function Map(props) {
 
   const history = useHistory();
 
-  console.log(props);
-
   useEffect(() => {
     const fetchPlaces = async () => {
       try {
@@ -107,7 +105,8 @@ function Map(props) {
 
   const hideModalHandler = () => {
     setMarkerIsShown(false);
-    history.push("/");
+    props.markerIsShownGetter(false);
+    console.log("close modal");
   };
 
   const showCreateMarkerHandler = () => {
@@ -205,7 +204,6 @@ function Map(props) {
                 lat: event.latLng.lat() - 0.01,
                 lng: event.latLng.lng() + 0.045,
               });
-              console.log(props);
               props.selectedGetter(marker);
               setMarkerIsShown(true);
             },
@@ -225,7 +223,7 @@ function Map(props) {
         />
       )}
       {markerIsShown === true || props.markerIsShown === true
-        ? (console.log(markerIsShown),
+        ? (console.log(props.markerIsShown),
           (
             <Modal
               onCloseModal={hideModalHandler}
