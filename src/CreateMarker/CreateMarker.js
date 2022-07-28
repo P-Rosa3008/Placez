@@ -221,29 +221,28 @@ function CreateMarker(props) {
       sx={{
         position: "absolute",
         top: "45%",
+        borderRadius: "8px",
         left: openDrawer ? "35%" : "50%",
         transform: "translate(-50%, -50%)",
         bgcolor: "white",
         boxShadow: 24,
         display: "block",
-        width: "50%",
         maxHeight: "800px",
       }}
     >
       <CardHeader
         title={
           <Typography
-            variant="h3"
+            variant="h4"
             color="rgba(46,46,48,255)"
-            sx={{ fontWeight: 400 }}
+            sx={{ fontWeight: 600, paddingRight: 0 }}
           >
-            Create Marker
+            Create new place
           </Typography>
         }
         sx={{
           paddingTop: 2,
           paddingLeft: 2,
-          paddingRight: 2,
           paddingBottom: 1,
         }}
         action={
@@ -272,7 +271,7 @@ function CreateMarker(props) {
                 <Box>
                   <Typography
                     color="rgba(54,54,54,255)"
-                    sx={{ paddingBottom: 1, fontSize: 18, fontWeight: 400 }}
+                    sx={{ paddingBottom: 1, fontSize: 14, fontWeight: 400 }}
                   >
                     Enter name
                   </Typography>
@@ -297,11 +296,11 @@ function CreateMarker(props) {
                           borderColor: "rgba(231,232,235,255)",
                         },
                         "&:hover fieldset": {
-                          borderColor: "rgba(231,232,235,255)",
-                          borderWidth: "2px",
+                          borderColor: "rgba(200,200,200,255)",
                         },
                         "&.Mui-focused fieldset": {
-                          borderColor: "rgba(231,232,235,255)",
+                          borderColor: "rgba(200,200,200,255)",
+                          borderWidth: "1px",
                         },
                       },
                       "& .MuiFormLabel-root": {
@@ -346,8 +345,7 @@ function CreateMarker(props) {
                           textTransform: "none",
                           "&:hover": {
                             backgroundColor: "white",
-                            borderColor: "rgba(231,232,235,255)",
-                            borderWidth: "2px",
+                            borderColor: "rgba(200,200,200,255)",
                           },
                         }}
                         onClick={handleDrawerOpen}
@@ -392,34 +390,41 @@ function CreateMarker(props) {
                 </Box>
               </Box>
             </Box>
-            <Box>
+            <Box sx={{ width: "465 !important" }}>
               <Typography
                 color="rgba(54,54,54,255)"
-                sx={{ paddingBottom: 1, fontSize: 18, fontWeight: 400 }}
+                variant="caption"
+                sx={{ paddingBottom: 1, fontSize: 14, fontWeight: 400 }}
               >
                 Description
               </Typography>
               <DescriptionOption handleInputChange={handleDescription} />
             </Box>
+            <ImageUpload
+              id="image"
+              component="create-marker"
+              image={image}
+              setImage={handleImage}
+            />
           </Container>
         </Form>
       </CardContent>
       <CardActions
         sx={{
-          paddingBottom: 1,
-          paddingLeft: 2.5,
-          paddingTop: 4,
+          paddingBottom: "16px",
+          paddingLeft: "20px",
+          paddingTop: "32px",
         }}
       >
-        <ImageUpload
-          id="image"
-          component="create-marker"
-          setImage={handleImage}
-        />
-        <Box width="100%" />
+        <Box height="10px" width="70%" />
         <Box sx={{ backgroundColor: "rgba(253,161,13,1)", borderRadius: 1 }}>
-          <Button type="submit" value="Submit" onClick={submitHandler}>
-            {isLoading ? <CircularProgress /> : "Submit"}
+          <Button
+            type="submit"
+            value="Submit"
+            sx={{ textTransform: "none", fontWeight: 600 }}
+            onClick={submitHandler}
+          >
+            {isLoading ? <CircularProgress /> : "Create place"}
           </Button>
         </Box>
       </CardActions>
@@ -443,7 +448,7 @@ function CreateMarker(props) {
               </IconButton>
             }
           >
-            {"Error: " +
+            {"Missing: " +
               errorData.map((err, index) => {
                 const error = err.replaceAll(",", "");
                 return index === 0 ? error : " " + error;

@@ -5,15 +5,17 @@ import {
   Container,
   Divider,
   Grid,
+  ListItemButton,
   Typography,
 } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import ImageUpload from "../../ImageUpload";
 import { AuthContext } from "../../shared/context/auth-context";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import EmailRoundedIcon from "@mui/icons-material/AlternateEmailRounded";
+import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 
 const UserProfile = () => {
   const auth = useContext(AuthContext);
@@ -49,6 +51,10 @@ const UserProfile = () => {
         }
       );
     } catch (err) {}
+  };
+
+  const handleLogOut = () => {
+    auth.logout();
   };
 
   return (
@@ -154,6 +160,46 @@ const UserProfile = () => {
                   >
                     {user.email}
                   </Typography>
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    width: "50%",
+                    backgroundColor: "lightpink",
+                    margin: "auto",
+                    borderRadius: 2,
+                    marginTop: 2,
+                  }}
+                >
+                  <Link
+                    style={{
+                      width: "100%",
+                      color: "inherit",
+                      textDecoration: "inherit",
+                    }}
+                    to="/"
+                  >
+                    <ListItemButton
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        height: 48,
+                      }}
+                      onClick={handleLogOut}
+                    >
+                      <Box>
+                        <Typography
+                          sx={{ paddingLeft: 1 }}
+                          color="red"
+                          variant="button"
+                          fontWeight="600"
+                        >
+                          Log Out
+                        </Typography>
+                      </Box>
+                    </ListItemButton>
+                  </Link>
                 </Box>
               </Box>
             </Box>

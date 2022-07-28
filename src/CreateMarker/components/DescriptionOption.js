@@ -21,11 +21,11 @@ export function DescriptionOption(props) {
             borderColor: "rgba(231,232,235,255)",
           },
           "&:hover fieldset": {
-            borderColor: "rgba(231,232,235,255)",
-            borderWidth: "2px",
+            borderColor: "rgba(200,200,200,255)",
           },
           "&.Mui-focused fieldset": {
-            borderColor: "rgba(231,232,235,255)",
+            borderColor: "rgba(200,200,200,255)",
+            borderWidth: "1px",
           },
         },
         "& .MuiFormLabel-root": {

@@ -58,13 +58,19 @@ function ImageUpload(props) {
       </Box>
     );
   }
+  console.log(props.image);
   if (props.component === "create-marker") {
     return (
       <Box
         position="absolute"
-        sx={{ backgroundColor: "rgba(253,161,13,1)", borderRadius: 1 }}
+        sx={{
+          border: 1,
+          borderRadius: 1,
+          borderColor: "rgba(54,54,54,255)",
+          marginTop: "8px",
+        }}
       >
-        <Button onClick={pickImageHandler}>
+        <Button sx={{ textTransform: "none" }} onClick={pickImageHandler}>
           {props.image ? "Edit photo" : "Add photo"}
         </Button>
         <input

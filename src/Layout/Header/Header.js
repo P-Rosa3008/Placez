@@ -108,19 +108,8 @@ function Header(props) {
             </Typography>
           </Link>
           <Box sx={{ flexGrow: 0.05 }} />
-          {auth.isLoggedIn && (
-            <Link
-              style={{ color: "inherit", textDecoration: "inherit" }}
-              to={`/profile/${auth.username}`}
-            >
-              <ListItemButton sx={{ height: 48 }}>
-                <AccountCircleRoundedIcon />
-                <Typography sx={{ paddingLeft: 1 }} variant="button">
-                  Profile
-                </Typography>
-              </ListItemButton>
-            </Link>
-          )}
+          <SearchBar />
+          <Box sx={{ flexGrow: 0.95 }} />
           {auth.isLoggedIn && (
             <Link
               style={{ color: "inherit", textDecoration: "inherit" }}
@@ -147,8 +136,6 @@ function Header(props) {
               </ListItemButton>
             </Link>
           )}
-          <Box sx={{ flexGrow: 0.95 }} />
-          <SearchBar />
           {auth.isLoggedIn && (
             <Link
               to={props.allowNewMarker ? "/" : "/"}
@@ -170,11 +157,18 @@ function Header(props) {
               </Button>
             </Link>
           ) : (
-            <IconButton onClick={handleClick}>
-              <Avatar
-                src={auth.avatar ? `http://localhost:8080/${auth.avatar}` : ""}
-              />
-            </IconButton>
+            <Link
+              style={{ color: "inherit", textDecoration: "inherit" }}
+              to={`/profile/${auth.username}`}
+            >
+              <IconButton>
+                <Avatar
+                  src={
+                    auth.avatar ? `http://localhost:8080/${auth.avatar}` : ""
+                  }
+                />
+              </IconButton>
+            </Link>
           )}
           <Menu
             open={open}
