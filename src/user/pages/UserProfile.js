@@ -29,7 +29,7 @@ const UserProfile = () => {
     const fetchPlaces = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8080/api/users/${username}`
+          `${process.env.REACT_APP_BACKEND_URL}/api/users/${username}`
         );
         setUser(responseData.user);
       } catch (err) {}
@@ -43,7 +43,7 @@ const UserProfile = () => {
       const formData = new FormData();
       formData.append("image", image);
       await sendRequest(
-        `http://localhost:8080/api/users/${username}`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/users/${username}`,
         "PATCH",
         formData,
         {
@@ -77,7 +77,11 @@ const UserProfile = () => {
                   width: 250,
                   marginBottom: 2,
                 }}
-                src={user.avatar ? `http://localhost:8080/${user.avatar}` : ""}
+                src={
+                  user.avatar
+                    ? `${process.env.REACT_APP_BACKEND_URL}/${user.avatar}`
+                    : ""
+                }
               />
 
               <ImageUpload

@@ -113,7 +113,7 @@ function Modal(props) {
     const fetchPlace = async () => {
       try {
         await sendRequest(
-          `http://localhost:8080/api/places/${props.selected.id}`
+          `${process.env.REACT_APP_BACKEND_URL}/api/places/${props.selected.id}`
         );
         // setLoadedPlace(responseData.place);
       } catch (err) {}
@@ -168,7 +168,7 @@ function Modal(props) {
       props.selected.type = typeValue;
       try {
         await sendRequest(
-          `http://localhost:8080/api/places/${props.selected.id}`,
+          `${process.env.REACT_APP_BACKEND_URL}/api/places/${props.selected.id}`,
           "PATCH",
           JSON.stringify({ title: nameEdited, type: typeValue }),
           {
@@ -189,7 +189,7 @@ function Modal(props) {
       const formData = new FormData();
       formData.append("image", image);
       await sendRequest(
-        `http://localhost:8080/api/places/images/${props.selected.id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/places/images/${props.selected.id}`,
         "PATCH",
         formData,
         {

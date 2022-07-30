@@ -206,9 +206,14 @@ function CreateMarker(props) {
         console.log(pair[0] + ", " + pair[1]);
       }
 
-      await sendRequest("http://localhost:8080/api/places", "POST", formData, {
-        Authorization: "Bearer " + auth.token,
-      });
+      await sendRequest(
+        process.env.REACT_APP_BACKEND_URL + "/api/places",
+        "POST",
+        formData,
+        {
+          Authorization: "Bearer " + auth.token,
+        }
+      );
     } catch (err) {
       setErrorData(err.message);
     }

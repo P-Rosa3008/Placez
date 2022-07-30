@@ -73,7 +73,7 @@ function Header(props) {
 
       try {
         const responseData = await sendRequest(
-          "http://localhost:8080/api/users/signup",
+          process.env.REACT_APP_BACKEND_URL + "/api/users/signup",
           "POST",
           JSON.stringify({
             firstName: user.firstName,
@@ -164,7 +164,9 @@ function Header(props) {
               <IconButton>
                 <Avatar
                   src={
-                    auth.avatar ? `http://localhost:8080/${auth.avatar}` : ""
+                    auth.avatar
+                      ? `${process.env.REACT_APP_BACKEND_URL}/${auth.avatar}`
+                      : ""
                   }
                 />
               </IconButton>

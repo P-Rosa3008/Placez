@@ -53,7 +53,7 @@ function PlaceList(props) {
         console.log(typeFilter[0].icon);
 
         let img = new Image();
-        img.src = `http://localhost:8080/${image}`;
+        img.src = `${process.env.REACT_APP_BACKEND_URL}/${image}`;
 
         return (
           <li
@@ -92,7 +92,7 @@ function PlaceList(props) {
                 <Box position="relative">
                   <CardMedia
                     component="img"
-                    image={`http://localhost:8080/${image}`}
+                    image={`${process.env.REACT_APP_BACKEND_URL}/${image}`}
                   ></CardMedia>
                 </Box>
                 <Box

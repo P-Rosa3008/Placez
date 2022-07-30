@@ -28,7 +28,7 @@ function Map(props) {
     const fetchPlaces = async () => {
       try {
         const responseData = await sendRequest(
-          "http://localhost:8080/api/places"
+          process.env.REACT_APP_BACKEND_URL + "/api/places"
         );
         setMarkers(responseData.places);
 

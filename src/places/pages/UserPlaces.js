@@ -29,7 +29,7 @@ function UserPlaces(props) {
     const fetchPlaces = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8080/api/places/${userId}/places`
+          `${process.env.REACT_APP_BACKEND_URL}/api/places/${userId}/places`
         );
 
         const places = responseData.places;

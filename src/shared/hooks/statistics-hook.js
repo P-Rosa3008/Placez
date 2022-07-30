@@ -52,7 +52,7 @@ export const useGetStatisticsData = (user) => {
       try {
         const typeStatisticsBarChartAll = async () => {
           const responseData = await sendRequest(
-            "http://localhost:8080/api/places"
+            process.env.REACT_APP_BACKEND_URL + "/api/places"
           );
 
           const dataCount = [];
@@ -73,7 +73,7 @@ export const useGetStatisticsData = (user) => {
 
         const typeStatisticsPieChartPercentageAll = async () => {
           const responseData = await sendRequest(
-            "http://localhost:8080/api/places"
+            process.env.REACT_APP_BACKEND_URL + "/api/places"
           );
 
           const dataCount = [];
@@ -101,7 +101,7 @@ export const useGetStatisticsData = (user) => {
           let randomStatistic;
 
           const responseData = await sendRequest(
-            "http://localhost:8080/api/places"
+            process.env.REACT_APP_BACKEND_URL + "/api/places"
           );
 
           const places = responseData.places;
@@ -143,7 +143,7 @@ export const useGetStatisticsData = (user) => {
         const typeStatisticsBarChartUser = async () => {
           try {
             const responseData = await sendRequest(
-              `http://localhost:8080/api/places/${auth.userId}/places`
+              `${process.env.REACT_APP_BACKEND_URL}/api/places/${auth.userId}/places`
             );
             const dataCount = [];
             const occurrences = responseData.places.map((p) => p.type);
@@ -169,7 +169,7 @@ export const useGetStatisticsData = (user) => {
 
         const typeEvolutionLineChart = async () => {
           const responseData = await sendRequest(
-            "http://localhost:8080/api/places"
+            process.env.REACT_APP_BACKEND_URL + "/api/places"
           );
           const dataCount = [];
           const occurrences = responseData.places.map(

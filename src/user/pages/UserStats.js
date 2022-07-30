@@ -20,7 +20,7 @@ function UserStats() {
     const fetchUser = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8080/api/users/${username}`
+          `${process.env.REACT_APP_BACKEND_URL}/api/users/${username}`
         );
         setUser(responseData.user);
       } catch (err) {

@@ -16,7 +16,7 @@ export function DownloadXLSXButton(props) {
     const fetchPlaces = async () => {
       try {
         const responseData = await sendRequest(
-          "http://localhost:8080/api/places/jsonToExcel"
+          process.env.REACT_APP_BACKEND_URL + "/api/places/jsonToExcel"
         );
         if (props.countries.length === 0 && props.types.length === 0) {
           const formatedJSON = responseData.places.map((place) => {

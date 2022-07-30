@@ -95,7 +95,7 @@ function SignUp() {
 
       try {
         const responseData = await sendRequest(
-          "http://localhost:8080/api/users/signup",
+          process.env.REACT_APP_BACKEND_URL + "/api/users/signup",
           "POST",
           JSON.stringify({
             firstName: formStateValid.firstName,

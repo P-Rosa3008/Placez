@@ -49,7 +49,7 @@ function LogIn() {
 
     try {
       const responseData = await sendRequest(
-        "http://localhost:8080/api/users/login",
+        process.env.REACT_APP_BACKEND_URL + "/api/users/login",
         "POST",
         JSON.stringify({
           email: formState.email.value,

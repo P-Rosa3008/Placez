@@ -7,7 +7,9 @@ export const useRandomCountry = async () => {
   const { sendRequest } = useHttpClient();
 
   const getRandomCountry = async () => {
-    const responseData = await sendRequest("http://localhost:8080/api/places");
+    const responseData = await sendRequest(
+      process.env.REACT_APP_BACKEND_URL + "/api/places"
+    );
 
     const occurrences = responseData.places.map((p) => p.country);
 

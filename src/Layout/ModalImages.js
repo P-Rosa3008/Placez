@@ -31,8 +31,8 @@ function ModalImages(props) {
               style={{ borderRadius: "8px" }}
               height="100px"
               width="100px"
-              src={`http://localhost:8080/${item}`}
-              srcSet={`http://localhost:8080/${item}`}
+              src={`${process.env.REACT_APP_BACKEND_URL}/${item}`}
+              srcSet={`${process.env.REACT_APP_BACKEND_URL}/${item}`}
               alt={item}
               loading="lazy"
             />

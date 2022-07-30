@@ -20,7 +20,7 @@ export const TypeStatisticsPieChartUser = async () => {
     useState();
 
   const responseData = await sendRequest(
-    `http://localhost:8080/api/places/${auth.userId}/places`
+    `${process.env.REACT_APP_BACKEND_URL}/api/places/${auth.userId}/places`
   );
   const dataCount = [];
   const occurrences = responseData.places.map((p) => p.type);
