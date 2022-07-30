@@ -34,8 +34,6 @@ export function SelectOptionsButton(props) {
     setSelectedTypesCheckboxes(selected);
   };
 
-  console.log(selectedCountriesCheckboxes);
-
   const menuSx = {
     width: 410,
     height: 520,

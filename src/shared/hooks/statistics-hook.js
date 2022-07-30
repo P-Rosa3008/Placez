@@ -22,7 +22,6 @@ import { getNegativeSetence } from "../utils/getterFunctions/getNegativeSetence"
 import { isCountryAccepted } from "../../user/components/UserStats/MapCardComponents/utils/isCountryAccepted";
 
 export const useGetStatisticsData = (user) => {
-  console.log(user);
   ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip);
 
   const auth = useContext(AuthContext);
@@ -146,7 +145,6 @@ export const useGetStatisticsData = (user) => {
             const responseData = await sendRequest(
               `http://localhost:8080/api/places/${auth.userId}/places`
             );
-            console.log(responseData.places.length);
             const dataCount = [];
             const occurrences = responseData.places.map((p) => p.type);
             const nameOccurrences = [...new Set(occurrences)];
@@ -174,9 +172,12 @@ export const useGetStatisticsData = (user) => {
             "http://localhost:8080/api/places"
           );
           const dataCount = [];
-          const occurrences = responseData.places.filter((p) => {
-            if (p.type === "Resort") return p;
-          });
+          const occurrences = responseData.places.map(
+            (p) => p.date.split(" ")[0]
+          );
+          console.log(occurrences);
+          console.log(typeStatisticsBarChartAllLabels);
+          console.log(typeStatisticsBarChartAllData);
         };
         typeEvolutionLineChart();
       } catch (err) {}
@@ -225,6 +226,8 @@ export const useGetStatisticsData = (user) => {
         )
       : getNegativeSetence(randomStatistic.country, randomStatistic.type);
   };
+
+  const placesEvolutionLineChart = () => {};
 
   return {
     typeStatisticsBarChartAll,

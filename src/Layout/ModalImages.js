@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Box, IconButton, ImageList, ImageListItem } from "@mui/material";
 import ImageUpload from "../ImageUpload";
+import { AuthContext } from "../shared/context/auth-context";
 
 function ModalImages(props) {
+  const auth = useContext(AuthContext);
+
   return (
     <Box
       sx={{
@@ -12,7 +15,7 @@ function ModalImages(props) {
       }}
     >
       <ImageList sx={{ height: 1, width: 1 }} cols={4}>
-        {props.items.length <= 3 ? (
+        {props.items.length <= 3 && auth.isLoggedIn ? (
           <ImageUpload
             id="image"
             component="marker-modal"

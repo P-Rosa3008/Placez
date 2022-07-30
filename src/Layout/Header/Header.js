@@ -108,7 +108,7 @@ function Header(props) {
             </Typography>
           </Link>
           <Box sx={{ flexGrow: 0.05 }} />
-          <SearchBar />
+          {/* <SearchBar /> */}
           <Box sx={{ flexGrow: 0.95 }} />
           {auth.isLoggedIn && (
             <Link
