@@ -6,7 +6,6 @@ export function DescriptionOption(props) {
       id="description"
       name="description"
       type="text"
-      label="e.g. A beautiful tower"
       multiline
       maxRows={5}
       minRows={5}

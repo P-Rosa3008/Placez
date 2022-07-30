@@ -282,7 +282,6 @@ function CreateMarker(props) {
                     id="name"
                     type="text"
                     variant="outlined"
-                    label="e.g. Eiffel Tower"
                     onChange={handleTitle}
                     inputProps={{
                       style: {
