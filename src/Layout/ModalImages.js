@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Box, IconButton, ImageList, ImageListItem } from "@mui/material";
+import { Box, ImageList, ImageListItem } from "@mui/material";
 import ImageUpload from "../ImageUpload";
 import { AuthContext } from "../shared/context/auth-context";
 

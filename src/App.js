@@ -1,5 +1,4 @@
-import { MainMap } from "./Map/MainMap";
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, Suspense } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import {
   BrowserRouter as Router,
@@ -12,17 +11,21 @@ import "./App.css";
 import themeOptions from "./Layout/Theme";
 import { AuthContext } from "./shared/context/auth-context";
 import Header from "./Layout/Header/Header";
-import Map from "./Map/Map";
-import UserProfile from "./user/pages/UserProfile";
-import UserPlaces from "./places/pages/UserPlaces";
-import CustomDrawer from "./Layout/CustomDrawer";
-import SignUp from "./user/pages/SignUp";
-import LogIn from "./user/pages/LogIn";
-import UserStats from "./user/pages/UserStats";
-import { Box, Card, CardActions } from "@mui/material";
-import { SelectOptionsButton } from "./user/components/UserStats/MapCardComponents/SelectOptionsButton";
+import { MainMap } from "./Map/MainMap";
+import { Box, CircularProgress } from "@mui/material";
+// import UserProfile from "./user/pages/UserProfile";
+// import UserPlaces from "./places/pages/UserPlaces";
+// import SignUp from "./user/pages/SignUp";
+// import LogIn from "./user/pages/LogIn";
+// import UserStats from "./user/pages/UserStats";
 
 let logoutTimer;
+
+const UserProfile = React.lazy(() => import("./user/pages/UserProfile"));
+const UserPlaces = React.lazy(() => import("./places/pages/UserPlaces"));
+const SignUp = React.lazy(() => import("./user/pages/SignUp"));
+const LogIn = React.lazy(() => import("./user/pages/LogIn"));
+const UserStats = React.lazy(() => import("./user/pages/UserStats"));
 
 function App() {
   const [allowNewMarker, setAllowNewMarker] = useState();
@@ -167,9 +170,6 @@ function App() {
             center={center}
           />
         </Route>
-        <Route path="/:username" exact>
-          <CustomDrawer />
-        </Route>
         <Route path="/profile/:username" exact>
           <UserProfile />
         </Route>
@@ -236,7 +236,15 @@ function App() {
             allowNewMarker={allowNewMarker}
             isNewMarkerAllowed={allowNewMarkerHandler}
           />
-          {routes}
+          <Suspense
+            fallback={
+              <Box>
+                <CircularProgress />
+              </Box>
+            }
+          >
+            {routes}
+          </Suspense>
         </Router>
       </AuthContext.Provider>
     </ThemeProvider>

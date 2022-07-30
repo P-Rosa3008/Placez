@@ -4,7 +4,6 @@ import { Box, Tab } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { filterCountrysAZ } from "./utils/filterCountrys";
 import { countrys } from "./utils/countriesNamesOnly";
-import { PowerInputSharp } from "@material-ui/icons";
 
 export const TabAToZ = (props) => {
   const [tabIndex, setTabIndex] = useState("1");
@@ -40,14 +39,14 @@ export const TabAToZ = (props) => {
       return bool;
     });
 
-    const countrySelected = selectedCheckbox.map((bool, i) => {
-      if (i === index) {
-        return country;
-      }
-      if (checked !== false) {
-        return country;
-      }
-    });
+    // const countrySelected = selectedCheckbox.map((bool, i) => {
+    //   if (i === index) {
+    //     return country;
+    //   }
+    //   if (checked !== false) {
+    //     return country;
+    //   }
+    // });
 
     let updatedCountryArray;
     updatedCountryArray = [...selectedCountry, country];

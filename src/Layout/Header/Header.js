@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import {
   AppBar,
   Avatar,
@@ -13,28 +13,16 @@ import NewMarkerButton from "./components/NewMarkerButton";
 import Menu from "./components/Menu";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../shared/context/auth-context";
-import SearchBar from "./components/SearchBar";
-import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
+// import SearchBar from "./components/SearchBar";
 import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
 
-import { faker } from "@faker-js/faker";
-import { useHttpClient } from "../../shared/hooks/http-hook";
-
 function Header(props) {
-  faker.locale = "pt_PT";
-
-  const { isLoading, error, sendRequest } = useHttpClient();
-
   const auth = useContext(AuthContext);
   const [allowNewMarker, setAllowNewMarker] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
 
   const open = Boolean(anchorEl);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
 
   const closeMenu = () => {
     setAnchorEl(null);
@@ -59,35 +47,6 @@ function Header(props) {
   };
 
   props.isNewMarkerAllowed(allowNewMarker);
-
-  useEffect(() => {
-    const createUser = async () => {
-      const username = faker.internet.userName();
-      const firstName = faker.name.firstName();
-      const lastName = faker.name.lastName();
-      const email = faker.internet.email();
-      const password = faker.internet.password();
-      const avatar = faker.internet.avatar();
-
-      const user = { username, firstName, lastName, email, password, avatar };
-
-      try {
-        const responseData = await sendRequest(
-          process.env.REACT_APP_BACKEND_URL + "/api/users/signup",
-          "POST",
-          JSON.stringify({
-            firstName: user.firstName,
-            lastName: user.lastName,
-            username: user.username,
-            email: user.email,
-            password: user.password,
-            avatar: user.avatar,
-          }),
-          { "Content-Type": "application/json" }
-        );
-      } catch (err) {}
-    };
-  }, []);
 
   return (
     <Box>

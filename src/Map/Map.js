@@ -5,7 +5,6 @@ import Modal from "../Layout/Modal";
 import CreateMarker from "../CreateMarker/CreateMarker";
 import BetterMarker from "./Markers/BetterMarker";
 import { useHttpClient } from "../shared/hooks/http-hook";
-import { useHistory } from "react-router-dom";
 import MarkerTypes from "./Markers/MarkerTypes";
 import { CircularProgress, Typography } from "@mui/material";
 
@@ -18,11 +17,9 @@ function Map(props) {
   const [newMarker, setNewMarker] = useState(false);
   const [showCreateMarker, setShowCreateMarker] = useState(false);
   const [allowNewMarker, setAllowNewMarker] = useState(false);
-  const [edited, setEdited] = useState();
+  // const [edited, setEdited] = useState();
   const [zoomHasChanged, setZoomHasChanged] = useState(false);
   const { isLoading, sendRequest } = useHttpClient();
-
-  const history = useHistory();
 
   useEffect(() => {
     const fetchPlaces = async () => {
@@ -97,11 +94,11 @@ function Map(props) {
     if (props.markerIsShown && props.selected) {
       setCenter(props.center);
     }
-  }, []); //check this if center error
+  }, []);
 
-  const showModalHandler = () => {
-    setMarkerIsShown(true);
-  };
+  // const showModalHandler = () => {
+  //   setMarkerIsShown(true);
+  // };
 
   const hideModalHandler = () => {
     setMarkerIsShown(false);
@@ -117,9 +114,9 @@ function Map(props) {
     setShowCreateMarker(false);
   };
 
-  const setEditedHandler = (edited) => {
-    setEdited(!edited);
-  };
+  // const setEditedHandler = (edited) => {
+  //   setEdited(!edited);
+  // };
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -230,7 +227,7 @@ function Map(props) {
               selected={selected || props.selected}
               currentName={selected?.title || props.selected.title}
               currentType={selected?.type || props.selected.type}
-              setEdited={setEditedHandler}
+              // setEdited={setEditedHandler}
             ></Modal>
           ))
         : null}

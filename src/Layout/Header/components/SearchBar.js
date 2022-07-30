@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { Box, TextField } from "@mui/material";
 import { Form } from "react-bootstrap";
 
 function SearchBar(props) {
-  const [search, setSearch] = useState("");
-
   const searchHandler = (event) => {
     const value = event.target.value.toLowerCase();
     props.search(value);

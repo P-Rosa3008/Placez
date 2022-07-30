@@ -1,5 +1,5 @@
 import { Box, Card, CardActions } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { SelectOptionsButton } from "../user/components/UserStats/MapCardComponents/SelectOptionsButton";
 import Map from "./Map";
 export function MainMap(props) {

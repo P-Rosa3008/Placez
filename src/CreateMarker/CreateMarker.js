@@ -13,7 +13,7 @@ import {
   FormControl,
   IconButton,
   SwipeableDrawer,
-  Switch,
+  // Switch,
   TextField,
   Toolbar,
   Typography,
@@ -22,12 +22,12 @@ import { Form } from "react-bootstrap";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box } from "@mui/system";
 import MenuItemsForChoosingTypes from "./components/MenuItemsForChoosingTypes";
-import AdvancedOptions from "./components/AdvancedOptions";
+// import AdvancedOptions from "./components/AdvancedOptions";
 import { useHttpClient } from "../shared/hooks/http-hook";
 import { AuthContext } from "../shared/context/auth-context";
 import ImageUpload from "../ImageUpload";
 import { DescriptionOption } from "./components/DescriptionOption";
-import ChooseAdvancedOptions from "./components/ChooseAdvancedOptions";
+// import ChooseAdvancedOptions from "./components/ChooseAdvancedOptions";
 
 import QuestionMark from "../icons/Special Char/symbol_inter.png";
 
@@ -39,29 +39,27 @@ function CreateMarker(props) {
   const [title, setTitle] = useState("");
   const [type, setTypeValue] = useState("");
   const [description, setDescription] = useState("");
-  const [advancedOptions, setAdvancedOptions] = useState({});
-  const [insertAdvancedOptions, setInsertAdvancedOptions] = useState(false);
-  const [closeModal, setCloseModal] = useState(true);
-  const [advancedOptionsChoosed, setAdvancedOptionsChoosed] = useState(false);
-  const [advancedOptionsChoosedValues, setAdvancedOptionsChoosedValues] =
-    useState(false);
+  // const [advancedOptions, setAdvancedOptions] = useState({});
+  // const [insertAdvancedOptions, setInsertAdvancedOptions] = useState(false);
+  // const [closeModal, setCloseModal] = useState(true);
+  // const [advancedOptionsChoosed, setAdvancedOptionsChoosed] = useState(false);
+  // const [advancedOptionsChoosedValues, setAdvancedOptionsChoosedValues] =
+  //   useState(false);
   const [image, setImage] = useState();
-  const [region, setRegion] = useState();
-  const [country, setCountry] = useState();
 
   const missingData = [];
 
-  const { isLoading, error, sendRequest } = useHttpClient();
+  const { isLoading, sendRequest } = useHttpClient();
   const auth = useContext(AuthContext);
 
   useEffect(() => {}, [sendRequest]);
 
   const handleDrawerClose = () => {
     setOpenDrawer(false);
-    if (!type) {
-      setInsertAdvancedOptions(false);
-      setAdvancedOptionsChoosed(false);
-    }
+    // if (!type) {
+    //   setInsertAdvancedOptions(false);
+    //   setAdvancedOptionsChoosed(false);
+    // }
   };
 
   const handleDrawerOpen = () => {
@@ -98,41 +96,41 @@ function CreateMarker(props) {
     }
   };
 
-  const handleAdvancedOptionsData = (advancedOptionsData) => {
-    setAdvancedOptions(advancedOptionsData);
-  };
+  // const handleAdvancedOptionsData = (advancedOptionsData) => {
+  //   setAdvancedOptions(advancedOptionsData);
+  // };
 
-  const handleInsertAdvancedOptions = (value) => {
-    setInsertAdvancedOptions(!insertAdvancedOptions);
+  // const handleInsertAdvancedOptions = (value) => {
+  //   setInsertAdvancedOptions(!insertAdvancedOptions);
 
-    if (type.trim().length === 0) {
-      missingData.push("You need to choose a type first!");
-      setErrorData(missingData);
-      setInsertAdvancedOptions(false);
-      setIsValid(false);
-    }
+  //   if (type.trim().length === 0) {
+  //     missingData.push("You need to choose a type first!");
+  //     setErrorData(missingData);
+  //     setInsertAdvancedOptions(false);
+  //     setIsValid(false);
+  //   }
 
-    if (advancedOptionsChoosed === true) {
-      setInsertAdvancedOptions(false);
-      setAdvancedOptionsChoosed(false);
-    }
-    setCloseModal(true);
-  };
+  //   if (advancedOptionsChoosed === true) {
+  //     setInsertAdvancedOptions(false);
+  //     setAdvancedOptionsChoosed(false);
+  //   }
+  //   setCloseModal(true);
+  // };
 
-  const closeChildModal = (value) => {
-    if (value === false) {
-      setInsertAdvancedOptions(false);
-    }
-    setCloseModal(value);
-  };
+  // const closeChildModal = (value) => {
+  //   if (value === false) {
+  //     setInsertAdvancedOptions(false);
+  //   }
+  //   setCloseModal(value);
+  // };
 
-  const handleAdvancedOptionsChoosed = (value) => {
-    setAdvancedOptionsChoosed(value);
-  };
+  // const handleAdvancedOptionsChoosed = (value) => {
+  //   setAdvancedOptionsChoosed(value);
+  // };
 
-  const handleAdvancedOptionsChoosedValues = (values) => {
-    setAdvancedOptionsChoosedValues(values);
-  };
+  // const handleAdvancedOptionsChoosedValues = (values) => {
+  //   setAdvancedOptionsChoosedValues(values);
+  // };
 
   const dataIsMissing = (name, type, description, image) => {
     return (
@@ -180,7 +178,7 @@ function CreateMarker(props) {
     const modalData = {
       title: title,
       type: type,
-      advancedOptions: advancedOptions,
+      // advancedOptions: advancedOptions,
       coordinates: { lat: props.onLatLng.lat, lng: props.onLatLng.lng },
       region: region,
       country: country,

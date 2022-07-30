@@ -7,7 +7,6 @@ import {
   ListItemButton,
   ListItemText,
   Menu as MenuMUI,
-  MenuItem,
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";

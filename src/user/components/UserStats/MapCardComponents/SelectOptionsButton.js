@@ -1,10 +1,9 @@
 import { TabTypes } from "./TabTypes";
 import { TabAToZ } from "./TabAToZ";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Box, Button, Menu, Tab } from "@mui/material";
 import FilterAltRoundedIcon from "@mui/icons-material/FilterAltRounded";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-import { height } from "@mui/system";
 
 export function SelectOptionsButton(props) {
   const [anchorEl, setAnchorEl] = useState(null);

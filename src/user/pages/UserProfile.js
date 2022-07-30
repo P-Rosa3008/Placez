@@ -3,8 +3,6 @@ import {
   Box,
   CircularProgress,
   Container,
-  Divider,
-  Grid,
   ListItemButton,
   Typography,
 } from "@mui/material";
@@ -15,14 +13,12 @@ import ImageUpload from "../../ImageUpload";
 import { AuthContext } from "../../shared/context/auth-context";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import EmailRoundedIcon from "@mui/icons-material/AlternateEmailRounded";
-import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 
 const UserProfile = () => {
   const auth = useContext(AuthContext);
   const username = useParams().username;
 
   const [user, setUser] = useState();
-  const [image, setImage] = useState();
   const { sendRequest } = useHttpClient();
 
   useEffect(() => {
@@ -38,7 +34,6 @@ const UserProfile = () => {
   }, [sendRequest, username]);
 
   const handleImage = async (image) => {
-    setImage(image);
     try {
       const formData = new FormData();
       formData.append("image", image);

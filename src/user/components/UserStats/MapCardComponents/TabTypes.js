@@ -36,14 +36,15 @@ export function TabTypes(props) {
       }
       return bool;
     });
-    const typeSelected = selectedCheckbox.map((bool, i) => {
-      if (i === index) {
-        return type;
-      }
-      if (checked !== false) {
-        return type;
-      }
-    });
+
+    // const typeSelected = selectedCheckbox.map((bool, i) => {
+    //   if (i === index) {
+    //     return type;
+    //   }
+    //   if (checked !== false) {
+    //     return type;
+    //   }
+    // });
 
     let updatedTypeArray;
     updatedTypeArray = [...selectedType, type];

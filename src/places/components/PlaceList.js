@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Card, CardMedia, Typography } from "@mui/material";
 import { SpringGrid, layout, measureItems } from "react-stonecutter";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { types } from "../../CreateMarker/components/Types";
 
 function PlaceList(props) {
-  const [center, setCenter] = useState();
+  // const [center, setCenter] = useState();
 
-  const handleSetCenter = (place) => {
-    setCenter({ lat: place.location.lat, lng: place.location.lng });
-  };
+  // const handleSetCenter = (place) => {
+  //   setCenter({ lat: place.location.lat, lng: place.location.lng });
+  // };
 
   const history = useHistory();
 
@@ -64,7 +64,7 @@ function PlaceList(props) {
             key={place.id}
             onClick={() => {
               props.selectedGetter(place);
-              handleSetCenter(place);
+              // handleSetCenter(place);
             }}
           >
             {/* <Link

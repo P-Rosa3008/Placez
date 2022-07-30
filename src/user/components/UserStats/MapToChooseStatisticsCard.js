@@ -1,7 +1,7 @@
 import { SelectOptionsButton } from "./MapCardComponents/SelectOptionsButton";
 import { MapToChooseStatistics } from "./MapCardComponents/MapToChooseStatistics";
 import React, { useState } from "react";
-import { Box, Button, Card, CardActions } from "@mui/material";
+import { Box, Card, CardActions } from "@mui/material";
 import { DownloadXLSXButton } from "./MapCardComponents/DownloadXLSXButton";
 
 export function MapToChooseStatisticsCard() {

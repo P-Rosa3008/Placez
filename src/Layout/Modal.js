@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Button, Divider, Rating, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { Form } from "react-bootstrap";
 import { Box } from "@mui/system";
 // import StarRoundedIcon from "@mui/icons-material/StarRounded";
@@ -8,8 +8,7 @@ import MenuItemsForChoosingTypes from "../CreateMarker/components/MenuItemsForCh
 import classes from "./Modal.module.css";
 import { AuthContext } from "../shared/context/auth-context";
 import { useHttpClient } from "../shared/hooks/http-hook";
-import { useHistory, useParams } from "react-router-dom";
-import ImageUpload from "../ImageUpload";
+import { useHistory } from "react-router-dom";
 import ModalImages from "./ModalImages";
 
 function Modal(props) {
@@ -22,7 +21,6 @@ function Modal(props) {
   const [nameEdited, setNameEdited] = useState("");
   // const [loadedPlace, setLoadedPlace] = useState();
   const [edited, setEdited] = useState(false);
-  const [image, setImage] = useState();
   // const [starRating, setStartRating] = useState(0);
 
   const getFamousWorks = (works) => {
@@ -151,9 +149,9 @@ function Modal(props) {
     return typeWasEdited(typeValue) || nameWasEdited(nameEdited);
   };
 
-  const onEditHandler = () => {
-    setOnEdit(!onEdit);
-  };
+  // const onEditHandler = () => {
+  //   setOnEdit(!onEdit);
+  // };
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
@@ -184,7 +182,6 @@ function Modal(props) {
   };
 
   const handleImage = async (image) => {
-    setImage(image);
     try {
       const formData = new FormData();
       formData.append("image", image);

@@ -1,5 +1,5 @@
 import { Box, Button, IconButton } from "@mui/material";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import AddAPhotoRoundedIcon from "@mui/icons-material/AddAPhotoRounded";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
@@ -7,7 +7,7 @@ import AddRoundedIcon from "@mui/icons-material/AddRounded";
 function ImageUpload(props) {
   // const [file, setFile] = useState();
   // const [previewUrl, setPreviewUrl] = useState();
-  const [isValid, setIsValid] = useState(false);
+  // const [isValid, setIsValid] = useState(false);
 
   const filePickerRef = useRef();
 
@@ -18,11 +18,9 @@ function ImageUpload(props) {
       pickedFile = event.target.files[0];
       console.log(pickedFile);
       props.setImage(pickedFile);
-      setIsValid(true);
-      // fileIsValid = true;
+      // setIsValid(true);
     } else {
-      setIsValid(false);
-      // fileIsValid = false;
+      // setIsValid(false);
     }
   };
 

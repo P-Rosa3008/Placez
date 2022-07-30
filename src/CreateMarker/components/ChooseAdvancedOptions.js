@@ -2,12 +2,10 @@ import { Box, Button, Modal, Switch } from "@mui/material";
 import React, { useState } from "react";
 
 function ChooseAdvancedOptions(props) {
-  const [open, setOpen] = useState(false);
   const [closeModal, setCloseModal] = useState(true);
   const [tickets, setTickets] = useState(false);
   const [schedule, setSchedule] = useState(false);
   const [famousWorks, setFamousWorks] = useState(false);
-  const handleClose = () => setOpen(false);
   const handleTickets = () => setTickets(!tickets);
   const handleSchedule = () => setSchedule(!schedule);
   const handleFamousWorks = () => setFamousWorks(!famousWorks);
@@ -34,7 +32,7 @@ function ChooseAdvancedOptions(props) {
   };
 
   return (
-    <Modal open={props.open} onClose={handleClose}>
+    <Modal open={props.open}>
       <Box sx={style} display="flex" flexDirection="column">
         <Button onClick={handleTickets}>
           <Switch checked={tickets} onChange={null} />
@@ -51,7 +49,6 @@ function ChooseAdvancedOptions(props) {
         <Button
           onClick={() => {
             props.advancedOptionsChoosedValues(bools);
-            setOpen(false);
             setCloseModal(false);
             props.handleCloseChildModal(closeModal);
             props.advancedOptionsChoosed(true);
@@ -61,7 +58,6 @@ function ChooseAdvancedOptions(props) {
         </Button>
         <Button
           onClick={() => {
-            setOpen(false);
             setCloseModal(false);
             props.handleCloseChildModal(closeModal);
             props.advancedOptionsChoosed(false);

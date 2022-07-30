@@ -38,9 +38,6 @@ function MenuItemsForChoosingTypes(props) {
   );
   const natureNiche = types.filter((type) => type.niche === "Nature");
   const tourismNiche = types.filter((type) => type.niche === "Tourism");
-  const entertainmentNiche = types.filter(
-    (type) => type.niche === "Entertainment"
-  );
   const housingNiche = types.filter((type) => type.niche === "Housing");
   const healthNiche = types.filter((type) => type.niche === "Health");
   const otherNiche = types.filter((type) => type.niche === "Other");
