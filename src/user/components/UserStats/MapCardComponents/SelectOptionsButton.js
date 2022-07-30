@@ -1,13 +1,17 @@
 import { TabTypes } from "./TabTypes";
 import { TabAToZ } from "./TabAToZ";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Menu, Tab } from "@mui/material";
 import FilterAltRoundedIcon from "@mui/icons-material/FilterAltRounded";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
+import { height } from "@mui/system";
 
 export function SelectOptionsButton(props) {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [tabIndex, setTabIndex] = useState(1);
+  const [tabIndex, setTabIndex] = useState("1");
+  const [selectedCountriesCheckboxes, setSelectedCountriesCheckboxes] =
+    useState();
+  const [selectedTypesCheckboxes, setSelectedTypesCheckboxes] = useState();
 
   const open = anchorEl;
 
@@ -21,6 +25,16 @@ export function SelectOptionsButton(props) {
   const handleChange = (event, newIndex) => {
     setTabIndex(newIndex);
   };
+
+  const handleSelectedCheckboxesCountrys = (selected) => {
+    setSelectedCountriesCheckboxes(selected);
+  };
+
+  const handleSelectedCheckboxesTypes = (selected) => {
+    setSelectedTypesCheckboxes(selected);
+  };
+
+  console.log(selectedCountriesCheckboxes);
 
   const menuSx = {
     width: 410,
@@ -90,7 +104,12 @@ export function SelectOptionsButton(props) {
               paddingRight: 0,
             }}
           >
-            <TabAToZ handleSelectedCountries={props.handleSelectedCountries} />
+            <TabAToZ
+              countries={props.countries}
+              handleSelectedCountries={props.handleSelectedCountries}
+              selectedCheckboxes={selectedCountriesCheckboxes}
+              handleSelectedCheckboxes={handleSelectedCheckboxesCountrys}
+            />
           </TabPanel>
           <TabPanel
             value="2"
@@ -101,7 +120,12 @@ export function SelectOptionsButton(props) {
               paddingRight: 0,
             }}
           >
-            <TabTypes handleSelectedTypes={props.handleSelectedTypes} />
+            <TabTypes
+              types={props.types}
+              handleSelectedTypes={props.handleSelectedTypes}
+              selectedCheckboxes={selectedTypesCheckboxes}
+              handleSelectedCheckboxes={handleSelectedCheckboxesTypes}
+            />
           </TabPanel>
         </TabContext>
       </Menu>

@@ -1,11 +1,12 @@
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Box, Tab } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { types } from "../../../../CreateMarker/components/Types";
 import { TabsCheckboxes } from "./TabsCheckboxes";
 import { filterTypes } from "./utils/filterTypes";
+
 export function TabTypes(props) {
-  const [tabIndex, setTabIndex] = useState(1);
+  const [tabIndex, setTabIndex] = useState("1");
 
   const handleChange = (event, newIndex) => {
     setTabIndex(newIndex);
@@ -22,9 +23,11 @@ export function TabTypes(props) {
   } = filterTypes(types);
 
   const [selectedCheckbox, setSelectedCheckbox] = useState(() =>
-    types.map((i) => false)
+    props.types.length > 0 ? props.selectedCheckboxes : types.map((i) => false)
   );
-  const [selectedType, setSelectedType] = useState([]);
+  const [selectedType, setSelectedType] = useState(props.types);
+
+  useEffect(() => {}, [selectedType]);
 
   const isTypeSelected = (type, index, checked) => {
     const checkboxSelected = selectedCheckbox.map((bool, i) => {
@@ -58,6 +61,7 @@ export function TabTypes(props) {
     setSelectedCheckbox(checkboxSelected);
   };
 
+  props.handleSelectedCheckboxes(selectedCheckbox);
   props.handleSelectedTypes(selectedType);
 
   return (
@@ -89,7 +93,7 @@ export function TabTypes(props) {
         <Box sx={{ height: 520, width: 410 }}>
           <TabsCheckboxes
             filter={filterTypeFoodsAndDrinks()}
-            addToIndex={0}
+            addToIndex={13}
             selectedCheckbox={selectedCheckbox}
             isCountrySelected={isTypeSelected}
           />
@@ -99,7 +103,7 @@ export function TabTypes(props) {
         <Box sx={{ height: 520, width: 410 }}>
           <TabsCheckboxes
             filter={filterTypeHealth()}
-            addToIndex={0}
+            addToIndex={26}
             selectedCheckbox={selectedCheckbox}
             isCountrySelected={isTypeSelected}
           />
@@ -109,7 +113,7 @@ export function TabTypes(props) {
         <Box sx={{ height: 520, width: 410 }}>
           <TabsCheckboxes
             filter={filterTypeHousing()}
-            addToIndex={0}
+            addToIndex={27}
             selectedCheckbox={selectedCheckbox}
             isCountrySelected={isTypeSelected}
           />
@@ -119,7 +123,7 @@ export function TabTypes(props) {
         <Box sx={{ height: 520, width: 410 }}>
           <TabsCheckboxes
             filter={filterTypeNature()}
-            addToIndex={0}
+            addToIndex={33}
             selectedCheckbox={selectedCheckbox}
             isCountrySelected={isTypeSelected}
           />
@@ -129,7 +133,7 @@ export function TabTypes(props) {
         <Box sx={{ height: 520, width: 410 }}>
           <TabsCheckboxes
             filter={filterTypeTourism()}
-            addToIndex={0}
+            addToIndex={40}
             selectedCheckbox={selectedCheckbox}
             isCountrySelected={isTypeSelected}
           />
@@ -139,7 +143,7 @@ export function TabTypes(props) {
         <Box sx={{ height: 520, width: 410 }}>
           <TabsCheckboxes
             filter={filterTypeOther()}
-            addToIndex={0}
+            addToIndex={68}
             selectedCheckbox={selectedCheckbox}
             isCountrySelected={isTypeSelected}
           />

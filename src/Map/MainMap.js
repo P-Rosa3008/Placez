@@ -1,16 +1,20 @@
 import { Box, Card, CardActions } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SelectOptionsButton } from "../user/components/UserStats/MapCardComponents/SelectOptionsButton";
 import Map from "./Map";
 export function MainMap(props) {
-  const [countries, setCountries] = useState([]);
-  const [types, setTypes] = useState([]);
+  const [countriesArray, setCountries] = useState([]);
+  const [typesArray, setTypes] = useState([]);
 
   const handleSelectedCountries = (countries) => {
-    setCountries(countries);
+    if (countries !== countriesArray) {
+      setCountries(countries);
+    }
   };
   const handleSelectedTypes = (types) => {
-    setTypes(types);
+    if (types !== typesArray) {
+      setTypes(types);
+    }
   };
 
   return (
@@ -29,8 +33,8 @@ export function MainMap(props) {
           markerIsShownGetter={props.markerIsShownGetter}
           selected={props.selected}
           center={props.center}
-          countries={countries}
-          types={types}
+          countries={countriesArray}
+          types={typesArray}
         />
         <CardActions
           sx={{
@@ -40,8 +44,8 @@ export function MainMap(props) {
           }}
         >
           <SelectOptionsButton
-            countries={countries}
-            types={types}
+            countries={countriesArray}
+            types={typesArray}
             handleSelectedCountries={handleSelectedCountries}
             handleSelectedTypes={handleSelectedTypes}
           />

@@ -1,17 +1,17 @@
 import { TabsCheckboxes } from "./TabsCheckboxes";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Box, Tab } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { filterCountrysAZ } from "./utils/filterCountrys";
 import { countrys } from "./utils/countriesNamesOnly";
+import { PowerInputSharp } from "@material-ui/icons";
 
 export const TabAToZ = (props) => {
-  const [tabIndex, setTabIndex] = useState(1);
+  const [tabIndex, setTabIndex] = useState("1");
 
-  const [selectedCheckbox, setSelectedCheckbox] = useState(() =>
-    countrys.map((i) => false)
-  );
-  const [selectedCountry, setSelectedCountry] = useState([]);
+  const handleChange = (event, newIndex) => {
+    setTabIndex(newIndex);
+  };
 
   const {
     filterCountryAD,
@@ -22,9 +22,15 @@ export const TabAToZ = (props) => {
     filterCountryUZ,
   } = filterCountrysAZ(countrys);
 
-  const handleChange = (event, newIndex) => {
-    setTabIndex(newIndex);
-  };
+  const [selectedCheckbox, setSelectedCheckbox] = useState(() =>
+    props.countries.length > 0
+      ? props.selectedCheckboxes
+      : countrys.map((i) => false)
+  );
+
+  const [selectedCountry, setSelectedCountry] = useState(props.countries);
+
+  useEffect(() => {}, [selectedCountry]);
 
   const isCountrySelected = (country, index, checked) => {
     const checkboxSelected = selectedCheckbox.map((bool, i) => {
@@ -33,6 +39,7 @@ export const TabAToZ = (props) => {
       }
       return bool;
     });
+
     const countrySelected = selectedCheckbox.map((bool, i) => {
       if (i === index) {
         return country;
@@ -58,6 +65,7 @@ export const TabAToZ = (props) => {
     setSelectedCheckbox(checkboxSelected);
   };
 
+  props.handleSelectedCheckboxes(selectedCheckbox);
   props.handleSelectedCountries(selectedCountry);
 
   return (

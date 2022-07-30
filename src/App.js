@@ -183,15 +183,6 @@ function App() {
             setCenterGetter={handleSetCenter}
           />
         </Route>
-        {/* <Route path="/place/:placeId" exact>
-          <MainMap
-            allowNewMarker={allowNewMarker}
-            selectedGetter={setSelectedHandler}
-            markerIsShown={markerIsShown}
-            selected={selected}
-            center={center}
-          />
-        </Route> */}
         <Redirect to="/" />
       </Switch>
     );
@@ -213,15 +204,6 @@ function App() {
             markerIsShownGetter={handleMarkerIsShown}
           />
         </Route>
-        {/* <Route path="/place/:placeId" exact>
-          <MainMap
-            allowNewMarker={allowNewMarker}
-            selectedGetter={setSelectedHandler}
-            markerIsShown={markerIsShown}
-            selected={selected}
-            center={center}
-          />
-        </Route> */}
         <Route path="/signup" exact>
           <SignUp />
         </Route>

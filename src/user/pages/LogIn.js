@@ -71,6 +71,7 @@ function LogIn() {
     } catch (err) {
       setErrorData(err.message);
       setOpen(true);
+      console.log(err);
     }
   };
 
