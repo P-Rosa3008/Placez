@@ -192,7 +192,7 @@ export const useGetStatisticsData = (user) => {
     };
 
     return (
-      <Box sx={{ width: 325 }}>
+      <Box sx={{ width: "65%" }}>
         <Typography sx={{ fontWeight: "bold" }}>Most added types?</Typography>
         <Bar width="10%" height="10%" data={data} options={barOptions} />
       </Box>
@@ -207,7 +207,7 @@ export const useGetStatisticsData = (user) => {
 
     if (user.places.length > 0) {
       return (
-        <Box sx={{ width: 325 }}>
+        <Box sx={{ width: "65%" }}>
           <Typography sx={{ fontWeight: "bold" }}>
             Types you added the most?
           </Typography>

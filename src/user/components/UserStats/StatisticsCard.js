@@ -4,14 +4,12 @@ export function StatisticsCard(props) {
   return (
     <Box
       sx={{
-        minHeight: 672,
-        maxHeight: 672,
         overflow: "auto",
         width: "-webkit-fill-available",
         marginTop: 3,
       }}
     >
-      <Box sx={{ marginLeft: 3 }}>
+      <Box sx={{ marginLeft: 3, height: "63.64vh", maxHeight: "63.64vh" }}>
         {props.user.places.length > 0 ? (
           props.typeStatisticsBarChartUser()
         ) : (

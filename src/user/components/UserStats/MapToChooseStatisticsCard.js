@@ -15,13 +15,20 @@ export function MapToChooseStatisticsCard() {
     setTypes(types);
   };
 
+  const getWidthByOrientation = () => {
+    if (document.body.clientHeight > document.body.clientWidth) {
+      return { width: "100vw" };
+    }
+    return { width: "74.1vw" };
+  };
+
   return (
     <Box position="relative">
       <Card
         sx={{
           color: "white",
-          height: "100%",
-          minWidth: 1280,
+          height: "90.52vh",
+          width: getWidthByOrientation(),
         }}
       >
         <MapToChooseStatistics countries={countries} types={types} />

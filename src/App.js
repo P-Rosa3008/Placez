@@ -13,11 +13,6 @@ import { AuthContext } from "./shared/context/auth-context";
 import Header from "./Layout/Header/Header";
 import { MainMap } from "./Map/MainMap";
 import { Box, CircularProgress } from "@mui/material";
-// import UserProfile from "./user/pages/UserProfile";
-// import UserPlaces from "./places/pages/UserPlaces";
-// import SignUp from "./user/pages/SignUp";
-// import LogIn from "./user/pages/LogIn";
-// import UserStats from "./user/pages/UserStats";
 
 let logoutTimer;
 

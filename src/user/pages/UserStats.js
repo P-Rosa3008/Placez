@@ -37,20 +37,22 @@ function UserStats() {
     typeStatisticsBarChartUser,
   } = useGetStatisticsData(user);
 
+  useEffect(() => {
+    console.log("HEIGHT: " + document.body.clientHeight);
+    console.log("WIDTH: " + document.body.clientWidth);
+  }, [document.body.clientHeight, document.body.clientWidth]);
+
+  const getSxByOrientation = () => {
+    if (document.body.clientHeight > document.body.clientWidth) {
+      return { display: "none" };
+    }
+    return { display: "block", height: "90.52vh", width: "25.9vw" };
+  };
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      sx={{ maxHeight: "100vh", backgroundColor: "white" }}
-    >
+    <Box height="90.52vh" sx={{ backgroundColor: "white" }}>
       {user ? (
-        <Box height="100%" width="100%" display="flex">
-          <Box
-            sx={{
-              height: "100%",
-              display: "block",
-            }}
-          >
+        <Box display="flex">
+          <Box sx={getSxByOrientation()}>
             <RandomStatisticCard
               randomStatistic={randomStatistic}
               randomCountryStatistic={randomCountryStatistic}

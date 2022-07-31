@@ -52,9 +52,18 @@ function Header(props) {
     <Box>
       <AppBar
         position="sticky"
-        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        sx={{
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+          height: "9.48vh",
+          display: "flex",
+          alignContent: "stretch",
+        }}
       >
-        <Toolbar>
+        <Toolbar
+          sx={{
+            minHeight: "9.48vh !important",
+          }}
+        >
           <Link
             to="/"
             onClick={() => {

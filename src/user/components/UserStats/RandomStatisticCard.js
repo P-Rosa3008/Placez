@@ -7,8 +7,8 @@ export function RandomStatisticCard(props) {
   return (
     <Card
       sx={{
-        height: 200,
-        width: 400,
+        height: "21%",
+        width: "89%",
         marginTop: 3,
         marginLeft: 3,
         marginRight: 3,

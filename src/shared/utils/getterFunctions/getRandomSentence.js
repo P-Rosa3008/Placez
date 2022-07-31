@@ -3,7 +3,10 @@ import { getRandomOccurrenceFromArray } from "./getRandomFromArray";
 
 export const getRandomSentence = (country, type, amount) => {
   const sentenceArray = [
-    <Typography sx={{ color: "white", fontSize: "18px" }} component="div">
+    <Typography
+      sx={{ color: "white", fontSize: { sm: "12px", md: "18px" } }}
+      component="div"
+    >
       Did you know that{" "}
       <Box display="inline" fontWeight="fontWeightBold">
         {country}
