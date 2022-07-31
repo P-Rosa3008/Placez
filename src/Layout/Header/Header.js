@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   AppBar,
   Avatar,
@@ -47,6 +47,14 @@ function Header(props) {
   };
 
   props.isNewMarkerAllowed(allowNewMarker);
+
+  useEffect(() => {}, [document.body.clientWidth]);
+
+  const isFullHD = () => {
+    return document.body.clientWidth > 1800;
+  };
+
+  console.log(isFullHD());
 
   return (
     <Box>
@@ -120,7 +128,11 @@ function Header(props) {
               to="/login"
               style={{ color: "inherit", textDecoration: "inherit" }}
             >
-              <Button variant="contained" color="secondary">
+              <Button
+                size={isFullHD() ? "large" : "medium"}
+                variant="contained"
+                color="secondary"
+              >
                 Log in / Sign up
               </Button>
             </Link>

@@ -12,7 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Form } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 
@@ -75,6 +75,12 @@ function LogIn() {
     }
   };
 
+  useEffect(() => {}, [document.body.clientHeight, document.body.clientWidth]);
+
+  const isPortraitMode = () => {
+    return document.body.clientHeight > document.body.clientWidth;
+  };
+
   return (
     <React.Fragment>
       {error && (
@@ -102,12 +108,12 @@ function LogIn() {
         </Collapse>
       )}
       <Container
-        maxWidth="33.3%"
+        maxWidth={isPortraitMode() ? "90%" : "33.3%"}
         display="block"
         boxSizing="border-box"
         marginLeft="auto"
         marginRight="auto"
-        sx={{ width: "33.3%" }}
+        sx={{ width: isPortraitMode() ? "90%" : "33.3%" }}
       >
         <Box
           sx={{

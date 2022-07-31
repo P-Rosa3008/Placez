@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   Alert,
   Avatar,
@@ -64,8 +64,6 @@ function SignUp() {
 
   const emailIsValid = () => {
     const emailValidator = validator.isEmail(email);
-    console.log(email);
-    console.log(emailValidator);
     return emailValidator;
   };
 
@@ -121,6 +119,14 @@ function SignUp() {
     }
   };
 
+  useEffect(() => {}, [document.body.clientHeight, document.body.clientWidth]);
+
+  const isPortraitMode = () => {
+    return document.body.clientHeight > document.body.clientWidth;
+  };
+
+  console.log(isPortraitMode());
+
   return (
     <React.Fragment>
       {error && (
@@ -148,12 +154,12 @@ function SignUp() {
         </Collapse>
       )}
       <Container
-        maxWidth="33.3%"
+        maxWidth={isPortraitMode() ? "90%" : "33.3%"}
         display="block"
         boxSizing="border-box"
         marginLeft="auto"
         marginRight="auto"
-        sx={{ width: "33.3%" }}
+        sx={{ width: isPortraitMode() ? "90%" : "33%" }}
       >
         <Box
           sx={{
@@ -193,7 +199,6 @@ function SignUp() {
                 paddingTop={1}
                 paddingBottom={1}
                 paddingRight={1}
-                sx={{ flexGrow: 0, maxWidth: "50%", flexBasis: "50%" }}
               >
                 <TextField
                   id="first name"
@@ -221,6 +226,7 @@ function SignUp() {
                   label="Last Name"
                   variant="outlined"
                   sx={{
+                    width: "100%",
                     borderColor: "red !important",
                     borderWidth: "1px",
                     "& .MuiOutlinedInput-root": {

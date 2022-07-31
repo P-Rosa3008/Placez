@@ -37,10 +37,7 @@ function UserStats() {
     typeStatisticsBarChartUser,
   } = useGetStatisticsData(user);
 
-  useEffect(() => {
-    console.log("HEIGHT: " + document.body.clientHeight);
-    console.log("WIDTH: " + document.body.clientWidth);
-  }, [document.body.clientHeight, document.body.clientWidth]);
+  useEffect(() => {}, [document.body.clientHeight, document.body.clientWidth]);
 
   const getSxByOrientation = () => {
     if (document.body.clientHeight > document.body.clientWidth) {
