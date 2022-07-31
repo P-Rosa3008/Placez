@@ -127,7 +127,7 @@ function LogIn() {
             Log In
           </Typography>
           {isLoading && <CircularProgress />}
-          <Form style={{ width: "100%", marginTop: 24 }}>
+          <Form style={{ width: "100%", marginTop: 24 }} autoComplete="off">
             <Grid
               container
               sx={{

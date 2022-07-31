@@ -28,7 +28,6 @@ import { AuthContext } from "../shared/context/auth-context";
 import ImageUpload from "../ImageUpload";
 import { DescriptionOption } from "./components/DescriptionOption";
 // import ChooseAdvancedOptions from "./components/ChooseAdvancedOptions";
-
 import QuestionMark from "../icons/Special Char/symbol_inter.png";
 
 function CreateMarker(props) {
@@ -255,7 +254,11 @@ function CreateMarker(props) {
         }
       />
       <CardContent sx={{ paddingBottom: 1 }}>
-        <Form onSubmit={submitHandler} enctype="multipart/form-data">
+        <Form
+          onSubmit={submitHandler}
+          enctype="multipart/form-data"
+          autoComplete="off"
+        >
           <Container
             sx={{ "@media (min-width: 600px)": { paddingLeft: 0.5 } }}
             display="block"
@@ -316,16 +319,7 @@ function CreateMarker(props) {
                     }}
                   />
                 </Box>
-                <Box
-                  display="flex"
-                  alignItems="flex-end"
-                  sx={
-                    {
-                      // minWidth: 0.49,
-                    }
-                  }
-                >
-                  {/* <Form.Group> */}
+                <Box display="flex" alignItems="flex-end">
                   <ClickAwayListener onClickAway={handleDrawerClose}>
                     <FormControl
                       sx={{

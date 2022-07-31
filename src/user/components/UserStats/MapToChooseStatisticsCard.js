@@ -21,7 +21,7 @@ export function MapToChooseStatisticsCard() {
         sx={{
           color: "white",
           height: "100%",
-          width: 1280,
+          minWidth: 1280,
         }}
       >
         <MapToChooseStatistics countries={countries} types={types} />
