@@ -164,6 +164,25 @@ function Map(props) {
     setZoomHasChanged();
   }
 
+  const getPlaceModal = () => {
+    return isPortraitMode() === false ? (
+      <Modal
+        onCloseModal={hideModalHandler}
+        selected={selected || props.selected}
+        currentName={selected?.title || props.selected.title}
+        currentType={selected?.type || props.selected.type}
+        // setEdited={setEditedHandler}
+      />
+    ) : (
+      <PortraitModal
+        onCloseModal={hideModalHandler}
+        selected={selected || props.selected}
+        currentName={selected?.title || props.selected.title}
+        currentType={selected?.type || props.selected.type}
+      />
+    );
+  };
+
   if (loadError) {
     return "Error";
   }
@@ -233,24 +252,9 @@ function Map(props) {
           newMarker={newMarker}
         />
       )}
-      {markerIsShown === true || props.markerIsShown === true ? (
-        isPortraitMode ? (
-          <Modal
-            onCloseModal={hideModalHandler}
-            selected={selected || props.selected}
-            currentName={selected?.title || props.selected.title}
-            currentType={selected?.type || props.selected.type}
-            // setEdited={setEditedHandler}
-          />
-        ) : (
-          <PortraitModal
-            onCloseModal={hideModalHandler}
-            selected={selected || props.selected}
-            currentName={selected?.title || props.selected.title}
-            currentType={selected?.type || props.selected.type}
-          />
-        )
-      ) : null}
+      {markerIsShown === true || props.markerIsShown === true
+        ? getPlaceModal()
+        : null}
     </GoogleMap>
   );
 }
