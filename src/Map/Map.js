@@ -8,6 +8,7 @@ import { useHttpClient } from "../shared/hooks/http-hook";
 import MarkerTypes from "./Markers/MarkerTypes";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import PortraitModal from "../Layout/PortraitModal";
+import CreateMarkerPortrait from "../CreateMarker/CreateMarkerPortrait";
 
 function Map(props) {
   const [center, setCenter] = useState({ lat: 39.353161, lng: -8.13946 });
@@ -181,6 +182,22 @@ function Map(props) {
     );
   };
 
+  const getCreateMarker = () => {
+    return isPortraitMode() === false ? (
+      <CreateMarker
+        onClose={hideCreateMarkerHandler}
+        onLatLng={latLng}
+        newMarker={newMarker}
+      />
+    ) : (
+      <CreateMarkerPortrait
+        onClose={hideCreateMarkerHandler}
+        onLatLng={latLng}
+        newMarker={newMarker}
+      />
+    );
+  };
+
   if (loadError) {
     return "Error";
   }
@@ -243,13 +260,9 @@ function Map(props) {
           );
         })}
 
-      {newMarker && showCreateMarker && allowNewMarker && (
-        <CreateMarker
-          onClose={hideCreateMarkerHandler}
-          onLatLng={latLng}
-          newMarker={newMarker}
-        />
-      )}
+      {newMarker && showCreateMarker && allowNewMarker
+        ? getCreateMarker()
+        : null}
       {markerIsShown === true || props.markerIsShown === true
         ? getPlaceModal()
         : null}
