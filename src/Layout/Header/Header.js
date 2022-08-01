@@ -54,13 +54,18 @@ function Header(props) {
     return document.body.clientWidth > 1800;
   };
 
+  const isPortraitMode = () => {
+    return document.body.clientHeight > document.body.clientWidth;
+  };
+
   return (
-    <Box>
+    <Box sx={{}}>
       <AppBar
         position="sticky"
         sx={{
           zIndex: (theme) => theme.zIndex.drawer + 1,
           height: "9.48vh",
+          width: document.body.clientWidth,
           display: "flex",
           alignContent: "stretch",
         }}
@@ -91,9 +96,11 @@ function Header(props) {
             >
               <ListItemButton sx={{ height: 48 }}>
                 <LocationOnRoundedIcon />
-                <Typography sx={{ paddingLeft: 1 }} variant="button">
-                  My Places
-                </Typography>
+                {!isPortraitMode() && (
+                  <Typography sx={{ paddingLeft: 1 }} variant="button">
+                    My Places
+                  </Typography>
+                )}
               </ListItemButton>
             </Link>
           )}
@@ -104,9 +111,11 @@ function Header(props) {
             >
               <ListItemButton sx={{ height: 48 }}>
                 <DashboardRoundedIcon />
-                <Typography sx={{ paddingLeft: 1 }} variant="button">
-                  Dashboard
-                </Typography>{" "}
+                {!isPortraitMode() && (
+                  <Typography sx={{ paddingLeft: 1 }} variant="button">
+                    Dashboard
+                  </Typography>
+                )}
               </ListItemButton>
             </Link>
           )}
