@@ -1,5 +1,10 @@
 .App {
   text-align: center;
+  overflow-x: "clip";
+}
+
+html {
+  overflow-x: "hidden";
 }
 
 .App-logo {
@@ -8,12 +13,7 @@
 }
 .body {
   color: white;
-}
-
-.leaflet-container {
-  width: 100vw;
-  height: 100vh;
-  z-index: 0;
+  flex: content;
 }
 
 :focus {

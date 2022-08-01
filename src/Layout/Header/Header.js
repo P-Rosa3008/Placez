@@ -54,8 +54,6 @@ function Header(props) {
     return document.body.clientWidth > 1800;
   };
 
-  console.log(isFullHD());
-
   return (
     <Box>
       <AppBar
@@ -63,6 +61,7 @@ function Header(props) {
         sx={{
           zIndex: (theme) => theme.zIndex.drawer + 1,
           height: "9.48vh",
+          width: window.innerWidth,
           display: "flex",
           alignContent: "stretch",
         }}
