@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Box, ImageList, ImageListItem } from "@mui/material";
 import ImageUpload from "../ImageUpload";
 import { AuthContext } from "../shared/context/auth-context";
@@ -6,11 +6,17 @@ import { AuthContext } from "../shared/context/auth-context";
 function ModalImages(props) {
   const auth = useContext(AuthContext);
 
+  useEffect(() => {}, [document.body.clientHeight, document.body.clientWidth]);
+
+  const isPortraitMode = () => {
+    return document.body.clientHeight > document.body.clientWidth;
+  };
+
   return (
     <Box
       sx={{
         width: 0.95,
-        height: 140,
+        height: isPortraitMode() ? 91 : 140,
         margin: "0 auto",
       }}
     >

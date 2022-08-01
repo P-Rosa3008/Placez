@@ -1,10 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Button, Typography } from "@mui/material";
-import { Form } from "react-bootstrap";
+// import { Form } from "react-bootstrap";
 import { Box } from "@mui/system";
 // import StarRoundedIcon from "@mui/icons-material/StarRounded";
 
-import MenuItemsForChoosingTypes from "../CreateMarker/components/MenuItemsForChoosingTypes";
+// import MenuItemsForChoosingTypes from "../CreateMarker/components/MenuItemsForChoosingTypes";
 import classes from "./Modal.module.css";
 import { AuthContext } from "../shared/context/auth-context";
 import { useHttpClient } from "../shared/hooks/http-hook";
@@ -23,89 +23,89 @@ function Modal(props) {
   const [edited, setEdited] = useState(false);
   // const [starRating, setStartRating] = useState(0);
 
-  const getFamousWorks = (works) => {
-    return (
-      <Typography>
-        {props.selected.advancedOptions[0].famousWorks ? (
-          <ul>
-            {props.selected.advancedOptions[0].famousWorks.firstWork ? (
-              <li>{props.selected.advancedOptions[0].famousWorks.firstWork}</li>
-            ) : null}
-            {props.selected.advancedOptions[0].famousWorks.secondWork ? (
-              <li>
-                {props.selected.advancedOptions[0].famousWorks.secondWork}
-              </li>
-            ) : null}
-            {props.selected.advancedOptions[0].famousWorks.thirdWork ? (
-              <li>{props.selected.advancedOptions[0].famousWorks.thirdWork}</li>
-            ) : null}
-          </ul>
-        ) : null}
-      </Typography>
-    );
-  };
+  // const getFamousWorks = (works) => {
+  //   return (
+  //     <Typography>
+  //       {props.selected.advancedOptions[0].famousWorks ? (
+  //         <ul>
+  //           {props.selected.advancedOptions[0].famousWorks.firstWork ? (
+  //             <li>{props.selected.advancedOptions[0].famousWorks.firstWork}</li>
+  //           ) : null}
+  //           {props.selected.advancedOptions[0].famousWorks.secondWork ? (
+  //             <li>
+  //               {props.selected.advancedOptions[0].famousWorks.secondWork}
+  //             </li>
+  //           ) : null}
+  //           {props.selected.advancedOptions[0].famousWorks.thirdWork ? (
+  //             <li>{props.selected.advancedOptions[0].famousWorks.thirdWork}</li>
+  //           ) : null}
+  //         </ul>
+  //       ) : null}
+  //     </Typography>
+  //   );
+  // };
 
-  const day = new Date();
-  const dayToday = day.getDay();
+  // const day = new Date();
+  // const dayToday = day.getDay();
 
-  const getSchedule = (day) => {
-    if (day === 0) {
-      return (
-        <Typography>
-          Schedule: {props.selected.advancedOptions[0].schedule[6].openingHours}
-          {props.selected.advancedOptions[0].schedule[6].closingHours}
-        </Typography>
-      );
-    }
-    if (day === 1) {
-      return (
-        <Typography>
-          Schedule: {props.selected.advancedOptions[0].schedule[0].openingHours}
-          {props.selected.advancedOptions[0].schedule[0].closingHours}
-        </Typography>
-      );
-    }
-    if (day === 2) {
-      return (
-        <Typography>
-          Schedule: {props.selected.advancedOptions[0].schedule[1].openingHours}
-          {props.selected.advancedOptions[0].schedule[1].closingHours}
-        </Typography>
-      );
-    }
-    if (day === 3) {
-      return (
-        <Typography>
-          Schedule: {props.selected.advancedOptions[0].schedule[2].openingHours}
-          {props.selected.advancedOptions[0].schedule[2].closingHours}
-        </Typography>
-      );
-    }
-    if (day === 4) {
-      return (
-        <Typography>
-          Schedule: {props.selected.advancedOptions[0].schedule[3].openingHours}
-          {props.selected.advancedOptions[0].schedule[3].closingHours}
-        </Typography>
-      );
-    }
-    if (day === 5) {
-      return (
-        <Typography>
-          Schedule: {props.selected.advancedOptions[0].schedule[4].openingHours}
-          {props.selected.advancedOptions[0].schedule[4].closingHours}
-        </Typography>
-      );
-    }
-    if (day === 6) {
-      return (
-        <Typography>
-          Schedule: {props.selected.advancedOptions[0].schedule[5].openingHours}
-          {props.selected.advancedOptions[0].schedule[5].closingHours}
-        </Typography>
-      );
-    }
-  };
+  // const getSchedule = (day) => {
+  //   if (day === 0) {
+  //     return (
+  //       <Typography>
+  //         Schedule: {props.selected.advancedOptions[0].schedule[6].openingHours}
+  //         {props.selected.advancedOptions[0].schedule[6].closingHours}
+  //       </Typography>
+  //     );
+  //   }
+  //   if (day === 1) {
+  //     return (
+  //       <Typography>
+  //         Schedule: {props.selected.advancedOptions[0].schedule[0].openingHours}
+  //         {props.selected.advancedOptions[0].schedule[0].closingHours}
+  //       </Typography>
+  //     );
+  //   }
+  //   if (day === 2) {
+  //     return (
+  //       <Typography>
+  //         Schedule: {props.selected.advancedOptions[0].schedule[1].openingHours}
+  //         {props.selected.advancedOptions[0].schedule[1].closingHours}
+  //       </Typography>
+  //     );
+  //   }
+  //   if (day === 3) {
+  //     return (
+  //       <Typography>
+  //         Schedule: {props.selected.advancedOptions[0].schedule[2].openingHours}
+  //         {props.selected.advancedOptions[0].schedule[2].closingHours}
+  //       </Typography>
+  //     );
+  //   }
+  //   if (day === 4) {
+  //     return (
+  //       <Typography>
+  //         Schedule: {props.selected.advancedOptions[0].schedule[3].openingHours}
+  //         {props.selected.advancedOptions[0].schedule[3].closingHours}
+  //       </Typography>
+  //     );
+  //   }
+  //   if (day === 5) {
+  //     return (
+  //       <Typography>
+  //         Schedule: {props.selected.advancedOptions[0].schedule[4].openingHours}
+  //         {props.selected.advancedOptions[0].schedule[4].closingHours}
+  //       </Typography>
+  //     );
+  //   }
+  //   if (day === 6) {
+  //     return (
+  //       <Typography>
+  //         Schedule: {props.selected.advancedOptions[0].schedule[5].openingHours}
+  //         {props.selected.advancedOptions[0].schedule[5].closingHours}
+  //       </Typography>
+  //     );
+  //   }
+  // };
 
   useEffect(() => {
     const fetchPlace = async () => {
@@ -119,14 +119,14 @@ function Modal(props) {
     fetchPlace();
   }, [sendRequest, props.selected.id]);
 
-  const handleTypeChange = (type) => {
-    setTypeValue(type);
-  };
+  // const handleTypeChange = (type) => {
+  //   setTypeValue(type);
+  // };
 
-  const handleNameChange = (event) => {
-    const name = event.target.value;
-    setNameEdited(name);
-  };
+  // const handleNameChange = (event) => {
+  //   const name = event.target.value;
+  //   setNameEdited(name);
+  // };
 
   // const handleStarRatingChange = (event) => {
   //   const starRating = event.target.value;
@@ -153,33 +153,33 @@ function Modal(props) {
   //   setOnEdit(!onEdit);
   // };
 
-  const onSubmitHandler = async (event) => {
-    event.preventDefault();
-    if (wasNotEdited(nameEdited, typeValue)) {
-      setOnEdit(false);
-      return;
-    }
-    setOnEdit(false);
+  // const onSubmitHandler = async (event) => {
+  //   event.preventDefault();
+  //   if (wasNotEdited(nameEdited, typeValue)) {
+  //     setOnEdit(false);
+  //     return;
+  //   }
+  //   setOnEdit(false);
 
-    if (wasEdited()) {
-      props.selected.title = nameEdited;
-      props.selected.type = typeValue;
-      try {
-        await sendRequest(
-          `${process.env.REACT_APP_BACKEND_URL}/api/places/${props.selected.id}`,
-          "PATCH",
-          JSON.stringify({ title: nameEdited, type: typeValue }),
-          {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + auth.token,
-          }
-        );
-        setEdited(true);
-        props.setEdited(edited);
-        history.push("/");
-      } catch (err) {}
-    }
-  };
+  //   if (wasEdited()) {
+  //     props.selected.title = nameEdited;
+  //     props.selected.type = typeValue;
+  //     try {
+  //       await sendRequest(
+  //         `${process.env.REACT_APP_BACKEND_URL}/api/places/${props.selected.id}`,
+  //         "PATCH",
+  //         JSON.stringify({ title: nameEdited, type: typeValue }),
+  //         {
+  //           "Content-Type": "application/json",
+  //           Authorization: "Bearer " + auth.token,
+  //         }
+  //       );
+  //       setEdited(true);
+  //       props.setEdited(edited);
+  //       history.push("/");
+  //     } catch (err) {}
+  //   }
+  // };
 
   const handleImage = async (image) => {
     try {
@@ -232,30 +232,32 @@ function Modal(props) {
         </Button>
       </Box>
 
-      {onEdit ? (
-        <Form>
-          <Box sx={{ my: 1, maxWidth: "50%" }}>
-            <Form.Group>
-              <Form.Control
-                id="name"
-                type="text"
-                size="lg"
-                placeholder={props.selected.title}
-                onChange={handleNameChange}
-              />
-            </Form.Group>
-          </Box>
-          <Box>
-            <Form.Group>
-              <MenuItemsForChoosingTypes type={handleTypeChange} />
-            </Form.Group>
-          </Box>
+      {/* {
+        onEdit ? (
+          <Form>
+            <Box sx={{ my: 1, maxWidth: "50%" }}>
+              <Form.Group>
+                <Form.Control
+                  id="name"
+                  type="text"
+                  size="lg"
+                  placeholder={props.selected.title}
+                  onChange={handleNameChange}
+                />
+              </Form.Group>
+            </Box>
+            <Box>
+              <Form.Group>
+                <MenuItemsForChoosingTypes type={handleTypeChange} />
+              </Form.Group>
+            </Box>
 
-          <Button variant="contained" type="submit" onClick={onSubmitHandler}>
-            Submit
-          </Button>
-        </Form>
-      ) : (
+            <Button variant="contained" type="submit" onClick={onSubmitHandler}>
+              Submit
+            </Button>
+          </Form>
+        ) : (*PUT BOX HERE*)} */}
+      {
         <Box
           sx={{
             display: "flex",
@@ -299,7 +301,7 @@ function Modal(props) {
             </Typography>
           </Box>
 
-          {props.selected.type === "Museum" ? (
+          {/* {props.selected.type === "Museum" ? (
             <Box>
               {props.selected.advancedOptions?.map((options, index) => {
                 return (
@@ -324,9 +326,9 @@ function Modal(props) {
                 : null}
               {getFamousWorks()}
             </Box>
-          ) : null}
+          ) : null} */}
         </Box>
-      )}
+      }
     </div>
   );
 }

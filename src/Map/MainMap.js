@@ -22,8 +22,10 @@ export function MainMap(props) {
       <Card
         sx={{
           color: "white",
-          height: "100%",
-          width: "100%",
+          height: "90.50vh",
+          width: "100vw",
+          borderBottomLeftRadius: 0,
+          borderBottomRightRadius: 0,
         }}
       >
         <Map

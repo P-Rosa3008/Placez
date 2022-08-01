@@ -6,7 +6,8 @@ import CreateMarker from "../CreateMarker/CreateMarker";
 import BetterMarker from "./Markers/BetterMarker";
 import { useHttpClient } from "../shared/hooks/http-hook";
 import MarkerTypes from "./Markers/MarkerTypes";
-import { CircularProgress, Typography } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
+import PortraitModal from "../Layout/PortraitModal";
 
 function Map(props) {
   const [center, setCenter] = useState({ lat: 39.353161, lng: -8.13946 });
@@ -96,6 +97,14 @@ function Map(props) {
     }
   }, []);
 
+  useEffect(() => {}, [document.body.clientHeight, document.body.clientWidth]);
+
+  const isPortraitMode = () => {
+    return document.body.clientHeight > document.body.clientWidth;
+  };
+
+  console.log(isPortraitMode() + " modal");
+
   // const showModalHandler = () => {
   //   setMarkerIsShown(true);
   // };
@@ -103,7 +112,6 @@ function Map(props) {
   const hideModalHandler = () => {
     setMarkerIsShown(false);
     props.markerIsShownGetter(false);
-    console.log("close modal");
   };
 
   const showCreateMarkerHandler = () => {
@@ -170,6 +178,7 @@ function Map(props) {
   }
 
   const betterMarker = new BetterMarker();
+
   return (
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
@@ -197,10 +206,15 @@ function Map(props) {
             },
             (event) => {
               setSelected(marker);
-              setCenter({
-                lat: event.latLng.lat() - 0.01,
-                lng: event.latLng.lng() + 0.045,
-              });
+              !isPortraitMode()
+                ? setCenter({
+                    lat: event.latLng.lat() - 0.01,
+                    lng: event.latLng.lng() + 0.045,
+                  })
+                : setCenter({
+                    lat: event.latLng.lat() - 0.025,
+                    lng: event.latLng.lng(),
+                  });
               props.selectedGetter(marker);
               setMarkerIsShown(true);
             },
@@ -219,18 +233,24 @@ function Map(props) {
           newMarker={newMarker}
         />
       )}
-      {markerIsShown === true || props.markerIsShown === true
-        ? (console.log(props.markerIsShown),
-          (
-            <Modal
-              onCloseModal={hideModalHandler}
-              selected={selected || props.selected}
-              currentName={selected?.title || props.selected.title}
-              currentType={selected?.type || props.selected.type}
-              // setEdited={setEditedHandler}
-            ></Modal>
-          ))
-        : null}
+      {markerIsShown === true || props.markerIsShown === true ? (
+        isPortraitMode ? (
+          <Modal
+            onCloseModal={hideModalHandler}
+            selected={selected || props.selected}
+            currentName={selected?.title || props.selected.title}
+            currentType={selected?.type || props.selected.type}
+            // setEdited={setEditedHandler}
+          />
+        ) : (
+          <PortraitModal
+            onCloseModal={hideModalHandler}
+            selected={selected || props.selected}
+            currentName={selected?.title || props.selected.title}
+            currentType={selected?.type || props.selected.type}
+          />
+        )
+      ) : null}
     </GoogleMap>
   );
 }
