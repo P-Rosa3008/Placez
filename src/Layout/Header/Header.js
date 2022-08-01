@@ -16,6 +16,7 @@ import { AuthContext } from "../../shared/context/auth-context";
 // import SearchBar from "./components/SearchBar";
 import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
+import NewMarkerButtonIcon from "./components/NewmarkerButtonIcon";
 
 function Header(props) {
   const auth = useContext(AuthContext);
@@ -56,6 +57,20 @@ function Header(props) {
 
   const isPortraitMode = () => {
     return document.body.clientHeight > document.body.clientWidth;
+  };
+
+  const getNewMarkerButton = () => {
+    return isPortraitMode() === false ? (
+      <NewMarkerButton
+        allowNewMarker={props.allowNewMarker}
+        onClick={allowNewMarkerHandler}
+      />
+    ) : (
+      <NewMarkerButtonIcon
+        allowNewMarker={props.allowNewMarker}
+        onClick={allowNewMarkerHandler}
+      />
+    );
   };
 
   return (
@@ -124,15 +139,12 @@ function Header(props) {
               </ListItemButton>
             </Link>
           )}
-          {auth.isLoggedIn && !isPortraitMode() && (
+          {auth.isLoggedIn && (
             <Link
               to={props.allowNewMarker ? "/" : "/"}
               style={{ color: "inherit", textDecoration: "inherit" }}
             >
-              <NewMarkerButton
-                allowNewMarker={props.allowNewMarker}
-                onClick={allowNewMarkerHandler}
-              />
+              {getNewMarkerButton()}
             </Link>
           )}
           {!auth.isLoggedIn ? (
