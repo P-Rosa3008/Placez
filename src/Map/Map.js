@@ -103,8 +103,6 @@ function Map(props) {
     return document.body.clientHeight > document.body.clientWidth;
   };
 
-  console.log(isPortraitMode() + " modal");
-
   // const showModalHandler = () => {
   //   setMarkerIsShown(true);
   // };

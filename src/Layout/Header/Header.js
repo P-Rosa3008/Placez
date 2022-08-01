@@ -59,13 +59,13 @@ function Header(props) {
   };
 
   return (
-    <Box sx={{}}>
+    <Box>
       <AppBar
         position="sticky"
         sx={{
           zIndex: (theme) => theme.zIndex.drawer + 1,
           height: "9.48vh",
-          width: document.body.clientWidth,
+          width: window.innerWidth,
           display: "flex",
           alignContent: "stretch",
         }}
@@ -73,6 +73,7 @@ function Header(props) {
         <Toolbar
           sx={{
             minHeight: "9.48vh !important",
+            maxWidth: "100%",
           }}
         >
           <Link
@@ -82,7 +83,11 @@ function Header(props) {
             }}
             style={{ color: "inherit", textDecoration: "inherit" }}
           >
-            <Typography variant="h1" component="div" fontWeight="bold">
+            <Typography
+              variant={isPortraitMode() ? "h3" : "h1"}
+              component="div"
+              fontWeight="bold"
+            >
               PlaceZ
             </Typography>
           </Link>
@@ -119,7 +124,7 @@ function Header(props) {
               </ListItemButton>
             </Link>
           )}
-          {auth.isLoggedIn && (
+          {auth.isLoggedIn && !isPortraitMode() && (
             <Link
               to={props.allowNewMarker ? "/" : "/"}
               style={{ color: "inherit", textDecoration: "inherit" }}
