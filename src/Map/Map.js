@@ -7,6 +7,7 @@ import BetterMarker from "./Markers/BetterMarker";
 import { useHttpClient } from "../shared/hooks/http-hook";
 import MarkerTypes from "./Markers/MarkerTypes";
 import { CircularProgress, Typography } from "@mui/material";
+import LoadingScreen from "../shared/components/LoadingScreen";
 
 function Map(props) {
   const [center, setCenter] = useState({ lat: 39.353161, lng: -8.13946 });
@@ -181,13 +182,7 @@ function Map(props) {
     return "Error";
   }
   if (!isLoaded) {
-    return (
-      <React.Fragment>
-        <div style={{ height: 90 }} />
-        <Typography>Loading</Typography>
-        <CircularProgress />
-      </React.Fragment>
-    );
+    return <LoadingScreen />;
   }
 
   const betterMarker = new BetterMarker();

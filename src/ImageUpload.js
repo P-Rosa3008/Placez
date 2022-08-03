@@ -11,7 +11,6 @@ function ImageUpload(props) {
     let pickedFile;
     if (event.target.files && event.target.files.length === 1) {
       pickedFile = event.target.files[0];
-      console.log(pickedFile);
       props.setImage(pickedFile);
     }
   };
@@ -33,7 +32,12 @@ function ImageUpload(props) {
           borderRadius: "50%",
         }}
       >
-        <IconButton aria-label="close" size="medium" color="primary">
+        <IconButton
+          aria-label="close"
+          size="medium"
+          color="primary"
+          onClick={pickImageHandler}
+        >
           {props.image ? <EditRoundedIcon /> : <AddAPhotoRoundedIcon />}
         </IconButton>
         <input

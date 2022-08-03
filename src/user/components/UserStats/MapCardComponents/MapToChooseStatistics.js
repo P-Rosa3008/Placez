@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import mapStyles from "../../../../Map/mapStyles";
 import BetterMarker from "../../../../Map/Markers/BetterMarker";
 import MarkerTypes from "../../../../Map/Markers/MarkerTypes";
+import LoadingScreen from "../../../../shared/components/LoadingScreen";
 import { useHttpClient } from "../../../../shared/hooks/http-hook";
 
 export function MapToChooseStatistics(props) {
@@ -117,13 +118,7 @@ export function MapToChooseStatistics(props) {
     return "Error";
   }
   if (!isLoaded) {
-    return (
-      <React.Fragment>
-        <div style={{ height: 90 }} />
-        <Typography>Loading</Typography>
-        <CircularProgress />
-      </React.Fragment>
-    );
+    return <LoadingScreen />;
   }
 
   return (

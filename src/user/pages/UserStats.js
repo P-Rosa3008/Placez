@@ -7,6 +7,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { useParams } from "react-router-dom";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import { useGetStatisticsData } from "../../shared/hooks/statistics-hook";
+import LoadingScreen from "../../shared/components/LoadingScreen";
 
 function UserStats() {
   const username = useParams().username;
@@ -62,7 +63,9 @@ function UserStats() {
           </Box>
           <MapToChooseStatisticsCard />
         </Box>
-      ) : null}
+      ) : (
+        <LoadingScreen />
+      )}
     </Box>
   );
 }

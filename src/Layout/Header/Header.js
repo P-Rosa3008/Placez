@@ -50,24 +50,9 @@ function Header(props) {
 
   props.isNewMarkerAllowed(allowNewMarker);
 
-  useEffect(() => {}, [document.body.clientWidth]);
-
-  const isFullHD = () => {
-    return document.body.clientWidth > 1800;
-  };
-
-  const isPortraitMode = () => {
-    return document.body.clientHeight > document.body.clientWidth;
-  };
-
   const getNewMarkerButton = () => {
-    return isPortraitMode() === false ? (
+    return (
       <NewMarkerButton
-        allowNewMarker={props.allowNewMarker}
-        onClick={allowNewMarkerHandler}
-      />
-    ) : (
-      <NewMarkerButtonIcon
         allowNewMarker={props.allowNewMarker}
         onClick={allowNewMarkerHandler}
       />
@@ -112,11 +97,10 @@ function Header(props) {
           >
             <ListItemButton sx={{ height: 48 }}>
               <LocationOnRoundedIcon />
-              {!isPortraitMode() && (
-                <Typography sx={{ paddingLeft: 1 }} variant="button">
-                  My Places
-                </Typography>
-              )}
+
+              <Typography sx={{ paddingLeft: 1 }} variant="button">
+                My Places
+              </Typography>
             </ListItemButton>
           </Link>
         )}
@@ -127,11 +111,10 @@ function Header(props) {
           >
             <ListItemButton sx={{ height: 48 }}>
               <DashboardRoundedIcon />
-              {!isPortraitMode() && (
-                <Typography sx={{ paddingLeft: 1 }} variant="button">
-                  Dashboard
-                </Typography>
-              )}
+
+              <Typography sx={{ paddingLeft: 1 }} variant="button">
+                Dashboard
+              </Typography>
             </ListItemButton>
           </Link>
         )}
@@ -148,11 +131,7 @@ function Header(props) {
             to="/login"
             style={{ color: "inherit", textDecoration: "inherit" }}
           >
-            <Button
-              size={isFullHD() ? "large" : "medium"}
-              variant="contained"
-              color="secondary"
-            >
+            <Button size="large" variant="contained" color="secondary">
               Log in / Sign up
             </Button>
           </Link>

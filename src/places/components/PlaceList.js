@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import {
   Box,
+  Button,
   Card,
   CardMedia,
   CircularProgress,
@@ -8,11 +9,12 @@ import {
   Typography,
 } from "@mui/material";
 import { SpringGrid, layout, measureItems } from "react-stonecutter";
-import { useHistory, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { types } from "../../CreateMarker/components/Types";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import { AuthContext } from "../../shared/context/auth-context";
+import OpenInNewRoundedIcon from "@mui/icons-material/OpenInNewRounded";
 
 function PlaceList(props) {
   const userId = useParams().userId;
@@ -28,8 +30,46 @@ function PlaceList(props) {
 
   if (places?.length === 0) {
     return (
-      <Box>
-        <Typography>No places found, create some!</Typography>
+      <Box
+        sx={{
+          width: "100%",
+          height: "40vh",
+          display: "block",
+          position: "relative",
+        }}
+      >
+        <Typography
+          variant="h2"
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%,-50%)",
+          }}
+        >
+          You have no places
+        </Typography>
+        <Link
+          to="/"
+          style={{
+            color: "inherit",
+            textDecoration: "inherit",
+          }}
+        >
+          <Button
+            variant="contained"
+            color="secondary"
+            endIcon={<OpenInNewRoundedIcon />}
+            sx={{
+              position: "absolute",
+              top: "70%",
+              left: "50%",
+              transform: "translate(-50%,-50%)",
+            }}
+          >
+            Create some!
+          </Button>
+        </Link>
       </Box>
     );
   }
@@ -75,7 +115,7 @@ function PlaceList(props) {
           setShowConfirmDeleteModal(false);
           try {
             await sendRequest(
-              `https://placez-pmbr.herokuapp.com/api/places/${place.id}`,
+              `${process.env.REACT_APP_BACKEND_URL}/api/places/${place.id}`,
               "DELETE",
               {},
               {
@@ -111,34 +151,36 @@ function PlaceList(props) {
                   <CardMedia
                     component="img"
                     image={`${process.env.REACT_APP_BACKEND_URL}/${image}`}
+                    onClick={() => {
+                      props.selectedGetter(place);
+                      history.push(`/place/${place.id}`);
+                    }}
                   ></CardMedia>
                 </Box>
-                <Box>
-                  {userId === auth.userId ? (
-                    isLoading ? (
-                      <CircularProgress
-                        sx={{
-                          position: "absolute",
-                          top: 0,
-                          right: 0,
-                        }}
-                      />
-                    ) : (
-                      <IconButton
-                        sx={{
-                          position: "absolute",
-                          top: 0,
-                          right: 0,
-                          zIndex: 9,
-                          "&:hover": { color: "darkred" },
-                        }}
-                        onClick={confirmDeleteHandler}
-                      >
-                        <DeleteForeverRoundedIcon />
-                      </IconButton>
-                    )
-                  ) : null}
-                </Box>
+                {userId === auth.userId ? (
+                  isLoading ? (
+                    <CircularProgress
+                      sx={{
+                        position: "absolute",
+                        top: 0,
+                        right: 0,
+                      }}
+                    />
+                  ) : (
+                    <IconButton
+                      sx={{
+                        position: "absolute",
+                        top: 0,
+                        right: 0,
+                        zIndex: 9,
+                        "&:hover": { color: "darkred" },
+                      }}
+                      onClick={confirmDeleteHandler}
+                    >
+                      <DeleteForeverRoundedIcon />
+                    </IconButton>
+                  )
+                ) : null}
                 <Box
                   sx={{
                     display: "flex",
@@ -156,10 +198,6 @@ function PlaceList(props) {
                     borderBottomRightRadius: "12px",
                     webkitTransform: "translate3d(0, 0, 0)",
                     transform: "translate3d(0, 0, 0)",
-                  }}
-                  onClick={() => {
-                    props.selectedGetter(place);
-                    history.push(`/place/${place.id}`);
                   }}
                 >
                   <img style={{ padding: 0 }} src={typeFilter[0].path} />

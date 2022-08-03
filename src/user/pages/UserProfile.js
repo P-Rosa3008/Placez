@@ -13,6 +13,7 @@ import ImageUpload from "../../ImageUpload";
 import { AuthContext } from "../../shared/context/auth-context";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import EmailRoundedIcon from "@mui/icons-material/AlternateEmailRounded";
+import LoadingScreen from "../../shared/components/LoadingScreen";
 
 const UserProfile = () => {
   const auth = useContext(AuthContext);
@@ -45,12 +46,16 @@ const UserProfile = () => {
           Authorization: "Bearer " + auth.token,
         }
       );
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleLogOut = () => {
     auth.logout();
   };
+
+  console.log(`${process.env.REACT_APP_BACKEND_URL}/api/users/${username}`);
 
   return (
     <Box>
@@ -205,9 +210,7 @@ const UserProfile = () => {
           </Box>
         </Container>
       ) : (
-        <Box paddingLeft="16%">
-          <CircularProgress />
-        </Box>
+        <LoadingScreen />
       )}
     </Box>
   );
