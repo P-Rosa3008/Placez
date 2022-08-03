@@ -4,6 +4,7 @@ import {
   Avatar,
   Box,
   Button,
+  Grid,
   IconButton,
   ListItemButton,
   Toolbar,
@@ -74,117 +75,116 @@ function Header(props) {
   };
 
   return (
-    <Box>
-      <AppBar
-        position="sticky"
+    <AppBar
+      position="sticky"
+      sx={{
+        zIndex: (theme) => theme.zIndex.drawer + 1,
+        height: "9.48vh",
+        width: "100vw",
+        display: "flex",
+        alignContent: "stretch",
+      }}
+    >
+      <Toolbar
         sx={{
-          zIndex: (theme) => theme.zIndex.drawer + 1,
-          height: "9.48vh",
-          width: window.innerWidth,
-          display: "flex",
-          alignContent: "stretch",
+          minHeight: "9.48vh !important",
+          maxWidth: "100%",
         }}
       >
-        <Toolbar
-          sx={{
-            minHeight: "9.48vh !important",
-            maxWidth: "100%",
+        <Link
+          to="/"
+          onClick={() => {
+            setAllowNewMarkerFalse();
           }}
+          style={{ color: "inherit", textDecoration: "inherit" }}
         >
+          <Typography
+            // variant={isPortraitMode() ? "h3" : "h1"}
+            variant={"h1"}
+            component="div"
+            fontWeight="bold"
+          >
+            PlaceZ
+          </Typography>
+        </Link>
+        <Box sx={{ flexGrow: 0.05 }} />
+        {/* <SearchBar /> */}
+        <Box sx={{ flexGrow: 0.95 }} />
+        {auth.isLoggedIn && (
           <Link
-            to="/"
-            onClick={() => {
-              setAllowNewMarkerFalse();
-            }}
+            style={{ color: "inherit", textDecoration: "inherit" }}
+            to={`/places/${auth.userId}`}
+          >
+            <ListItemButton sx={{ height: 48 }}>
+              <LocationOnRoundedIcon />
+              {!isPortraitMode() && (
+                <Typography sx={{ paddingLeft: 1 }} variant="button">
+                  My Places
+                </Typography>
+              )}
+            </ListItemButton>
+          </Link>
+        )}
+        {auth.isLoggedIn && (
+          <Link
+            style={{ color: "inherit", textDecoration: "inherit" }}
+            to={`/stats/${auth.username}`}
+          >
+            <ListItemButton sx={{ height: 48 }}>
+              <DashboardRoundedIcon />
+              {!isPortraitMode() && (
+                <Typography sx={{ paddingLeft: 1 }} variant="button">
+                  Dashboard
+                </Typography>
+              )}
+            </ListItemButton>
+          </Link>
+        )}
+        {auth.isLoggedIn && (
+          <Link
+            to={props.allowNewMarker ? "/" : "/"}
             style={{ color: "inherit", textDecoration: "inherit" }}
           >
-            <Typography
-              variant={isPortraitMode() ? "h3" : "h1"}
-              component="div"
-              fontWeight="bold"
-            >
-              PlaceZ
-            </Typography>
+            {getNewMarkerButton()}
           </Link>
-          <Box sx={{ flexGrow: 0.05 }} />
-          {/* <SearchBar /> */}
-          <Box sx={{ flexGrow: 0.95 }} />
-          {auth.isLoggedIn && (
-            <Link
-              style={{ color: "inherit", textDecoration: "inherit" }}
-              to={`/places/${auth.userId}`}
+        )}
+        {!auth.isLoggedIn ? (
+          <Link
+            to="/login"
+            style={{ color: "inherit", textDecoration: "inherit" }}
+          >
+            <Button
+              size={isFullHD() ? "large" : "medium"}
+              variant="contained"
+              color="secondary"
             >
-              <ListItemButton sx={{ height: 48 }}>
-                <LocationOnRoundedIcon />
-                {!isPortraitMode() && (
-                  <Typography sx={{ paddingLeft: 1 }} variant="button">
-                    My Places
-                  </Typography>
-                )}
-              </ListItemButton>
-            </Link>
-          )}
-          {auth.isLoggedIn && (
-            <Link
-              style={{ color: "inherit", textDecoration: "inherit" }}
-              to={`/stats/${auth.username}`}
-            >
-              <ListItemButton sx={{ height: 48 }}>
-                <DashboardRoundedIcon />
-                {!isPortraitMode() && (
-                  <Typography sx={{ paddingLeft: 1 }} variant="button">
-                    Dashboard
-                  </Typography>
-                )}
-              </ListItemButton>
-            </Link>
-          )}
-          {auth.isLoggedIn && (
-            <Link
-              to={props.allowNewMarker ? "/" : "/"}
-              style={{ color: "inherit", textDecoration: "inherit" }}
-            >
-              {getNewMarkerButton()}
-            </Link>
-          )}
-          {!auth.isLoggedIn ? (
-            <Link
-              to="/login"
-              style={{ color: "inherit", textDecoration: "inherit" }}
-            >
-              <Button
-                size={isFullHD() ? "large" : "medium"}
-                variant="contained"
-                color="secondary"
-              >
-                Log in / Sign up
-              </Button>
-            </Link>
-          ) : (
-            <Link
-              style={{ color: "inherit", textDecoration: "inherit" }}
-              to={`/profile/${auth.username}`}
-            >
-              <IconButton>
-                <Avatar
-                  src={
-                    auth.avatar
-                      ? `${process.env.REACT_APP_BACKEND_URL}/${auth.avatar}`
-                      : ""
-                  }
-                />
-              </IconButton>
-            </Link>
-          )}
-          <Menu
-            open={open}
-            anchorEl={anchorEl}
-            closeMenu={closeMenu}
-            handleLogOut={handleLogOut}
-          />
-        </Toolbar>
-      </AppBar>
-    </Box>
+              Log in / Sign up
+            </Button>
+          </Link>
+        ) : (
+          <Link
+            style={{ color: "inherit", textDecoration: "inherit" }}
+            to={`/profile/${auth.username}`}
+          >
+            <IconButton>
+              <Avatar
+                src={
+                  auth.avatar
+                    ? `${process.env.REACT_APP_BACKEND_URL}/${auth.avatar}`
+                    : ""
+                }
+              />
+            </IconButton>
+          </Link>
+        )}
+        <Menu
+          open={open}
+          anchorEl={anchorEl}
+          closeMenu={closeMenu}
+          handleLogOut={handleLogOut}
+        />
+      </Toolbar>
+    </AppBar>
   );
 }
 
