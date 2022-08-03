@@ -75,10 +75,15 @@ function PlaceList(props) {
           setShowConfirmDeleteModal(false);
           try {
             console.log("ola");
-            await sendRequest(
-              `${process.env.REACT_APP_BACKEND_URL}/api/places/${place.id}`,
-              "DELETE"
+            const respondeData = await sendRequest(
+              `https://placez-pmbr.herokuapp.com/api/places/${place.id}`,
+              "DELETE",
+              {},
+              {
+                Authorization: "Bearer " + auth.token,
+              }
             );
+            console.log(respondeData);
             console.log("ola2");
             props.onDelete(placeId);
           } catch (err) {
@@ -93,11 +98,6 @@ function PlaceList(props) {
               position: "relative",
             }}
             key={place.id}
-            on
-            onClick={() => {
-              // props.selectedGetter(place);
-              // history.push(`/place/${place.id}`);
-            }}
           >
             <Box>
               <Card
@@ -119,7 +119,13 @@ function PlaceList(props) {
                 <Box>
                   {userId === auth.userId ? (
                     isLoading ? (
-                      <CircularProgress />
+                      <CircularProgress
+                        sx={{
+                          position: "absolute",
+                          top: 0,
+                          right: 0,
+                        }}
+                      />
                     ) : (
                       <IconButton
                         sx={{
@@ -153,6 +159,10 @@ function PlaceList(props) {
                     borderBottomRightRadius: "12px",
                     webkitTransform: "translate3d(0, 0, 0)",
                     transform: "translate3d(0, 0, 0)",
+                  }}
+                  onClick={() => {
+                    props.selectedGetter(place);
+                    history.push(`/place/${place.id}`);
                   }}
                 >
                   <img style={{ padding: 0 }} src={typeFilter[0].path} />
