@@ -115,7 +115,7 @@ function CreateMarkerPortrait(props) {
     let country;
     try {
       const responseData = await sendRequest(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${props.onLatLng.lat},${props.onLatLng.lng}&key=AIzaSyCBV5PosZ19R_EBmCdHZNluFe-bzP_fJ3M&language=en`
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${props.onLatLng.lat},${props.onLatLng.lng}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&language=en`
       );
       region =
         responseData.results[

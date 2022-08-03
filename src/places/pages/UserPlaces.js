@@ -32,12 +32,17 @@ function UserPlaces(props) {
           `${process.env.REACT_APP_BACKEND_URL}/api/places/${userId}/places`
         );
 
-        const places = responseData.places;
-        setUserPlaces(places);
+        setUserPlaces(responseData.places);
       } catch (err) {}
     };
     fetchPlaces();
   }, [sendRequest, userId]);
+
+  const placeDeletedHandler = (deletedPlaceId) => {
+    setUserPlaces((prevPlaces) =>
+      prevPlaces.filter((place) => place.id !== deletedPlaceId)
+    );
+  };
 
   if (isLoading) {
     return <Typography>Please Wait</Typography>;
@@ -50,7 +55,11 @@ function UserPlaces(props) {
   return (
     <Box display="flex">
       <Box padding={3}>
-        <PlaceList selectedGetter={setSelectedHandler} items={userPlaces} />
+        <PlaceList
+          selectedGetter={setSelectedHandler}
+          items={userPlaces}
+          onDelete={placeDeletedHandler}
+        />
       </Box>
     </Box>
   );

@@ -1,15 +1,26 @@
-import React from "react";
-import { Box, Card, CardMedia, Typography } from "@mui/material";
+import React, { useContext, useState } from "react";
+import {
+  Box,
+  Card,
+  CardMedia,
+  CircularProgress,
+  IconButton,
+  Typography,
+} from "@mui/material";
 import { SpringGrid, layout, measureItems } from "react-stonecutter";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { types } from "../../CreateMarker/components/Types";
+import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
+import { useHttpClient } from "../../shared/hooks/http-hook";
+import { AuthContext } from "../../shared/context/auth-context";
 
 function PlaceList(props) {
-  // const [center, setCenter] = useState();
+  const userId = useParams().userId;
+  const auth = useContext(AuthContext);
 
-  // const handleSetCenter = (place) => {
-  //   setCenter({ lat: place.location.lat, lng: place.location.lng });
-  // };
+  const { isLoading, sendRequest } = useHttpClient();
+  const [showConfirmDeleteModal, setShowConfirmDeleteModal] = useState();
+  const [placeId, setPlaceId] = useState();
 
   const history = useHistory();
 
@@ -43,17 +54,37 @@ function PlaceList(props) {
         const type = place.type;
         const image = place.image[0];
 
-        console.log(type);
-
         const typeFilter = types.filter((t) => {
           if (type === t.label) {
             return t.path;
           }
         });
-        console.log(typeFilter[0].icon);
 
         let img = new Image();
         img.src = `${process.env.REACT_APP_BACKEND_URL}/${image}`;
+
+        const showDeleteWarningHandler = () => {
+          setShowConfirmDeleteModal(true);
+        };
+
+        const cancelDeleteHandler = () => {
+          setShowConfirmDeleteModal(false);
+        };
+
+        const confirmDeleteHandler = async () => {
+          setShowConfirmDeleteModal(false);
+          try {
+            console.log("ola");
+            await sendRequest(
+              `${process.env.REACT_APP_BACKEND_URL}/api/places/${place.id}`,
+              "DELETE"
+            );
+            console.log("ola2");
+            props.onDelete(placeId);
+          } catch (err) {
+            console.log(err);
+          }
+        };
 
         return (
           <li
@@ -62,18 +93,12 @@ function PlaceList(props) {
               position: "relative",
             }}
             key={place.id}
+            on
             onClick={() => {
-              props.selectedGetter(place);
-              // handleSetCenter(place);
+              // props.selectedGetter(place);
+              // history.push(`/place/${place.id}`);
             }}
           >
-            {/* <Link
-              style={{ color: "inherit", textDecoration: "inherit" }}
-              onClick={() => {
-                props.selectedGetter(place);
-                handleSetCenter(place);
-              }}
-            > */}
             <Box>
               <Card
                 sx={{
@@ -84,16 +109,32 @@ function PlaceList(props) {
                 key={place.id}
                 id={place.id}
                 elevation={1}
-                onClick={() => {
-                  props.selectedGetter(place);
-                  history.push(`/place/${place.id}`);
-                }}
               >
                 <Box position="relative">
                   <CardMedia
                     component="img"
                     image={`${process.env.REACT_APP_BACKEND_URL}/${image}`}
                   ></CardMedia>
+                </Box>
+                <Box>
+                  {userId === auth.userId ? (
+                    isLoading ? (
+                      <CircularProgress />
+                    ) : (
+                      <IconButton
+                        sx={{
+                          position: "absolute",
+                          top: 0,
+                          right: 0,
+                          zIndex: 9,
+                          "&:hover": { color: "darkred" },
+                        }}
+                        onClick={confirmDeleteHandler}
+                      >
+                        <DeleteForeverRoundedIcon />
+                      </IconButton>
+                    )
+                  ) : null}
                 </Box>
                 <Box
                   sx={{
@@ -107,7 +148,9 @@ function PlaceList(props) {
                     bgcolor: "rgba(0, 0, 0, 0.25)",
                     color: "white",
                     padding: "2px",
-                    borderTopRightRadius: "16px",
+                    borderTopRightRadius: "12px",
+                    borderBottomLeftRadius: "12px",
+                    borderBottomRightRadius: "12px",
                     webkitTransform: "translate3d(0, 0, 0)",
                     transform: "translate3d(0, 0, 0)",
                   }}

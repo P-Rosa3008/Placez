@@ -56,7 +56,6 @@ function ImageUpload(props) {
       </Box>
     );
   }
-  console.log(props.image);
   if (props.component === "create-marker") {
     return (
       <Box
