@@ -74,8 +74,7 @@ function PlaceList(props) {
         const confirmDeleteHandler = async () => {
           setShowConfirmDeleteModal(false);
           try {
-            console.log("ola");
-            const respondeData = await sendRequest(
+            await sendRequest(
               `https://placez-pmbr.herokuapp.com/api/places/${place.id}`,
               "DELETE",
               {},
@@ -83,9 +82,7 @@ function PlaceList(props) {
                 Authorization: "Bearer " + auth.token,
               }
             );
-            console.log(respondeData);
-            console.log("ola2");
-            props.onDelete(placeId);
+            props.onDelete(place.id);
           } catch (err) {
             console.log(err);
           }
@@ -177,7 +174,6 @@ function PlaceList(props) {
                 </Box>
               </Card>
             </Box>
-            {/* </Link> */}
           </li>
         );
       })}

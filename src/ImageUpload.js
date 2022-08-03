@@ -5,22 +5,14 @@ import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 
 function ImageUpload(props) {
-  // const [file, setFile] = useState();
-  // const [previewUrl, setPreviewUrl] = useState();
-  // const [isValid, setIsValid] = useState(false);
-
   const filePickerRef = useRef();
 
   const pickedHandler = (event) => {
     let pickedFile;
-    // let fileIsValid = isValid;
     if (event.target.files && event.target.files.length === 1) {
       pickedFile = event.target.files[0];
       console.log(pickedFile);
       props.setImage(pickedFile);
-      // setIsValid(true);
-    } else {
-      // setIsValid(false);
     }
   };
 

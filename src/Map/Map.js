@@ -6,9 +6,7 @@ import CreateMarker from "../CreateMarker/CreateMarker";
 import BetterMarker from "./Markers/BetterMarker";
 import { useHttpClient } from "../shared/hooks/http-hook";
 import MarkerTypes from "./Markers/MarkerTypes";
-import { Box, CircularProgress, Typography } from "@mui/material";
-import PortraitModal from "../Layout/PortraitModal";
-import CreateMarkerPortrait from "../CreateMarker/CreateMarkerPortrait";
+import { CircularProgress, Typography } from "@mui/material";
 
 function Map(props) {
   const [center, setCenter] = useState({ lat: 39.353161, lng: -8.13946 });
@@ -19,7 +17,6 @@ function Map(props) {
   const [newMarker, setNewMarker] = useState(false);
   const [showCreateMarker, setShowCreateMarker] = useState(false);
   const [allowNewMarker, setAllowNewMarker] = useState(false);
-  // const [edited, setEdited] = useState();
   const [zoomHasChanged, setZoomHasChanged] = useState(false);
   const { isLoading, sendRequest } = useHttpClient();
 
@@ -92,21 +89,20 @@ function Map(props) {
     fetchPlaces();
   }, [sendRequest, props.countries, props.types]);
 
+  const newPlaceHandler = (addedPlace) => {
+    const places = [...new Set(markers)];
+    setMarkers(places + addedPlace);
+  };
+
   useEffect(() => {
     if (props.markerIsShown && props.selected) {
       setCenter(props.center);
     }
   }, []);
 
-  useEffect(() => {}, [document.body.clientHeight, document.body.clientWidth]);
-
   const isPortraitMode = () => {
     return document.body.clientHeight > document.body.clientWidth;
   };
-
-  // const showModalHandler = () => {
-  //   setMarkerIsShown(true);
-  // };
 
   const hideModalHandler = () => {
     setMarkerIsShown(false);
@@ -120,10 +116,6 @@ function Map(props) {
   const hideCreateMarkerHandler = () => {
     setShowCreateMarker(false);
   };
-
-  // const setEditedHandler = (edited) => {
-  //   setEdited(!edited);
-  // };
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -164,16 +156,8 @@ function Map(props) {
   }
 
   const getPlaceModal = () => {
-    return isPortraitMode() === false ? (
+    return (
       <Modal
-        onCloseModal={hideModalHandler}
-        selected={selected || props.selected}
-        currentName={selected?.title || props.selected.title}
-        currentType={selected?.type || props.selected.type}
-        // setEdited={setEditedHandler}
-      />
-    ) : (
-      <PortraitModal
         onCloseModal={hideModalHandler}
         selected={selected || props.selected}
         currentName={selected?.title || props.selected.title}
@@ -183,17 +167,12 @@ function Map(props) {
   };
 
   const getCreateMarker = () => {
-    return isPortraitMode() === false ? (
+    return (
       <CreateMarker
         onClose={hideCreateMarkerHandler}
         onLatLng={latLng}
         newMarker={newMarker}
-      />
-    ) : (
-      <CreateMarkerPortrait
-        onClose={hideCreateMarkerHandler}
-        onLatLng={latLng}
-        newMarker={newMarker}
+        getAddedPlace={newPlaceHandler}
       />
     );
   };

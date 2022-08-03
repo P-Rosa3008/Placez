@@ -333,7 +333,6 @@ function CreateMarkerPortrait(props) {
                       </SwipeableDrawer>
                     </FormControl>
                   </ClickAwayListener>
-                  {/* </Form.Group> */}
                 </Box>
               </Box>
             </Box>

@@ -39,15 +39,6 @@ export const TabAToZ = (props) => {
       return bool;
     });
 
-    // const countrySelected = selectedCheckbox.map((bool, i) => {
-    //   if (i === index) {
-    //     return country;
-    //   }
-    //   if (checked !== false) {
-    //     return country;
-    //   }
-    // });
-
     let updatedCountryArray;
     updatedCountryArray = [...selectedCountry, country];
     if (updatedCountryArray.includes(country)) {

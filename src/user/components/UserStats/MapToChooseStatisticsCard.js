@@ -47,9 +47,6 @@ export function MapToChooseStatisticsCard() {
             handleSelectedCountries={handleSelectedCountries}
             handleSelectedTypes={handleSelectedTypes}
           />
-          {/* <Button variant="contained" color="secondary" onClick={handleClick}>
-            Hexagonal
-          </Button> */}
         </CardActions>
       </Card>
     </Box>

@@ -98,12 +98,7 @@ function Header(props) {
           }}
           style={{ color: "inherit", textDecoration: "inherit" }}
         >
-          <Typography
-            // variant={isPortraitMode() ? "h3" : "h1"}
-            variant={"h1"}
-            component="div"
-            fontWeight="bold"
-          >
+          <Typography variant="h1" component="div" fontWeight="bold">
             PlaceZ
           </Typography>
         </Link>

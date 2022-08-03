@@ -205,7 +205,6 @@ const UserProfile = () => {
           </Box>
         </Container>
       ) : (
-        //           <Typography>{user.places.length} Places</Typography>
         <Box paddingLeft="16%">
           <CircularProgress />
         </Box>
