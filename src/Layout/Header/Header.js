@@ -131,7 +131,7 @@ function Header(props) {
             to="/login"
             style={{ color: "inherit", textDecoration: "inherit" }}
           >
-            <Button size="large" variant="contained" color="secondary">
+            <Button size="medium" variant="contained" color="secondary">
               Log in / Sign up
             </Button>
           </Link>
