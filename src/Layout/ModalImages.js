@@ -12,6 +12,8 @@ function ModalImages(props) {
     return document.body.clientHeight > document.body.clientWidth;
   };
 
+  let image = new Image();
+
   return (
     <Box
       sx={{
@@ -28,22 +30,30 @@ function ModalImages(props) {
             setImage={props.handleImage}
           ></ImageUpload>
         ) : null}
-        {props.items?.slice(0, 4).map((item, index) => (
-          <ImageListItem
-            key={item.img}
-            sx={{ "& .MuiImageListItem-img": { height: 0 }, borderRadius: 1 }}
-          >
-            <img
-              style={{ borderRadius: "8px" }}
-              height="100px"
-              width="100px"
-              src={`${process.env.REACT_APP_BACKEND_URL}/${item}`}
-              srcSet={`${process.env.REACT_APP_BACKEND_URL}/${item}`}
-              alt={item}
-              loading="lazy"
-            />
-          </ImageListItem>
-        ))}
+        {props.items?.slice(0, 4).map((item, index) => {
+          image.src = item;
+          console.log(item);
+          return (
+            <ImageListItem
+              key={item.img}
+              sx={{
+                "& .MuiImageListItem-img": { height: 0 },
+                borderRadius: 1,
+              }}
+            >
+              <img
+                key={"image" + index}
+                style={{ borderRadius: "8px" }}
+                height="100px"
+                width="100px"
+                src={item}
+                srcSet={item}
+                alt={item}
+                loading="lazy"
+              />
+            </ImageListItem>
+          );
+        })}
       </ImageList>
     </Box>
   );

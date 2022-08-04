@@ -162,7 +162,7 @@ function CreateMarker(props) {
       for (var pair of formData.entries()) {
         console.log(pair[0] + ", " + pair[1]);
       }
-
+      console.log(auth.token);
       await sendRequest(
         process.env.REACT_APP_BACKEND_URL + "/api/places",
         "POST",
