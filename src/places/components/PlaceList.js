@@ -101,7 +101,7 @@ function PlaceList(props) {
         });
 
         let img = new Image();
-        img.src = `${process.env.REACT_APP_BACKEND_URL}/${image}`;
+        img.src = image;
 
         const showDeleteWarningHandler = () => {
           setShowConfirmDeleteModal(true);
@@ -150,7 +150,7 @@ function PlaceList(props) {
                 <Box position="relative">
                   <CardMedia
                     component="img"
-                    image={`${process.env.REACT_APP_BACKEND_URL}/${image}`}
+                    image={image}
                     onClick={() => {
                       props.selectedGetter(place);
                       history.push(`/place/${place.id}`);

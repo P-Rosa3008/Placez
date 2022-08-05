@@ -35,6 +35,8 @@ const UserProfile = () => {
     fetchPlaces();
   }, [sendRequest, username]);
 
+  console.log(auth.avatar);
+
   const handleImage = async (image) => {
     try {
       const formData = new FormData();

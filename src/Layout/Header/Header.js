@@ -17,12 +17,16 @@ import { AuthContext } from "../../shared/context/auth-context";
 // import SearchBar from "./components/SearchBar";
 import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
-import NewMarkerButtonIcon from "./components/NewmarkerButtonIcon";
+import { useHttpClient } from "../../shared/hooks/http-hook";
 
 function Header(props) {
   const auth = useContext(AuthContext);
   const [allowNewMarker, setAllowNewMarker] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [user, setUser] = useState();
+  const [loadingUser, setLoadingUser] = useState(true);
+
+  const { isLoading, sendRequest } = useHttpClient();
 
   const open = Boolean(anchorEl);
 
@@ -58,6 +62,23 @@ function Header(props) {
       />
     );
   };
+
+  useEffect(() => {
+    const fetchPlaces = async () => {
+      setLoadingUser(true);
+      try {
+        const responseData = await sendRequest(
+          `${process.env.REACT_APP_BACKEND_URL}/api/users/${props.username}`
+        );
+        setUser(responseData.user);
+        console.log(responseData.user.avatar);
+        setLoadingUser(false);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchPlaces();
+  }, [sendRequest, props.username]);
 
   return (
     <AppBar
@@ -141,7 +162,8 @@ function Header(props) {
             to={`/profile/${auth.username}`}
           >
             <IconButton>
-              <Avatar src={auth.avatar ? auth.avatar : ""} />
+              {/* <Avatar src={loadingUser === false ? user.avatar : ""} /> */}
+              <Avatar src={loadingUser ? "" : user.avatar} />
             </IconButton>
           </Link>
         )}

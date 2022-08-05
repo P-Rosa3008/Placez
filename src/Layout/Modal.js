@@ -90,7 +90,7 @@ function Modal(props) {
           maxHeight="450px"
           marginTop="8px"
           paddingRight="8px"
-          overflow="scroll"
+          overflow="auto"
         >
           <Typography textAlign="justify" color="primary">
             {props.selected.description}

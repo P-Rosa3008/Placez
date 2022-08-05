@@ -132,6 +132,7 @@ function CreateMarker(props) {
       region: region,
       country: country,
       creator: auth.userId,
+      image: image,
     };
 
     console.log(modalData);

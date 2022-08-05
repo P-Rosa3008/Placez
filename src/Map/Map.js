@@ -6,28 +6,31 @@ import CreateMarker from "../CreateMarker/CreateMarker";
 import BetterMarker from "./Markers/BetterMarker";
 import { useHttpClient } from "../shared/hooks/http-hook";
 import MarkerTypes from "./Markers/MarkerTypes";
-import { CircularProgress, Typography } from "@mui/material";
+import { Box, Chip, CircularProgress, Typography } from "@mui/material";
 import LoadingScreen from "../shared/components/LoadingScreen";
 
 function Map(props) {
   const [center, setCenter] = useState({ lat: 39.353161, lng: -8.13946 });
   const [latLng, setLatLng] = useState({ lat: null, lng: null });
-  const [markers, setMarkers] = useState();
+  const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(false);
   const [markerIsShown, setMarkerIsShown] = useState();
   const [newMarker, setNewMarker] = useState(false);
   const [showCreateMarker, setShowCreateMarker] = useState(false);
   const [allowNewMarker, setAllowNewMarker] = useState(false);
   const [zoomHasChanged, setZoomHasChanged] = useState(false);
+  const [loadingPlaces, setLoadingPlaces] = useState(true);
   const { isLoading, sendRequest } = useHttpClient();
 
   useEffect(() => {
     const fetchPlaces = async () => {
+      setLoadingPlaces(true);
       try {
         const responseData = await sendRequest(
           process.env.REACT_APP_BACKEND_URL + "/api/places"
         );
         setMarkers(responseData.places);
+        setLoadingPlaces(false);
 
         if (props.countries.length > 0) {
           const countries = responseData.places.map((p) => p.country);
@@ -43,6 +46,7 @@ function Map(props) {
           );
 
           setMarkers(markersFiltered);
+          setLoadingPlaces(false);
         }
         if (props.types.length > 0) {
           const types = responseData.places.map((p) => p.type);
@@ -58,6 +62,7 @@ function Map(props) {
           );
 
           setMarkers(markersFiltered);
+          setLoadingPlaces(false);
         }
         if (props.countries.length > 0 && props.types.length > 0) {
           const countries = responseData.places.map((p) => p.country);
@@ -84,6 +89,7 @@ function Map(props) {
           );
 
           setMarkers(markersFilteredByCountryAndType);
+          setLoadingPlaces(false);
         }
       } catch (err) {}
     };
@@ -187,6 +193,8 @@ function Map(props) {
 
   const betterMarker = new BetterMarker();
 
+  console.log(loadingPlaces);
+
   return (
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
@@ -240,6 +248,28 @@ function Map(props) {
       {markerIsShown === true || props.markerIsShown === true
         ? getPlaceModal()
         : null}
+
+      {loadingPlaces === true ? (
+        <Box
+          sx={{
+            width: "100%",
+            height: "40vh",
+            display: "block",
+            position: "relative",
+          }}
+        >
+          <Chip
+            label="Loading places..."
+            color="secondary"
+            sx={{
+              position: "absolute",
+              top: "30%",
+              left: "50%",
+              transform: "translate(-50%,-50%)",
+            }}
+          />
+        </Box>
+      ) : null}
     </GoogleMap>
   );
 }

@@ -230,6 +230,8 @@ function App() {
           <Header
             allowNewMarker={allowNewMarker}
             isNewMarkerAllowed={allowNewMarkerHandler}
+            username={username}
+            avatar={avatar}
           />
           <Suspense
             fallback={
