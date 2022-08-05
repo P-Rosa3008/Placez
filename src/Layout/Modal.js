@@ -24,6 +24,7 @@ function Modal(props) {
   // }, [sendRequest, props.selected.id]);
 
   const handleImage = async (image) => {
+    console.log(image);
     try {
       const formData = new FormData();
       formData.append("image", image);

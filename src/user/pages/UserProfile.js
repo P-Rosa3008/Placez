@@ -28,6 +28,7 @@ const UserProfile = () => {
         const responseData = await sendRequest(
           `${process.env.REACT_APP_BACKEND_URL}/api/users/${username}`
         );
+
         setUser(responseData.user);
       } catch (err) {}
     };
@@ -35,8 +36,6 @@ const UserProfile = () => {
   }, [sendRequest, username]);
 
   const handleImage = async (image) => {
-    console.log(image);
-
     try {
       const formData = new FormData();
       formData.append("image", image);
@@ -80,11 +79,7 @@ const UserProfile = () => {
                   width: 250,
                   marginBottom: 2,
                 }}
-                src={
-                  user.avatar
-                    ? `${process.env.REACT_APP_BACKEND_URL}/${user.avatar}`
-                    : ""
-                }
+                src={user.avatar ? user.avatar : ""}
               />
 
               <ImageUpload

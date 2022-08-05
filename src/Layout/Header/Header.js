@@ -141,13 +141,7 @@ function Header(props) {
             to={`/profile/${auth.username}`}
           >
             <IconButton>
-              <Avatar
-                src={
-                  auth.avatar
-                    ? `${process.env.REACT_APP_BACKEND_URL}/${auth.avatar}`
-                    : ""
-                }
-              />
+              <Avatar src={auth.avatar ? auth.avatar : ""} />
             </IconButton>
           </Link>
         )}
