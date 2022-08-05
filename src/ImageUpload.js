@@ -3,15 +3,16 @@ import React, { useRef } from "react";
 import AddAPhotoRoundedIcon from "@mui/icons-material/AddAPhotoRounded";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import { resizeFile } from "./shared/utils/resizeFile";
 
 function ImageUpload(props) {
   const filePickerRef = useRef();
 
-  const pickedHandler = (event) => {
-    let pickedFile;
+  const pickedHandler = async (event) => {
+    let pickedFileResized;
     if (event.target.files && event.target.files.length === 1) {
-      pickedFile = event.target.files[0];
-      props.setImage(pickedFile);
+      pickedFileResized = await resizeFile(event.target.files[0]);
+      props.setImage(pickedFileResized);
     }
   };
 

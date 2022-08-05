@@ -35,9 +35,14 @@ const UserProfile = () => {
   }, [sendRequest, username]);
 
   const handleImage = async (image) => {
+    console.log(image);
+
     try {
       const formData = new FormData();
       formData.append("image", image);
+      for (var pair of formData.entries()) {
+        console.log(pair[0] + ", " + pair[1]);
+      }
       await sendRequest(
         `${process.env.REACT_APP_BACKEND_URL}/api/users/${username}`,
         "PATCH",
@@ -54,8 +59,6 @@ const UserProfile = () => {
   const handleLogOut = () => {
     auth.logout();
   };
-
-  console.log(`${process.env.REACT_APP_BACKEND_URL}/api/users/${username}`);
 
   return (
     <Box>

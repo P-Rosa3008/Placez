@@ -32,7 +32,6 @@ function ModalImages(props) {
         ) : null}
         {props.items?.slice(0, 4).map((item, index) => {
           image.src = item;
-          console.log(item);
           return (
             <ImageListItem
               key={item.img}
