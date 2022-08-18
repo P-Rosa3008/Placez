@@ -4,6 +4,7 @@ import {
   Avatar,
   Box,
   Button,
+  CircularProgress,
   Grid,
   IconButton,
   ListItemButton,
@@ -24,7 +25,7 @@ function Header(props) {
   const [allowNewMarker, setAllowNewMarker] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [user, setUser] = useState();
-  const [loadingUser, setLoadingUser] = useState(true);
+  const [loadingUser, setLoadingUser] = useState();
 
   const { isLoading, sendRequest } = useHttpClient();
 
@@ -63,6 +64,8 @@ function Header(props) {
     );
   };
 
+  console.log(props.imageHasChanged);
+
   useEffect(() => {
     const fetchPlaces = async () => {
       setLoadingUser(true);
@@ -71,14 +74,23 @@ function Header(props) {
           `${process.env.REACT_APP_BACKEND_URL}/api/users/${props.username}`
         );
         setUser(responseData.user);
-        console.log(responseData.user.avatar);
         setLoadingUser(false);
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
     };
     fetchPlaces();
-  }, [sendRequest, props.username]);
+
+    if (props.imageHasChanged === true) {
+      const fetchPlaces = async () => {
+        try {
+          const responseData = await sendRequest(
+            `${process.env.REACT_APP_BACKEND_URL}/api/users/${props.username}`
+          );
+          setUser(responseData.user);
+        } catch (err) {}
+      };
+      fetchPlaces();
+    }
+  }, [sendRequest, props.username, props.avatar, props.imageHasChanged]);
 
   return (
     <AppBar
@@ -162,8 +174,17 @@ function Header(props) {
             to={`/profile/${auth.username}`}
           >
             <IconButton>
-              {/* <Avatar src={loadingUser === false ? user.avatar : ""} /> */}
-              <Avatar src={loadingUser ? "" : user.avatar} />
+              <Avatar
+                src={
+                  props.imageHasChanged ? (
+                    <CircularProgress />
+                  ) : user ? (
+                    user.avatar
+                  ) : (
+                    <CircularProgress />
+                  )
+                }
+              />
             </IconButton>
           </Link>
         )}

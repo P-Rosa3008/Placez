@@ -27,6 +27,7 @@ function App() {
   const [selected, setSelected] = useState();
   const [markerIsShown, setMarkerIsShown] = useState();
   const [center, setCenter] = useState();
+  const [imageHasChanged, setImageHasChanged] = useState();
 
   useEffect(() => {
     document.body.style.overlay = "auto";
@@ -42,6 +43,10 @@ function App() {
 
   const handleMarkerIsShown = (value) => {
     setMarkerIsShown(value);
+  };
+
+  const handleImageHasChanged = (value) => {
+    setImageHasChanged(value);
   };
 
   const handleSetCenter = (value) => {
@@ -166,7 +171,7 @@ function App() {
           />
         </Route>
         <Route path="/profile/:username" exact>
-          <UserProfile />
+          <UserProfile imageHasChanged={handleImageHasChanged} />
         </Route>
         <Route path="/stats/:username" exact>
           <UserStats />
@@ -232,6 +237,7 @@ function App() {
             isNewMarkerAllowed={allowNewMarkerHandler}
             username={username}
             avatar={avatar}
+            imageHasChanged={imageHasChanged}
           />
           <Suspense
             fallback={

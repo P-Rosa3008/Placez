@@ -1,6 +1,7 @@
 import {
   Avatar,
   Box,
+  Chip,
   CircularProgress,
   Container,
   ListItemButton,
@@ -15,11 +16,14 @@ import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import EmailRoundedIcon from "@mui/icons-material/AlternateEmailRounded";
 import LoadingScreen from "../../shared/components/LoadingScreen";
 
-const UserProfile = () => {
+const UserProfile = (props) => {
   const auth = useContext(AuthContext);
   const username = useParams().username;
 
   const [user, setUser] = useState();
+  const [imageHasChanged, setImageHasChanged] = useState();
+  const [isImageLoading, setIsImageLoading] = useState();
+
   const { sendRequest } = useHttpClient();
 
   useEffect(() => {
@@ -33,17 +37,31 @@ const UserProfile = () => {
       } catch (err) {}
     };
     fetchPlaces();
-  }, [sendRequest, username]);
+    if (imageHasChanged === true) {
+      const fetchPlaces = async () => {
+        try {
+          const responseData = await sendRequest(
+            `${process.env.REACT_APP_BACKEND_URL}/api/users/${username}`
+          );
 
-  console.log(auth.avatar);
+          setUser(responseData.user);
+          setIsImageLoading(false);
+          setImageHasChanged(false);
+        } catch (err) {
+          console.log(err);
+          setIsImageLoading(false);
+          setImageHasChanged(false);
+        }
+      };
+      fetchPlaces();
+    }
+  }, [sendRequest, username, imageHasChanged]);
 
   const handleImage = async (image) => {
+    setIsImageLoading(true);
     try {
       const formData = new FormData();
       formData.append("image", image);
-      for (var pair of formData.entries()) {
-        console.log(pair[0] + ", " + pair[1]);
-      }
       await sendRequest(
         `${process.env.REACT_APP_BACKEND_URL}/api/users/${username}`,
         "PATCH",
@@ -52,6 +70,7 @@ const UserProfile = () => {
           Authorization: "Bearer " + auth.token,
         }
       );
+      setImageHasChanged(true);
     } catch (err) {
       console.log(err);
     }
@@ -60,6 +79,8 @@ const UserProfile = () => {
   const handleLogOut = () => {
     auth.logout();
   };
+
+  props.imageHasChanged(imageHasChanged);
 
   return (
     <Box>
@@ -81,9 +102,8 @@ const UserProfile = () => {
                   width: 250,
                   marginBottom: 2,
                 }}
-                src={user.avatar ? user.avatar : ""}
+                src={user.avatar ? user.avatar : <CircularProgress />}
               />
-
               <ImageUpload
                 id="image"
                 component="user-profile-image"
@@ -91,6 +111,7 @@ const UserProfile = () => {
                 image={user.avatar}
               />
             </Box>
+            {isImageLoading ? <CircularProgress sx={{ marginY: 2 }} /> : null}
             <Box>
               <Box
                 sx={{

@@ -193,8 +193,6 @@ function Map(props) {
 
   const betterMarker = new BetterMarker();
 
-  console.log(loadingPlaces);
-
   return (
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
