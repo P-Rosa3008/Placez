@@ -161,6 +161,7 @@ function CreateMarker(props) {
           Authorization: "Bearer " + auth.token,
         }
       );
+      props.newPlaceHandler(true);
     } catch (err) {
       setErrorData(err.message);
     }

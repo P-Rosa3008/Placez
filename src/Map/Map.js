@@ -96,9 +96,20 @@ function Map(props) {
     fetchPlaces();
   }, [sendRequest, props.countries, props.types]);
 
-  const newPlaceHandler = (addedPlace) => {
-    const places = [...new Set(markers)];
-    setMarkers(places + addedPlace);
+  const newPlaceHandler = (bool) => {
+    if (bool === true) {
+      const fetchPlaces = async () => {
+        setLoadingPlaces(true);
+        try {
+          const responseData = await sendRequest(
+            process.env.REACT_APP_BACKEND_URL + "/api/places"
+          );
+          setMarkers(responseData.places);
+          setLoadingPlaces(false);
+        } catch (error) {}
+      };
+      fetchPlaces();
+    }
   };
 
   useEffect(() => {
@@ -179,7 +190,7 @@ function Map(props) {
         onClose={hideCreateMarkerHandler}
         onLatLng={latLng}
         newMarker={newMarker}
-        getAddedPlace={newPlaceHandler}
+        newPlaceHandler={newPlaceHandler}
       />
     );
   };
