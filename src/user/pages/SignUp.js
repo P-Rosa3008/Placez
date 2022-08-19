@@ -310,6 +310,11 @@ function SignUp() {
                       "&.Mui-focused fieldset": {
                         borderColor: "gray",
                       },
+                      "&.MuiInputBase-input": {
+                        "&.MuiOutlinedInput-input": {
+                          "-webkit-text-fill-color": "red !important ",
+                        },
+                      },
                     },
                   }}
                   InputProps={{
