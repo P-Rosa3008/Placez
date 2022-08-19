@@ -4,6 +4,7 @@ import {
   Button,
   Card,
   CardMedia,
+  Chip,
   CircularProgress,
   IconButton,
   Typography,
@@ -15,6 +16,9 @@ import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import { AuthContext } from "../../shared/context/auth-context";
 import OpenInNewRoundedIcon from "@mui/icons-material/OpenInNewRounded";
+import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import { useEffect } from "react";
 
 function PlaceList(props) {
   const userId = useParams().userId;
@@ -27,6 +31,8 @@ function PlaceList(props) {
   const history = useHistory();
 
   const places = props.items;
+
+  useEffect(() => {}, [showConfirmDeleteModal]);
 
   if (places?.length === 0) {
     return (
@@ -77,6 +83,8 @@ function PlaceList(props) {
   const defaultItemHeight = 200;
 
   const Grid = measureItems(SpringGrid, { measureImages: true });
+
+  console.log(showConfirmDeleteModal);
 
   return (
     <Grid
@@ -166,6 +174,38 @@ function PlaceList(props) {
                         right: 0,
                       }}
                     />
+                  ) : showConfirmDeleteModal === true ? (
+                    <Chip
+                      sx={{ position: "absolute", top: 8, right: 4 }}
+                      label={
+                        <Box display="flex" maxHeight="20px">
+                          <Box>Delete place?</Box>
+                          <IconButton
+                            size="small"
+                            sx={{
+                              "&:hover": {
+                                backgroundColor: "transparent",
+                              },
+                            }}
+                            onClick={confirmDeleteHandler}
+                          >
+                            <CheckRoundedIcon />
+                          </IconButton>
+                          <IconButton
+                            size="small"
+                            sx={{
+                              "&:hover": {
+                                backgroundColor: "transparent",
+                              },
+                            }}
+                            onClick={cancelDeleteHandler}
+                          >
+                            <CloseRoundedIcon />
+                          </IconButton>
+                        </Box>
+                      }
+                      color="error"
+                    />
                   ) : (
                     <IconButton
                       sx={{
@@ -175,12 +215,13 @@ function PlaceList(props) {
                         zIndex: 9,
                         "&:hover": { color: "darkred" },
                       }}
-                      onClick={confirmDeleteHandler}
+                      onClick={showDeleteWarningHandler}
                     >
                       <DeleteForeverRoundedIcon />
                     </IconButton>
                   )
                 ) : null}
+
                 <Box
                   sx={{
                     display: "flex",

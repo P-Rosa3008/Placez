@@ -11,9 +11,7 @@ function UserPlaces(props) {
   const { isLoading, sendRequest } = useHttpClient();
   const [userPlaces, setUserPlaces] = useState();
 
-  useEffect(() => {
-    document.body.style.overflow = "visible";
-  }, []);
+  useEffect(() => {}, [userPlaces, setUserPlaces]);
 
   const setSelectedHandler = (selected) => {
     if (selected) {
@@ -21,8 +19,8 @@ function UserPlaces(props) {
     }
     props.selectedGetter(selected);
     props.setCenterGetter({
-      lat: selected.location.lat - 0.01,
-      lng: selected.location.lng + 0.045,
+      lat: selected.location.lat,
+      lng: selected.location.lng + 0.0015,
     });
   };
 
@@ -119,7 +117,7 @@ function UserPlaces(props) {
 
   return (
     <Box display="flex">
-      <Box padding={3}>
+      <Box width="100%" padding={3}>
         <PlaceList
           selectedGetter={setSelectedHandler}
           items={userPlaces}

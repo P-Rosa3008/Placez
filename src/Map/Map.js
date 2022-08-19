@@ -115,8 +115,10 @@ function Map(props) {
   useEffect(() => {
     if (props.markerIsShown && props.selected) {
       setCenter(props.center);
+      setZoom(0);
+      setZoom(18);
     }
-  }, []);
+  }, [props.markerIsShown, props.selected]);
 
   const hideModalHandler = () => {
     if (props.markerIsShown) {
