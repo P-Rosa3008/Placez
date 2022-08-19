@@ -205,6 +205,7 @@ function SignUp() {
                   label="First Name"
                   variant="outlined"
                   sx={{
+                    width: "100%",
                     "& .MuiOutlinedInput-root": {
                       "& fieldset": {
                         borderColor: "gray",
