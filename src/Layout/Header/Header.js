@@ -64,8 +64,6 @@ function Header(props) {
     );
   };
 
-  console.log(props.imageHasChanged);
-
   useEffect(() => {
     const fetchPlaces = async () => {
       setLoadingUser(true);

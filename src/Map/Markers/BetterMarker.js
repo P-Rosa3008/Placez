@@ -37,7 +37,6 @@ export default class BetterMarker {
     onClick,
     advanced,
     mapRef,
-    zoomHasChanged,
     countries,
     types
   ) {

@@ -12,19 +12,7 @@ function Modal(props) {
   const auth = useContext(AuthContext);
   const { sendRequest } = useHttpClient();
 
-  // useEffect(() => {
-  //   const fetchPlace = async () => {
-  //     try {
-  //       await sendRequest(
-  //         `${process.env.REACT_APP_BACKEND_URL}/api/places/${props.selected.id}`
-  //       );
-  //     } catch (err) {}
-  //   };
-  //   fetchPlace();
-  // }, [sendRequest, props.selected.id]);
-
   const handleImage = async (image) => {
-    console.log(image);
     try {
       const formData = new FormData();
       formData.append("image", image);
@@ -37,6 +25,11 @@ function Modal(props) {
         }
       );
     } catch (err) {}
+  };
+
+  const handleHasNewImage = (bool) => {
+    if (bool === true) {
+    }
   };
 
   return (
@@ -84,7 +77,11 @@ function Modal(props) {
         </Box>
 
         <Box paddingTop="24px" paddingBottom="24px" display="flex">
-          <ModalImages items={props.selected.image} handleImage={handleImage} />
+          <ModalImages
+            items={props.selected.image}
+            handleImage={handleImage}
+            hasNewImage={handleHasNewImage}
+          />
         </Box>
         <Box
           maxHeight="450px"

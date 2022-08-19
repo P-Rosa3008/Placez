@@ -8,17 +8,13 @@ function ModalImages(props) {
 
   useEffect(() => {}, [document.body.clientHeight, document.body.clientWidth]);
 
-  const isPortraitMode = () => {
-    return document.body.clientHeight > document.body.clientWidth;
-  };
-
   let image = new Image();
 
   return (
     <Box
       sx={{
         width: 0.95,
-        height: isPortraitMode() ? 91 : 140,
+        height: 140,
         margin: "0 auto",
       }}
     >

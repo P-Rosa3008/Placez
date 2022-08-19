@@ -25,7 +25,7 @@ const UserStats = React.lazy(() => import("./user/pages/UserStats"));
 function App() {
   const [allowNewMarker, setAllowNewMarker] = useState();
   const [selected, setSelected] = useState();
-  const [markerIsShown, setMarkerIsShown] = useState();
+  const [markerIsShown, setMarkerIsShown] = useState(false);
   const [center, setCenter] = useState();
   const [imageHasChanged, setImageHasChanged] = useState();
 

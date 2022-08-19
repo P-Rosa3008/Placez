@@ -6,11 +6,12 @@ import CreateMarker from "../CreateMarker/CreateMarker";
 import BetterMarker from "./Markers/BetterMarker";
 import { useHttpClient } from "../shared/hooks/http-hook";
 import MarkerTypes from "./Markers/MarkerTypes";
-import { Box, Chip, CircularProgress, Typography } from "@mui/material";
+import { Box, Chip } from "@mui/material";
 import LoadingScreen from "../shared/components/LoadingScreen";
 
 function Map(props) {
   const [center, setCenter] = useState({ lat: 39.353161, lng: -8.13946 });
+  const [zoom, setZoom] = useState(13);
   const [latLng, setLatLng] = useState({ lat: null, lng: null });
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(false);
@@ -18,7 +19,6 @@ function Map(props) {
   const [newMarker, setNewMarker] = useState(false);
   const [showCreateMarker, setShowCreateMarker] = useState(false);
   const [allowNewMarker, setAllowNewMarker] = useState(false);
-  const [zoomHasChanged, setZoomHasChanged] = useState(false);
   const [loadingPlaces, setLoadingPlaces] = useState(true);
   const { isLoading, sendRequest } = useHttpClient();
 
@@ -118,13 +118,12 @@ function Map(props) {
     }
   }, []);
 
-  const isPortraitMode = () => {
-    return document.body.clientHeight > document.body.clientWidth;
-  };
-
   const hideModalHandler = () => {
+    if (props.markerIsShown) {
+      props.markerIsShownGetter(false);
+    }
+
     setMarkerIsShown(false);
-    props.markerIsShownGetter(false);
   };
 
   const showCreateMarkerHandler = () => {
@@ -165,14 +164,6 @@ function Map(props) {
     [props.allowNewMarker]
   );
 
-  const handleZoom = () => {
-    setZoomHasChanged(true);
-  };
-
-  if (zoomHasChanged) {
-    setZoomHasChanged();
-  }
-
   const getPlaceModal = () => {
     return (
       <Modal
@@ -207,12 +198,11 @@ function Map(props) {
   return (
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
-      zoom={13}
+      zoom={zoom}
       center={center}
       options={options}
       onClick={onMapClick}
       onLoad={onMapLoad}
-      onZoomChanged={handleZoom}
     >
       {!isLoading &&
         markers &&
@@ -230,22 +220,18 @@ function Map(props) {
               anchor: new window.google.maps.Point(15, 22.5),
             },
             (event) => {
+              setZoom(0);
               setSelected(marker);
-              !isPortraitMode()
-                ? setCenter({
-                    lat: event.latLng.lat() - 0.01,
-                    lng: event.latLng.lng() + 0.045,
-                  })
-                : setCenter({
-                    lat: event.latLng.lat() - 0.025,
-                    lng: event.latLng.lng(),
-                  });
+              setZoom(18);
+              setCenter({
+                lat: event.latLng.lat(),
+                lng: event.latLng.lng() + 0.0015,
+              });
               props.selectedGetter(marker);
               setMarkerIsShown(true);
             },
             marker.advancedOptions[0],
             mapRef.current ? mapRef.current.zoom : 3,
-            zoomHasChanged,
             props.countries ? props.countries : 0,
             props.types ? props.types : 0
           );
