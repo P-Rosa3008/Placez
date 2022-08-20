@@ -13,6 +13,7 @@ function Map(props) {
   const [center, setCenter] = useState({ lat: 39.353161, lng: -8.13946 });
   const [zoom, setZoom] = useState(13);
   const [latLng, setLatLng] = useState({ lat: null, lng: null });
+  const [zoomHasChanged, setZoomHasChanged] = useState(false);
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(false);
   const [markerIsShown, setMarkerIsShown] = useState();
@@ -154,6 +155,14 @@ function Map(props) {
     mapRef.current = map;
   }, []);
 
+  const handleZoom = () => {
+    setZoomHasChanged(true);
+  };
+
+  if (zoomHasChanged) {
+    setZoomHasChanged();
+  }
+
   const onMapClick = useCallback(
     (event) => {
       setAllowNewMarker(props.allowNewMarker);
@@ -197,7 +206,7 @@ function Map(props) {
 
   const betterMarker = new BetterMarker();
 
-  console.log(mapRef.current);
+  console.log(mapRef.current && mapRef.current.zoom);
 
   return (
     <GoogleMap
@@ -207,6 +216,7 @@ function Map(props) {
       options={options}
       onClick={onMapClick}
       onLoad={onMapLoad}
+      onZoomChanged={handleZoom}
     >
       {!isLoading &&
         markers &&
@@ -235,8 +245,8 @@ function Map(props) {
               setMarkerIsShown(true);
             },
             mapRef.current ? mapRef.current.zoom : 3,
-            props.countries ? props.countries : 0,
-            props.types ? props.types : 0
+            props.countries ? props.countries.length : 0,
+            props.types ? props.types.length : 0
           );
         })}
 

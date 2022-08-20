@@ -11,7 +11,6 @@ export default class BetterMarker {
     icon,
     onClick,
     mapRef,
-    zoomHasChanged,
     countries,
     types
   ) {
@@ -23,7 +22,6 @@ export default class BetterMarker {
     this.icon = icon;
     this.onClick = onClick;
     this.mapRef = mapRef;
-    this.zoomHasChanged = zoomHasChanged;
     this.countries = countries;
     this.types = types;
   }
@@ -40,10 +38,10 @@ export default class BetterMarker {
     types
   ) {
     if (
-      mapRef >= 12
-      // (types.length >= 1 && mapRef.zoom >= 9) ||
-      // (countries.length >= 1 && mapRef.zoom >= 10) ||
-      // (countries.length >= 1 && types.length >= 1 && mapRef.zoom >= 10)
+      mapRef >= 12 ||
+      (types >= 1 && mapRef.zoom >= 9) ||
+      (countries >= 1 && mapRef.zoom >= 10) ||
+      (countries >= 1 && types >= 1 && mapRef.zoom >= 10)
     ) {
       return (
         <Marker
