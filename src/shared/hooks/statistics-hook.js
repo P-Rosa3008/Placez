@@ -175,9 +175,6 @@ export const useGetStatisticsData = (user) => {
           const occurrences = responseData.places.map(
             (p) => p.date.split(" ")[0]
           );
-          console.log(occurrences);
-          console.log(typeStatisticsBarChartAllLabels);
-          console.log(typeStatisticsBarChartAllData);
         };
         typeEvolutionLineChart();
       } catch (err) {}

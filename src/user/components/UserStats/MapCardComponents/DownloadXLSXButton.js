@@ -26,45 +26,13 @@ export function DownloadXLSXButton(props) {
               title: place.title,
               type: place.type,
               description: place.description,
-              advancedOptions: place.advancedOptions,
               region: place.region,
               country: place.country,
             };
           });
 
           setMarkers(formatedJSON);
-        }
-        if (props.countries > 0) {
-          const countries = responseData.places.map((p) => p.country);
-
-          const possibleOccurrences = [...new Set(countries)];
-
-          const countriesBothSelectedAndAvailable = possibleOccurrences.filter(
-            (element) => props.countries.includes(element)
-          );
-
-          const markersFiltered = responseData.places.filter((place) =>
-            countriesBothSelectedAndAvailable.includes(place.country)
-          );
-
-          setMarkers(markersFiltered);
-        }
-        if (props.types.length > 0) {
-          const types = responseData.places.map((p) => p.type);
-
-          const possibleOccurrences = [...new Set(types)];
-
-          const typesBothSelectedAndAvailable = possibleOccurrences.filter(
-            (element) => props.types.includes(element)
-          );
-
-          const markersFiltered = responseData.places.filter((place) =>
-            typesBothSelectedAndAvailable.includes(place.type)
-          );
-
-          setMarkers(markersFiltered);
-        }
-        if (props.countries.length > 0 && props.types.length > 0) {
+        } else if (props.countries.length > 0 && props.types.length > 0) {
           const countries = responseData.places.map((p) => p.country);
           const types = responseData.places.map((p) => p.type);
 
@@ -88,7 +56,70 @@ export function DownloadXLSXButton(props) {
             (place) => typesBothSelectedAndAvailable.includes(place.type)
           );
 
-          setMarkers(markersFilteredByCountryAndType);
+          const formatedJSON = markersFilteredByCountryAndType.map((place) => {
+            return {
+              lat: place.location.lat,
+              lng: place.location.lng,
+              title: place.title,
+              type: place.type,
+              description: place.description,
+              region: place.region,
+              country: place.country,
+            };
+          });
+
+          setMarkers(formatedJSON);
+        } else if (props.countries.length > 0) {
+          const countries = responseData.places.map((p) => p.country);
+          const possibleOccurrences = [...new Set(countries)];
+
+          const countriesBothSelectedAndAvailable = possibleOccurrences.filter(
+            (element) => props.countries.includes(element)
+          );
+
+          const markersFiltered = responseData.places.filter((place) =>
+            countriesBothSelectedAndAvailable.includes(place.country)
+          );
+
+          const formatedJSON = markersFiltered.map((place) => {
+            return {
+              lat: place.location.lat,
+              lng: place.location.lng,
+              title: place.title,
+              type: place.type,
+              description: place.description,
+              region: place.region,
+              country: place.country,
+            };
+          });
+
+          setMarkers(formatedJSON);
+        } else if (props.types.length > 0) {
+          const types = responseData.places.map((p) => p.type);
+
+          const possibleOccurrences = [...new Set(types)];
+
+          const typesBothSelectedAndAvailable = possibleOccurrences.filter(
+            (element) => props.types.includes(element)
+          );
+
+          const markersFiltered = responseData.places.filter((place) =>
+            typesBothSelectedAndAvailable.includes(place.type)
+          );
+
+          const formatedJSON = markersFiltered.map((place) => {
+            return {
+              lat: place.location.lat,
+              lng: place.location.lng,
+              title: place.title,
+              type: place.type,
+              description: place.description,
+              region: place.region,
+              country: place.country,
+            };
+          });
+
+          setMarkers(formatedJSON);
         }
       } catch (err) {}
     };
