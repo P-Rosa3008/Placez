@@ -197,6 +197,8 @@ function Map(props) {
 
   const betterMarker = new BetterMarker();
 
+  console.log(mapRef.current);
+
   return (
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
@@ -232,7 +234,6 @@ function Map(props) {
               props.selectedGetter(marker);
               setMarkerIsShown(true);
             },
-            marker.advancedOptions[0],
             mapRef.current ? mapRef.current.zoom : 3,
             props.countries ? props.countries : 0,
             props.types ? props.types : 0

@@ -12,6 +12,7 @@ export function MapToChooseStatistics(props) {
     lat: 39.353161,
     lng: -8.13946,
   });
+  const [zoom, setZoom] = useState(13);
   const [markers, setMarkers] = useState();
   const [zoomHasChanged, setZoomHasChanged] = useState(false);
 
@@ -124,7 +125,7 @@ export function MapToChooseStatistics(props) {
   return (
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
-      zoom={3}
+      zoom={zoom}
       center={center}
       options={options}
       onLoad={onMapLoad}
@@ -147,13 +148,13 @@ export function MapToChooseStatistics(props) {
             },
             (event) => {
               setCenter({
-                lat: event.latLng.lat() - 0.01,
-                lng: event.latLng.lng() + 0.045,
+                lat: event.latLng.lat(),
+                lng: event.latLng.lng(),
               });
+              setZoom(0);
+              setZoom(18);
             },
-            marker.advancedOptions[0],
             mapRef.current.zoom,
-            zoomHasChanged,
             props.countries,
             props.types
           );
