@@ -23,28 +23,22 @@ import { useHttpClient } from "../../shared/hooks/http-hook";
 function Header(props) {
   const auth = useContext(AuthContext);
   const [allowNewMarker, setAllowNewMarker] = useState(false);
-  const [anchorEl, setAnchorEl] = useState(null);
   const [user, setUser] = useState();
   const [loadingUser, setLoadingUser] = useState();
 
   const { isLoading, sendRequest } = useHttpClient();
 
-  const open = Boolean(anchorEl);
-
-  const closeMenu = () => {
-    setAnchorEl(null);
-  };
-
-  const handleLogOut = () => {
-    setAnchorEl(null);
-    auth.logout();
-  };
+  console.log(allowNewMarker);
+  console.log(props.allowNewMarker);
 
   const allowNewMarkerHandler = () => {
-    if (!allowNewMarker) {
+    if (auth.isLoggedIn && !allowNewMarker) {
+      console.log("logged e nao permito");
       setAllowNewMarker(true);
     }
-    if (allowNewMarker) {
+    if (auth.isLoggedIn && allowNewMarker) {
+      console.log("logged e permito");
+
       setAllowNewMarker(false);
     }
   };
@@ -53,7 +47,7 @@ function Header(props) {
     setAllowNewMarker(false);
   };
 
-  props.isNewMarkerAllowed(allowNewMarker);
+  props.isNewMarkerAllowed(auth.isLoggedIn === true ? allowNewMarker : null);
 
   const getNewMarkerButton = () => {
     return (
@@ -186,12 +180,6 @@ function Header(props) {
             </IconButton>
           </Link>
         )}
-        <Menu
-          open={open}
-          anchorEl={anchorEl}
-          closeMenu={closeMenu}
-          handleLogOut={handleLogOut}
-        />
       </Toolbar>
     </AppBar>
   );

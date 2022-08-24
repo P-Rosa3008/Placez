@@ -78,6 +78,7 @@ const UserProfile = (props) => {
 
   const handleLogOut = () => {
     auth.logout();
+    props.setAllowNewMarker(false);
   };
 
   props.imageHasChanged(imageHasChanged);

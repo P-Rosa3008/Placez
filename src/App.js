@@ -171,7 +171,10 @@ function App() {
           />
         </Route>
         <Route path="/profile/:username" exact>
-          <UserProfile imageHasChanged={handleImageHasChanged} />
+          <UserProfile
+            imageHasChanged={handleImageHasChanged}
+            setAllowNewMarker={setAllowNewMarker}
+          />
         </Route>
         <Route path="/stats/:username" exact>
           <UserStats />

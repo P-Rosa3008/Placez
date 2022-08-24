@@ -206,8 +206,6 @@ function Map(props) {
 
   const betterMarker = new BetterMarker();
 
-  console.log(mapRef.current && mapRef.current.zoom);
-
   return (
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
