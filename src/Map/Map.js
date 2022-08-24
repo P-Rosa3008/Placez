@@ -229,7 +229,7 @@ function Map(props) {
               url: markerIcon,
               scaledSize: new window.google.maps.Size(32.685, 37.7925),
               origin: new window.google.maps.Point(0, 0),
-              anchor: new window.google.maps.Point(15, 22.5),
+              anchor: new window.google.maps.Point(32.685 / 2, 37.7925),
             },
             (event) => {
               setZoom(0);
