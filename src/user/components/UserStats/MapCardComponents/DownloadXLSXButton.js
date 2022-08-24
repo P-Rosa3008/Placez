@@ -28,6 +28,7 @@ export function DownloadXLSXButton(props) {
               description: place.description,
               region: place.region,
               country: place.country,
+              date: place.date.split(/\s+/)[0],
             };
           });
 
@@ -65,6 +66,7 @@ export function DownloadXLSXButton(props) {
               description: place.description,
               region: place.region,
               country: place.country,
+              date: place.date.split(/\s+/)[0],
             };
           });
 
@@ -90,6 +92,7 @@ export function DownloadXLSXButton(props) {
               description: place.description,
               region: place.region,
               country: place.country,
+              date: place.date.split(/\s+/)[0],
             };
           });
 
@@ -116,6 +119,7 @@ export function DownloadXLSXButton(props) {
               description: place.description,
               region: place.region,
               country: place.country,
+              date: place.date.split(/\s+/)[0],
             };
           });
 
