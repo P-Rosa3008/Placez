@@ -84,12 +84,16 @@ function PlaceList(props) {
 
   const Grid = measureItems(SpringGrid, { measureImages: true });
 
-  console.log(showConfirmDeleteModal);
+  console.log(window.screen.width);
+
+  const getScreenWidth = () => {
+    return window.screen.width > 1500 ? 6 : 5;
+  };
 
   return (
     <Grid
       component="div"
-      columns={6}
+      columns={getScreenWidth()}
       columnWidth={250}
       gutterWidth={25}
       gutterHeight={25}
