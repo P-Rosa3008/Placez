@@ -86,16 +86,20 @@ function PlaceList(props) {
 
   console.log(window.screen.width);
 
-  const getScreenWidth = () => {
+  const getScreenWidthForColumns = () => {
     return window.screen.width > 1500 ? 6 : 5;
+  };
+
+  const getScreenWidthForGutterWidth = () => {
+    return window.screen.width > 1500 ? 25 : 20;
   };
 
   return (
     <Grid
       component="div"
-      columns={getScreenWidth()}
+      columns={getScreenWidthForColumns()}
       columnWidth={250}
-      gutterWidth={25}
+      gutterWidth={getScreenWidthForGutterWidth()}
       gutterHeight={25}
       itemHeight={defaultItemHeight}
       layout={layout.pinterest}
